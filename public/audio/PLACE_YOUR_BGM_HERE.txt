@@ -1,0 +1,15 @@
+Please put your 2 background music files in this folder and name them:
+- background1.mp3 (must be exactly 'background1.mp3')
+- background2.mp3 (must be exactly 'background2.mp3')
+
+The website will play background1.mp3 first, and once it finishes, it will automatically transition to background2.mp3, and then loop back to background1.mp3!
+
+--------------------------------------------------
+กรุณานำไฟล์เพลงทั้ง 2 เพลงของคุณมาวางในโฟลเดอร์นี้
+และตั้งชื่อไฟล์ดังนี้ครับ:
+1. 'background1.mp3' (เพลงที่ 1)
+2. 'background2.mp3' (เพลงที่ 2)
+
+เมื่อเปิดเพลง ระบบจะเล่นเพลงที่ 1 จนจบ แล้วสลับไปเล่นเพลงที่ 2 ทันที
+เมื่อเพลงที่ 2 จบก็จะวนกลับมาเล่นเพลงที่ 1 ใหม่เป็นลิสต์ต่อเนื่องไปเรื่อยๆ ครับ!
+--------------------------------------------------

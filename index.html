@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔮 ดวงปังพลังแพม - เว็บไซต์ดูดวงและมินิเกมปาร์ตี้ของเพื่อนซี้</title>
+  
+  <!-- Google Fonts: Mitr & Kanit for beautiful Thai typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400;600&family=Mitr:wght@300;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Starry Background Canvas -->
+  <canvas id="star-canvas"></canvas>
+
+  <!-- Ambient Audio Indicator (Floating top-right) -->
+  <div class="audio-control playing" id="audio-toggle-btn" title="เปิด/ปิดเพลงคลออวกาศ">
+    <div class="audio-icon">🔊</div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- HEADER -->
+    <header class="app-header hidden" id="app-header-logo">
+      <h1 class="logo-text">ดวงปังพลังแพม</h1>
+      <p class="subtitle-text">ดวงชะตาลิขิต & ปาร์ตี้มินิเกมส์กับเพื่อนซี้</p>
+    </header>
+
+    <!-- SECTION 0: WELCOME SPLASH SCREEN -->
+    <section id="sec-welcome" class="view-section active">
+      <div class="glass-card text-center" style="max-width: 500px; margin: 3rem auto; padding: 3rem 2rem; border-color: var(--color-gold);">
+        <!-- Floating Mascot Wrapper -->
+        <div class="angel-pam-container" style="position: relative; bottom: 0; right: 0; margin: 0 auto 2.5rem auto; transform: scale(1.3); display: flex;">
+          <div class="wing left-wing"></div>
+          <div class="wing right-wing"></div>
+          <div class="pam-avatar"></div>
+          <div class="halo"></div>
+        </div>
+
+        <h1 class="logo-text" style="font-size: clamp(2rem, 8vw, 3.2rem); margin-bottom: 0.5rem;">ดวงปังพลังแพม</h1>
+        <p class="subtitle-text" style="margin-bottom: 2.5rem;">ดินแดนดูดวงและมินิเกมปาร์ตี้ของเพื่อนซี้</p>
+
+        <button class="mystic-btn w-full" id="btn-enter-land" style="font-size: 1.2rem; padding: 14px 28px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);">
+          🔮 เปิดประตูชะตาชีวิต 🔮
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION 1: MAIN LOBBY (FORTUNE SELECTION) -->
+    <section id="sec-lobby" class="view-section hidden">
+      <!-- Floating Tarot Cards Particle Container -->
+      <div id="lobby-card-particles" class="card-particles-wrapper"></div>
+
+      <!-- Dabbing Pig Mascot (Left Side of Lobby) -->
+      <div class="lobby-pig-container" id="lobby-pig" title="พี่หมูแด็บสุดจ๊าบ! คลิกทักทายกวนๆ">
+        <img src="/images/dabbing_pig.png" class="pig-avatar" alt="Dabbing Pig">
+        <div class="speech-bubble hidden" id="pig-speech">
+          <p id="pig-speech-text">สวัสดีวัยรุ่น! วันนี้ขอให้ดวงแข็งดั่งเหล็กกล้า! 🐷🔥</p>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--color-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">🔮 เลือกศาสตร์พยากรณ์ชะตาชีวิต 🔮</h2>
+        
+        <!-- Category Selector -->
+        <div class="category-selector-container">
+          <p class="label-text">เลือกแนวคำทำนายที่คุณต้องการ:</p>
+          <div class="category-buttons">
+            <button class="cat-btn active" data-category="gag">🤪 ตลกกวนบาทา</button>
+            <button class="cat-btn" data-category="inspiration">💖 ซึ้งให้กำลังใจ</button>
+            <button class="cat-btn" data-category="serious">🔮 แม่นยำจริงจัง</button>
+          </div>
+        </div>
+
+        <div class="solo-options-grid">
+          <!-- Option Esiimsi -->
+          <div class="sub-option-card" id="btn-start-esiimsi">
+            <div class="card-icon-img" style="background-image: url('/images/esiimsi_cup.jpg'); margin: 0 auto 1.2rem auto; width: 85px; height: 85px; border-radius: 50%;"></div>
+            <h3>เซียมซีเสี่ยงดวง</h3>
+            <p>ตั้งจิตอธิษฐานแล้วเขย่ากระบอกเซียมซีลุ้นใบทำนายมงคล</p>
+          </div>
+
+          <!-- Option Tarot -->
+          <div class="sub-option-card" id="btn-start-tarot">
+            <div class="card-icon-img" style="background-image: url('/images/tarot_card_back.jpg'); margin: 0 auto 1.2rem auto; width: 65px; height: 95px;"></div>
+            <h3>ไพ่ยิปซีชี้ทาง</h3>
+            <p>เลือกไพ่ 3 ใบ ทำนายอดีต ปัจจุบัน อนาคต อย่างแม่นยำ</p>
+          </div>
+
+          <!-- Option Numeric -->
+          <div class="sub-option-card" id="btn-start-numeric">
+            <div class="sub-icon">🔢</div>
+            <h3>วิเคราะห์ตัวเลขมงคล</h3>
+            <p>ถอดรหัสวิเคราะห์เบอร์โทรศัพท์ มือถือ เลขทะเบียนรถนำโชคตามตำราเลขศาสตร์</p>
+          </div>
+
+          <!-- Option Zodiac Match -->
+          <div class="sub-option-card" id="btn-start-zodmatch">
+            <div class="sub-icon">💘</div>
+            <h3>เช็กดวงเนื้อคู่สมพงษ์</h3>
+            <p>วิเคราะห์ดวงความเข้ากันได้ตามจักรราศีและวันเกิดแม่นยำ 100%</p>
+          </div>
+
+          <!-- Option Zodiac Reading -->
+          <div class="sub-option-card" id="btn-start-zodread">
+            <div class="sub-icon">☀️</div>
+            <h3>คำนวณราศีและธาตุเกิด</h3>
+            <p>ตรวจสอบสัญลักษณ์ดวงชะตา ราศีเกิด ธาตุเจ้าเรือน สีและเลขนำโชคประจำตัว</p>
+          </div>
+
+          <!-- Option Dream Dictionary (ทำนายฝันเลขเด็ด) -->
+          <div class="sub-option-card" id="btn-start-dream">
+            <div class="sub-icon">🛌</div>
+            <h3>ทำนายฝันแปลเลขเด็ด</h3>
+            <p>สืบค้นความฝัน วิเคราะห์ความหมายลี้ลับบอกเหตุการณ์ พร้อมถอดเลขเด็ดมงคลโชคลาภ 2 ตัวและ 3 ตัว</p>
+          </div>
+
+          <!-- Option Daily Outfit Color (เสื้อสีมงคล) -->
+          <div class="sub-option-card" id="btn-start-outfit">
+            <div class="sub-icon">👕</div>
+            <h3>ตารางเสื้อสีมงคลประจำวัน</h3>
+            <p>คำนวณสีเสื้อผ้าเสริมดวงรายวันเสริม โชคลาภ การเงิน การงาน เสน่ห์เมตตา และเลี่ยงสีกาลกิณี</p>
+          </div>
+
+          <!-- Option Life Graph (กราฟชีวิต) -->
+          <div class="sub-option-card" id="btn-start-lifegraph">
+            <div class="sub-icon">📈</div>
+            <h3>กราฟชีวิตลิขิตโชคชะตา</h3>
+            <p>วิเคราะห์กราฟพลังชีวิต 12 ด้าน (วาสนา, ทรัพย์, การงาน, คู่ครอง, ลาภยศ) คำนวณเลขศาสตร์โบราณ</p>
+          </div>
+
+          <!-- Option Contact (ดูดวงแบบละเอียด) -->
+          <div class="sub-option-card" id="btn-start-contact" style="border-color: var(--color-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);">
+            <div class="sub-icon" style="color: var(--color-gold);">⭐</div>
+            <h3>ดูดวงส่วนตัวแบบละเอียด</h3>
+            <p>ปรึกษาชะตาชีวิต 1 ต่อ 1 เชิงลึกแบบแม่นยำ 100% กับหมอดูแพมผ่านช่องทาง Discord</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: ESIIMSI PLAYGROUND -->
+    <section id="sec-esiimsi" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      
+      <div class="glass-card text-center">
+        <h2>🎋 เซียมซีอธิษฐานจิต</h2>
+        <p class="desc-text">หลับตาทำสมาธิ คิดถึงเรื่องที่กังวล แล้วกดปุ่มเขย่ากระบอกเซียมซี</p>
+
+        <!-- Esiimsi Container Animation -->
+        <div class="esiimsi-wrapper">
+          <div class="esiimsi-cup" id="esiimsi-cup-anim"></div>
+        </div>
+
+        <div class="btn-group">
+          <button class="mystic-btn" id="btn-shake-esiimsi">💫 เขย่าเซียมซี 💫</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: TAROT PLAYGROUND -->
+    <section id="sec-tarot" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      
+      <div class="glass-card">
+        <h2>🃏 เปิดดวงชะตาสามมิติ (ไพ่ทาโรต์ 3 ใบ)</h2>
+        <p class="desc-text" id="tarot-instructions">ทำจิตใจให้สงบ จากนั้นคลิกเลือกไพ่ทั้งหมด 3 ใบเพื่อดูผลอดีต ปัจจุบัน และอนาคต</p>
+
+        <!-- Tarot Board -->
+        <div class="tarot-board" id="tarot-spread-board">
+          <div class="deck-container" id="tarot-deck">
+            <!-- 6 cards floating to choose from -->
+          </div>
+        </div>
+
+        <!-- Chosen Layout -->
+        <div class="tarot-selection-layout hidden" id="tarot-slots-container">
+          <div class="tarot-slot" data-slot="1">
+            <span class="slot-title">1. อดีต (Past)</span>
+            <div class="slot-card-holder" id="slot-1"></div>
+          </div>
+          <div class="tarot-slot" data-slot="2">
+            <span class="slot-title">2. ปัจจุบัน (Present)</span>
+            <div class="slot-card-holder" id="slot-2"></div>
+          </div>
+          <div class="tarot-slot" data-slot="3">
+            <span class="slot-title">3. อนาคต (Future)</span>
+            <div class="slot-card-holder" id="slot-3"></div>
+          </div>
+        </div>
+
+        <div class="btn-group hidden" id="tarot-result-actions">
+          <button class="mystic-btn" id="btn-reset-tarot">🃏 เปิดไพ่ใหม่อีกครั้ง</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: NUMERIC ASTROLOGY -->
+    <section id="sec-numeric" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2>🔢 วิเคราะห์ศาสตร์ตัวเลขมงคล (MyHora Phone & Registration)</h2>
+        <p class="desc-text">กรอกเบอร์โทรศัพท์มือถือ หรือตัวเลขที่คุณต้องการถอดรหัสทำนายดวงชะตา</p>
+
+        <div class="compat-local-form" style="max-width: 500px;">
+          <div class="form-group">
+            <label for="select-num-type">ประเภทตัวเลข:</label>
+            <select id="select-num-type" class="mystic-select">
+              <option value="mobile">📱 เบอร์โทรศัพท์มือถือ (10 หลัก)</option>
+              <option value="car">🚗 เลขทะเบียนรถยนต์</option>
+              <option value="idcard">💳 เลขท้ายบัตรประชาชน</option>
+              <option value="general">🔢 ตัวเลขทั่วไป</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="input-astronum">กรอกตัวเลขที่ต้องการดูดวง:</label>
+            <input type="text" id="input-astronum" placeholder="เช่น 0951234567 หรือ 9999" class="mystic-input">
+          </div>
+
+          <button class="mystic-btn w-full" id="btn-submit-numeric">🔮 ถอดรหัสตัวเลขนำโชค 🔮</button>
+        </div>
+
+        <!-- Numeric Results Display Area -->
+        <div class="compatibility-result-container hidden" id="numeric-result-box" style="margin-top: 2rem;">
+          <div class="glass-card result-panel" style="max-width: 100%; border-color: var(--color-cyan);">
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 1.5rem;">
+              <div>
+                <h4 style="font-size: 0.9rem; color: var(--text-secondary);">ผลรวมตัวเลข</h4>
+                <div class="score-radial-progress" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); width: 90px; height: 90px; margin-bottom: 0;">
+                  <span class="score-val" id="num-result-sum">45</span>
+                </div>
+              </div>
+              <div>
+                <h4 style="font-size: 0.9rem; color: var(--text-secondary);">เกรดพลังงาน</h4>
+                <div class="score-radial-progress" style="border-color: var(--color-gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); width: 90px; height: 90px; margin-bottom: 0;">
+                  <span class="score-val" id="num-result-grade" style="color: var(--color-gold);">A+</span>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="compat-status-title" style="color: var(--color-gold);">วิเคราะห์ผลรวมดวงชะตา</h3>
+            <p class="compat-description" id="num-result-summary" style="margin-bottom: 1.5rem; text-align: left; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">คำทำนายเลขศาสตร์...</p>
+
+            <div class="num-pairs-grid" style="display: grid; grid-template-columns: 1fr; gap: 15px; text-align: left;">
+              <div>
+                <h4 style="color: var(--color-cyan); font-size: 0.95rem; border-bottom: 1px solid rgba(0,255,255,0.2); padding-bottom: 4px;">📈 คู่เลขมงคลเด่นชะตาชีวิต:</h4>
+                <ul id="num-good-pairs-list" style="padding-left: 15px; font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                  <li>ไม่มีคู่มงคลเด่นชัด</li>
+                </ul>
+              </div>
+              <div style="margin-top: 10px;">
+                <h4 style="color: var(--color-magenta); font-size: 0.95rem; border-bottom: 1px solid rgba(255,65,108,0.2); padding-bottom: 4px;">⚠️ คู่เลขเตือนภัยที่ต้องระวัง:</h4>
+                <ul id="num-bad-pairs-list" style="padding-left: 15px; font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                  <li>ไม่มีคู่ขัดแย้ง</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: ZODIAC COMPATIBILITY -->
+    <section id="sec-zodiac-match" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2>💘 ตรวจสอบดวงสมพงษ์เนื้อคู่ (Zodiac & Birthday Matcher)</h2>
+        <p class="desc-text">กรอกราศีและวันเกิดของคุณและคนรัก เพื่อวิเคราะห์แรงดึงดูดพลังงานธรรมชาติ</p>
+
+        <div class="compat-local-form" style="max-width: 500px;">
+          <!-- Player 1 Info -->
+          <div style="border: 1px dashed rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; margin-bottom: 15px;">
+            <h4 style="color: var(--color-cyan); font-size: 0.95rem; margin-bottom: 8px;">ตัวคุณ:</h4>
+            <div class="form-group">
+              <label>ราศีเกิดของคุณ:</label>
+              <select id="select-zodmatch-z1" class="mystic-select">
+                <option value="เมษ">ราศีเมษ (13 เม.ย. - 13 พ.ค.)</option>
+                <option value="พฤษภ">ราศีพฤษภ (14 พ.ค. - 13 มิ.ย.)</option>
+                <option value="เมถุน">ราศีเมถุน (14 มิ.ย. - 14 ก.ค.)</option>
+                <option value="กรกฎ">ราศีกรกฎ (15 ก.ค. - 15 ส.ค.)</option>
+                <option value="สิงห์">ราศีสิงห์ (16 ส.ค. - 16 ก.ย.)</option>
+                <option value="กันย์">ราศีกันย์ (17 ก.ย. - 16 ต.ค.)</option>
+                <option value="ตุลย์">ราศีตุลย์ (17 ต.ค. - 15 พ.ย.)</option>
+                <option value="พิจิก">ราศีพิจิก (16 พ.ย. - 15 ธ.ค.)</option>
+                <option value="ธนู">ราศีธนู (16 ธ.ค. - 14 ม.ค.)</option>
+                <option value="มังกร">ราศีมังกร (15 ม.ค. - 12 ก.พ.)</option>
+                <option value="กุมภ์">ราศีกุมภ์ (13 ก.พ. - 13 มี.ค.)</option>
+                <option value="มีน">ราศีมีน (14 มี.ค. - 12 เม.ย.)</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label>เกิดวันอะไร:</label>
+              <select id="select-zodmatch-day1" class="mystic-select">
+                <option value="Sunday">วันอาทิตย์</option>
+                <option value="Monday">วันจันทร์</option>
+                <option value="Tuesday">วันอังคาร</option>
+                <option value="Wednesday">วันพุธ</option>
+                <option value="Thursday">วันพฤหัสบดี</option>
+                <option value="Friday">วันศุกร์</option>
+                <option value="Saturday">วันเสาร์</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Player 2 Info -->
+          <div style="border: 1px dashed rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; margin-bottom: 15px;">
+            <h4 style="color: var(--color-magenta); font-size: 0.95rem; margin-bottom: 8px;">คนรัก / เพื่อน:</h4>
+            <div class="form-group">
+              <label>ราศีเกิด:</label>
+              <select id="select-zodmatch-z2" class="mystic-select">
+                <option value="เมษ">ราศีเมษ (13 เม.ย. - 13 พ.ค.)</option>
+                <option value="พฤษภ">ราศีพฤษภ (14 พ.ค. - 13 มิ.ย.)</option>
+                <option value="เมถุน">ราศีเมถุน (14 มิ.ย. - 14 ก.ค.)</option>
+                <option value="กรกฎ">ราศีกรกฎ (15 ก.ค. - 15 ส.ค.)</option>
+                <option value="สิงห์">ราศีสิงห์ (16 ส.ค. - 16 ก.ย.)</option>
+                <option value="กันย์">ราศีกันย์ (17 ก.ย. - 16 ต.ค.)</option>
+                <option value="ตุลย์">ราศีตุลย์ (17 ต.ค. - 15 พ.ย.)</option>
+                <option value="พิจิก">ราศีพิจิก (16 พ.ย. - 15 ธ.ค.)</option>
+                <option value="ธนู">ราศีธนู (16 ธ.ค. - 14 ม.ค.)</option>
+                <option value="มังกร">ราศีมังกร (15 ม.ค. - 12 ก.พ.)</option>
+                <option value="กุมภ์">ราศีกุมภ์ (13 ก.พ. - 13 มี.ค.)</option>
+                <option value="มีน">ราศีมีน (14 มี.ค. - 12 เม.ย.)</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label>เกิดวันอะไร:</label>
+              <select id="select-zodmatch-day2" class="mystic-select">
+                <option value="Sunday">วันอาทิตย์</option>
+                <option value="Monday">วันจันทร์</option>
+                <option value="Tuesday">วันอังคาร</option>
+                <option value="Wednesday">วันพุธ</option>
+                <option value="Thursday">วันพฤหัสบดี</option>
+                <option value="Friday">วันศุกร์</option>
+                <option value="Saturday">วันเสาร์</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="mystic-btn w-full" id="btn-submit-zodmatch">💖 ตรวจสอบดวงสมพงษ์ 💖</button>
+        </div>
+
+        <!-- Result Box -->
+        <div class="compatibility-result-container hidden" id="zodmatch-result-box" style="margin-top: 2rem;">
+          <div class="glass-card result-panel" style="max-width: 450px; border-color: var(--color-magenta);">
+            <h4 class="couple-names" id="zodmatch-names-title">ราศีเมษ & ราศีกรกฎ</h4>
+            <div class="score-radial-progress" style="border-color: var(--color-magenta); box-shadow: 0 0 20px rgba(255, 65, 108, 0.3);">
+              <span class="score-val" id="zodmatch-score-val">85%</span>
+            </div>
+            <h3 class="compat-status-title" style="color: var(--color-gold);" id="zodmatch-affinity-level">ระดับความเข้ากันได้</h3>
+            
+            <div style="text-align: left; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px; font-size: 0.95rem;">
+              <p style="margin-bottom: 10px; border-bottom: 1.5px solid rgba(255,255,255,0.1); padding-bottom: 6px;" id="zodmatch-elem-text">คำทำนายธาตุดินน้ำลมไฟ...</p>
+              <p id="zodmatch-day-text" style="color: var(--text-secondary);">คำทำนายวันเกิด...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: PERSONAL ZODIAC & ELEMENT -->
+    <section id="sec-zodiac-reading" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2>☀️ คำนวณราศีเกิดและธาตุเจ้าเรือน (Zodiac & Element Astrology)</h2>
+        <p class="desc-text">กรอกวันเกิดเพื่อคำนวณราศีและตรวจสอบโชคชะตาประจำวันตามแบบโบราณ</p>
+
+        <div class="compat-local-form" style="max-width: 400px;">
+          <div class="form-group">
+            <label for="select-zodread-date">วันเกิดของคุณ:</label>
+            <select id="select-zodread-date" class="mystic-select">
+              <option value="1">วันที่ 1</option><option value="2">วันที่ 2</option><option value="3">วันที่ 3</option><option value="4">วันที่ 4</option><option value="5">วันที่ 5</option>
+              <option value="6">วันที่ 6</option><option value="7">วันที่ 7</option><option value="8">วันที่ 8</option><option value="9">วันที่ 9</option><option value="10">วันที่ 10</option>
+              <option value="11">วันที่ 11</option><option value="12">วันที่ 12</option><option value="13">วันที่ 13</option><option value="14">วันที่ 14</option><option value="15">วันที่ 15</option>
+              <option value="16">วันที่ 16</option><option value="17">วันที่ 17</option><option value="18">วันที่ 18</option><option value="19">วันที่ 19</option><option value="20">วันที่ 20</option>
+              <option value="21">วันที่ 21</option><option value="22">วันที่ 22</option><option value="23">วันที่ 23</option><option value="24">วันที่ 24</option><option value="25">วันที่ 25</option>
+              <option value="26">วันที่ 26</option><option value="27">วันที่ 27</option><option value="28">วันที่ 28</option><option value="29">วันที่ 29</option><option value="30">วันที่ 30</option>
+              <option value="31">วันที่ 31</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-zodread-month">เดือนเกิด:</label>
+            <select id="select-zodread-month" class="mystic-select">
+              <option value="1">มกราคม</option>
+              <option value="2">กุมภาพันธ์</option>
+              <option value="3">มีนาคม</option>
+              <option value="4">เมษายน</option>
+              <option value="5">พฤษภาคม</option>
+              <option value="6">มิถุนายน</option>
+              <option value="7">กรกฎาคม</option>
+              <option value="8">สิงหาคม</option>
+              <option value="9">กันยายน</option>
+              <option value="10">ตุลาคม</option>
+              <option value="11">พฤศจิกายน</option>
+              <option value="12">ธันวาคม</option>
+            </select>
+          </div>
+
+          <button class="mystic-btn w-full" id="btn-submit-zodread">☀️ เปิดประตูคำทำนายราศี ☀️</button>
+        </div>
+
+        <!-- Result Box -->
+        <div class="compatibility-result-container hidden" id="zodread-result-box" style="margin-top: 2rem;">
+          <div class="glass-card result-panel" style="max-width: 500px; border-color: var(--color-gold); text-align: left;">
+            <h2 style="color: var(--color-cyan); font-size: 1.6rem; text-align: center; margin-bottom: 0.3rem;" id="zodread-sign-title">ราศีเมษ</h2>
+            <p style="text-align: center; font-size: 0.85rem; color: var(--color-gold); margin-bottom: 1rem;" id="zodread-range-title">13 เม.ย. - 13 พ.ค.</p>
+
+            <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center; flex-wrap: wrap;">
+              <span class="badge" style="background: rgba(0, 255, 255, 0.15); border-color: var(--color-cyan); color: #fff; font-size: 0.8rem;">ธาตุ: <b id="zodread-element">ไฟ</b></span>
+              <span class="badge" style="background: rgba(255, 215, 0, 0.15); border-color: var(--color-gold); color: #fff; font-size: 0.8rem;">สีนำโชค: <b id="zodread-color">สีแดง</b></span>
+              <span class="badge" style="background: rgba(255, 65, 108, 0.15); border-color: var(--color-magenta); color: #fff; font-size: 0.8rem;">เลขเด็ด: <b id="zodread-number">1, 9</b></span>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+              <h4 style="color: var(--color-gold); font-size: 0.95rem;">🧬 พื้นฐานอุปนิสัยและชะตาชีวิต:</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;" id="zodread-trait-desc">รายละเอียดอุปนิสัย...</p>
+            </div>
+
+            <div style="background: rgba(142, 45, 226, 0.1); border: 1px solid rgba(142,45,226,0.3); padding: 12px; border-radius: 8px;">
+              <h4 style="color: var(--color-purple); font-size: 0.95rem;">🔮 แนวทางชะตาชีวิตวันนี้:</h4>
+              <p style="font-size: 0.9rem; color: var(--text-primary); margin-top: 4px; font-weight: 500;" id="zodread-forecast-desc">คำพยากรณ์รายวัน...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: DETAILED PERSONAL FORTUNE CONSULTATION (CONTACT) -->
+    <section id="sec-contact" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      
+      <div class="glass-card text-center" style="max-width: 600px; margin: 2rem auto; border-color: var(--color-gold);">
+        <span class="modal-badge-decor">🔮 บริการพรีเมียม</span>
+        <h2 style="font-size: 1.8rem; margin-top: 1rem; color: var(--color-gold);">ดูดวงส่วนตัวแบบละเอียดกับหมอดูแพม</h2>
+        <p class="desc-text" style="margin-bottom: 2rem;">ปรึกษาชะตาชีวิต เจาะลึกแบบ 1 ต่อ 1 พยากรณ์อดีต ปัจจุบัน อนาคต พร้อมตอบคำถามที่คุณคาใจอย่างแม่นยำ</p>
+
+        <!-- Mascot Display -->
+        <div class="angel-pam-container" style="position: relative; bottom: 0; right: 0; margin: 0 auto 2rem auto; transform: scale(1.1); display: flex;">
+          <div class="wing left-wing"></div>
+          <div class="wing right-wing"></div>
+          <div class="pam-avatar"></div>
+          <div class="halo"></div>
+        </div>
+
+        <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.05);">
+          <h4 style="color: var(--color-cyan); font-size: 1.05rem; border-bottom: 1.5px solid rgba(0,255,255,0.2); padding-bottom: 6px; margin-bottom: 12px;">📌 ขอบเขตและรูปแบบการทำนาย:</h4>
+          <ul style="padding-left: 18px; font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);">
+            <li style="margin-bottom: 8px;"><b style="color: #fff;">พยากรณ์ไพ่ยิปซีวิถีดวงดาว:</b> เจาะลึกเรื่องการงาน การเงิน โชคลาภ และความรักรายบุคคล</li>
+            <li style="margin-bottom: 8px;"><b style="color: #fff;">วิเคราะห์ตัวเลขศาสตร์:</b> ตรวจสอบเบอร์โทรศัพท์มงคล เลขทะเบียนรถนำโชคที่ช่วยเสริมบารมี</li>
+            <li style="margin-bottom: 8px;"><b style="color: #fff;">ตอบคำถามคาใจ:</b> บริการถาม-ตอบข้อสงสัย 1 ต่อ 1 กับหมอดูแพมอย่างเป็นกันเองและจริงจัง</li>
+          </ul>
+        </div>
+
+        <!-- Service Fee Info Box -->
+        <div style="background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.25); padding: 18px; border-radius: 12px; margin-bottom: 2rem; text-align: center;">
+          <h4 style="color: var(--color-gold); font-size: 1.1rem; margin-bottom: 6px; font-weight: 700;">🪙 ค่าบูชาครู / อัตราค่าบริการ:</h4>
+          <p style="font-size: 1.3rem; color: #fff; font-weight: bold; margin-bottom: 4px;">เริ่มต้นขั้นต่ำ 50 บาท</p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">(หรือขึ้นอยู่กับความต้องการเจาะลึกรายละเอียดและปริมาณคำถามจ้า)</p>
+        </div>
+
+        <!-- Big Discord Join button (placeholder link) -->
+        <a href="https://discord.com/users/618048213366210562" id="discord-contact-link" target="_blank" class="mystic-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-size: 1.15rem; padding: 12px 30px; background: #5865F2; border-color: #5865F2; width: 100%; box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);">
+          <!-- Discord Logo SVG -->
+          <svg width="24" height="24" viewBox="0 0 127.14 96.36" fill="#fff" style="display: block;">
+            <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.5-5c.9-.65,1.76-1.34,2.58-2.06a75.48,75.48,0,0,0,72.76,0c.82.72,1.68,1.41,2.58,2.06a68.43,68.43,0,0,1-10.5,5,77.7,77.7,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31-18.83C129.86,49.12,123.39,26.27,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.9,46,53.9,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S88.41,40.36,84.69,40.36,96.14,46,96.14,53,91,65.69,84.69,65.69Z"/>
+          </svg>
+          <span>เปิดโปรไฟล์ Discord เพื่อติดต่อหมอดูแพม</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: DREAM DICTIONARY -->
+    <section id="sec-dream" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2>🛌 ทำนายฝันโบราณแปลเลขเด็ดนำโชค</h2>
+        <p class="desc-text">กรอกสิ่งที่คุณฝันถึง (เช่น งู, ทอง, ฟันหัก, พระพุทธรูป, นก) หรือเลือกคำฝันยอดนิยม เพื่อทำนายความหมายและแปลออกมาเป็นตัวเลขนำโชค</p>
+
+        <div class="compat-local-form" style="max-width: 500px; margin: 0 auto 1.5rem auto;">
+          <div class="form-group" style="display: flex; gap: 8px;">
+            <input type="text" id="input-dream-keyword" class="mystic-input" placeholder="พิมพ์สิ่งที่คุณฝันถึง... (เช่น งู, น้ำท่วม, ศพ)" style="flex: 1;">
+            <button class="mystic-btn" id="btn-submit-dream" style="padding: 10px 20px; white-space: nowrap;">🔮 ทำนายฝัน</button>
+          </div>
+
+          <div style="margin-top: 10px; text-align: left;">
+            <span style="font-size: 0.85rem; color: var(--color-gold); font-weight: bold; display: block; margin-bottom: 6px;">คำฝันยอดนิยม:</span>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="dream-suggestions">
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="งู">🐍 ฝันเห็นงู</span>
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="ทอง">🪙 ฝันเห็นทอง</span>
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="ฟันหัก">🦷 ฝันว่าฟันหัก</span>
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="ศพ">💀 ฝันเห็นคนตาย/ศพ</span>
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="น้ำท่วม">🌊 ฝันเห็นน้ำท่วม</span>
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="ช้าง">🐘 ฝันเห็นช้าง</span>
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="เต่า">🐢 ฝันเห็นเต่า</span>
+              <span class="badge suggestion-badge" style="cursor: pointer; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);" data-dream="แหวน">💍 ฝันเห็นแหวนทอง</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Box -->
+        <div class="compatibility-result-container hidden" id="dream-result-box" style="margin-top: 1.5rem;">
+          <div class="glass-card result-panel" style="max-width: 550px; border-color: var(--color-cyan); text-align: left; background: rgba(0, 0, 0, 0.35);">
+            <h3 style="color: var(--color-gold); font-size: 1.35rem; text-align: center; margin-bottom: 8px;" id="dream-reveal-title">คำทำนายฝันของคุณ</h3>
+            
+            <div style="background: rgba(0,0,0,0.4); padding: 14px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--color-cyan);">
+              <p style="font-size: 0.95rem; color: var(--text-primary); line-height: 1.6;" id="dream-reveal-meaning">เนื้อหาคำทำนาย...</p>
+            </div>
+
+            <div style="background: rgba(255, 215, 0, 0.08); border: 1px dashed rgba(255, 215, 0, 0.3); padding: 15px; border-radius: 10px; text-align: center;">
+              <h4 style="color: var(--color-gold); font-size: 1rem; margin-bottom: 8px;">🍀 เลขเด็ดนำโชคจากการฝัน 🍀</h4>
+              <div style="display: flex; justify-content: center; gap: 20px;">
+                <div>
+                  <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">เลขท้าย 2 ตัว</span>
+                  <span style="font-size: 1.8rem; font-weight: bold; color: var(--color-cyan); letter-spacing: 2px;" id="dream-num-2">--</span>
+                </div>
+                <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
+                  <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">เลขท้าย 3 ตัว</span>
+                  <span style="font-size: 1.8rem; font-weight: bold; color: var(--color-magenta); letter-spacing: 2px;" id="dream-num-3">---</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: DAILY OUTFIT COLORS -->
+    <section id="sec-outfit" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2>👕 ตารางเสื้อสีมงคลประจำปีเกิดและวันใช้งาน</h2>
+        <p class="desc-text">เลือกวันเกิดตามวันในสัปดาห์ของคุณ เพื่อดูตารางคู่สีเสื้อผ้าเครื่องประดับที่ช่วยเสริมดวงชะตาประจำวัน</p>
+
+        <div class="compat-local-form" style="max-width: 400px; margin: 0 auto 1.5rem auto;">
+          <div class="form-group">
+            <label for="select-outfit-birthday">คุณเกิดวันอะไร:</label>
+            <select id="select-outfit-birthday" class="mystic-select">
+              <option value="Sunday">วันอาทิตย์ 🔴</option>
+              <option value="Monday">วันจันทร์ 🟡</option>
+              <option value="Tuesday">วันอังคาร 💗</option>
+              <option value="Wednesday">วันพุธ 🟢</option>
+              <option value="Thursday">วันพฤหัสบดี 🟠</option>
+              <option value="Friday">วันศุกร์ 🔵</option>
+              <option value="Saturday">วันเสาร์ 🟣</option>
+            </select>
+          </div>
+          <button class="mystic-btn w-full" id="btn-submit-outfit">👕 คำนวณสีเสื้อผ้าเสริมดวง</button>
+        </div>
+
+        <!-- Result Table Card -->
+        <div class="compatibility-result-container hidden" id="outfit-result-box" style="margin-top: 1.5rem;">
+          <div class="glass-card result-panel" style="max-width: 500px; border-color: var(--color-gold); text-align: left; background: rgba(0,0,0,0.35);">
+            <h3 style="color: var(--color-gold); font-size: 1.3rem; text-align: center; margin-bottom: 12px;" id="outfit-reveal-title">เสื้อสีมงคลของคนเกิดวัน...</h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,255,255,0.06); padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--color-cyan);">
+                <span style="font-weight: 500; font-size: 0.95rem;">💼 การงาน/อำนาจบารมี:</span>
+                <span style="font-weight: bold; color: var(--color-cyan);" id="outfit-career">--</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,215,0,0.06); padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--color-gold);">
+                <span style="font-weight: 500; font-size: 0.95rem;">🪙 โชคลาภ/เงินทองไหลมา:</span>
+                <span style="font-weight: bold; color: var(--color-gold);" id="outfit-wealth">--</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,65,108,0.06); padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--color-magenta);">
+                <span style="font-weight: 500; font-size: 0.95rem;">💖 เสน่ห์เมตตา/ความรักรุ่ง:</span>
+                <span style="font-weight: bold; color: var(--color-magenta);" id="outfit-love">--</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px 14px; border-radius: 8px; border-left: 4px solid #fff;">
+                <span style="font-weight: 500; font-size: 0.95rem;">🛡️ ความแคล้วคลาด/สุขภาพดี:</span>
+                <span style="font-weight: bold; color: #fff;" id="outfit-health">--</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,0,0,0.1); padding: 10px 14px; border-radius: 8px; border-left: 4px solid #ff4d4d;">
+                <span style="font-weight: bold; font-size: 0.95rem; color: #ff4d4d;">⚠️ สีต้องห้ามกาลกิณี (เลี่ยงเด็ดขาด):</span>
+                <span style="font-weight: bold; color: #ff4d4d;" id="outfit-taboo">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: LIFE GRAPH ASTROLOGY -->
+    <section id="sec-lifegraph" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2>📈 กราฟชีวิตพยากรณ์ลิขิตโชคชะตา</h2>
+        <p class="desc-text">วิเคราะห์พลังชีวิต 12 ด้าน คำนวณด้วยเกณฑ์ตัวเลขโบราณจาก วันเกิด, เดือนเกิด, และวันในสัปดาห์</p>
+
+        <div class="compat-local-form lifegraph-form-grid" style="max-width: 500px; margin: 0 auto 1.5rem auto; gap: 10px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="select-lg-weekday">วันเกิดในสัปดาห์:</label>
+            <select id="select-lg-weekday" class="mystic-select" style="width: 100%;">
+              <option value="1">วันอาทิตย์</option>
+              <option value="2">วันจันทร์</option>
+              <option value="3">วันอังคาร</option>
+              <option value="4">วันพุธ</option>
+              <option value="5">วันพฤหัสบดี</option>
+              <option value="6">วันศุกร์</option>
+              <option value="7">วันเสาร์</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="select-lg-date">วันที่เกิด:</label>
+            <select id="select-lg-date" class="mystic-select" style="width: 100%;">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+              <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+              <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+              <option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option>
+              <option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="select-lg-month">เดือนเกิด:</label>
+            <select id="select-lg-month" class="mystic-select" style="width: 100%;">
+              <option value="1">ม.ค. (1)</option>
+              <option value="2">ก.พ. (2)</option>
+              <option value="3">มี.ค. (3)</option>
+              <option value="4">เม.ย. (4)</option>
+              <option value="5">พ.ค. (5)</option>
+              <option value="6">มิ.ย. (6)</option>
+              <option value="7">ก.ค. (7)</option>
+              <option value="8">ส.ค. (8)</option>
+              <option value="9">ก.ย. (9)</option>
+              <option value="10">ต.ค. (10)</option>
+              <option value="11">พ.ย. (11)</option>
+              <option value="12">ธ.ค. (12)</option>
+            </select>
+          </div>
+          <button class="mystic-btn w-full" id="btn-submit-lifegraph" style="grid-column: span 3; margin-top: 8px;">📈 คำนวณแผนภูมิกราฟชีวิต</button>
+        </div>
+
+        <!-- Life Graph Result Panel -->
+        <div class="compatibility-result-container hidden" id="lifegraph-result-box" style="margin-top: 1.5rem; width: 100%;">
+          <div class="glass-card" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: left; background: rgba(0,0,0,0.45); border-color: var(--color-cyan);">
+            <h3 style="color: var(--color-gold); font-size: 1.4rem; text-align: center; margin-bottom: 15px;" id="lifegraph-reveal-title">แผนภูมิกราฟชีวิตประจำปีเกิดของคุณ</h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 15px;" id="lifegraph-bars-container">
+              <!-- 12 Stat Bars will be generated dynamically by JS here -->
+            </div>
+            
+            <div style="margin-top: 20px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; color: var(--text-secondary);">
+              <span style="color: var(--color-gold); font-weight: bold;">💡 วิธีอ่านความหมาย:</span> คะแนนระดับ 1-4 = ดวงต่ำเฉลี่ย (ต้องระวัง), 5-8 = ดวงทรงตัวปานกลาง (ประคองดี), 9-12 = ดวงดีเด่นสูงสุด (โชครุ่งโรจน์)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ONLINE MULTIPLAYER (HOST BOARD) -->
+    <section id="sec-online-host" class="view-section hidden">
+      <button class="back-btn btn-back-lobby">← กลับหน้าหลัก (ยกเลิกห้อง)</button>
+      
+      <div class="host-grid-layout">
+        <!-- Sidebar Room Info -->
+        <div class="glass-card room-info-sidebar">
+          <h3>รหัสห้องเล่นเกม</h3>
+          <div class="room-code-display" id="host-room-code">----</div>
+          
+          <div class="qr-placeholder" id="host-qr-container">
+            <div class="qr-label">สแกนเข้าห้องเล่นเกม</div>
+            <!-- Dynamic Canvas QR code will go here -->
+            <div id="qrcode-box" class="qrcode-style"></div>
+          </div>
+          
+          <div class="players-box">
+            <h4>รายชื่อผู้เล่น (<span id="player-count">0</span>/8)</h4>
+            <ul class="player-list" id="host-players-list">
+              <li class="empty-list-msg">กำลังรอเพื่อนเข้าร่วมห้อง...</li>
+            </ul>
+          </div>
+
+          <button class="mystic-btn action" id="btn-host-start-game" disabled>🚀 เริ่มความสนุกปาร์ตี้</button>
+        </div>
+
+        <!-- Main Game Board Area -->
+        <div class="glass-card main-game-board">
+          <!-- Game Lobby Screen -->
+          <div id="host-subview-lobby" class="host-game-screen active">
+            <h2>ยินดีต้อนรับสู่ปาร์ตี้วงมูเตลู!</h2>
+            <p>เมื่อเพื่อนๆ เข้าร่วมห้องครบแล้ว โฮสต์กดปุ่ม <b>"เริ่มความสนุกปาร์ตี้"</b> ด้านซ้ายเพื่อลุยเกมน่าตื่นเต้นได้เลย!</p>
+            <div class="lobby-illustration">🔮🌌📱</div>
+          </div>
+
+          <!-- Host Menu Selection -->
+          <div id="host-subview-game-menu" class="host-game-screen hidden">
+            <h2>เลือกเกมปาร์ตี้ที่จะเล่นกัน</h2>
+            <div class="games-selector-grid">
+              <div class="game-select-card" data-game="wheel">
+                <span class="game-emoji">🎡</span>
+                <h4>วงล้อเสี่ยงดวงผู้โชคดี</h4>
+                <p>หมุนวงล้อสุ่มเลือกคนที่จะได้ท้าทายภารกิจ</p>
+              </div>
+              <div class="game-select-card" data-game="compatibility">
+                <span class="game-emoji">💑</span>
+                <h4>เช็กระดับสมพงษ์ฮาๆ</h4>
+                <p>ตรวจจับคู่เพื่อนสองคนว่าอยู่ด้วยกันจะปังหรือพัง</p>
+              </div>
+              <div class="game-select-card" data-game="likely">
+                <span class="game-emoji">🤔</span>
+                <h4>ทำนายใจใครเอ่ย?</h4>
+                <p>ให้โหวตกันในมือถือว่าใครมีพฤติกรรมตรงกับคำถามมูที่สุด</p>
+              </div>
+              <div class="game-select-card" data-game="king">
+                <span class="game-emoji">👑</span>
+                <h4>พระราชาสายมูสั่งการ</h4>
+                <p>สุ่มผู้เล่นมาเป็นพระราชาและสั่งการคนอื่นตามคำทำนาย</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wheel of Fortune Board -->
+          <div id="host-subview-wheel" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-host-menu">← ย้อนกลับไปเลือกเกม</button>
+            <h3>🎡 วงล้อเสี่ยงดวงลิขิตชะตา</h3>
+            
+            <div class="wheel-game-container">
+              <div class="canvas-wheel-wrapper">
+                <canvas id="wheel-canvas"></canvas>
+              </div>
+              <div class="wheel-control-card">
+                <button class="mystic-btn text-lg" id="btn-host-spin-wheel">🌪️ หมุนวงล้อเสี่ยงดวง 🌪️</button>
+                <div class="spin-result-box hidden" id="wheel-result-box">
+                  <h4>ผู้โชคดีดวงพุ่ง:</h4>
+                  <div class="winner-name" id="wheel-winner-display">ชื่อผู้เล่น</div>
+                  <p class="winner-fortune" id="wheel-winner-fortune">คำทำนายแบบฮาๆ</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compatibility Screen -->
+          <div id="host-subview-compatibility" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-host-menu2">← ย้อนกลับไปเลือกเกม</button>
+            <h3>💑 สแกนระดับดวงสมพงษ์สุดฮา</h3>
+            <p>กรอกวันเกิดและเลือกคู่เพื่อนบนหน้าจอคอนโทรลเลอร์มือถือเพื่อประเมินความเข้ากันได้</p>
+            
+            <div class="compatibility-result-container hidden" id="compat-result-box">
+              <div class="glass-card result-panel">
+                <h4 class="couple-names" id="compat-names">นาย ก & นางสาว ข</h4>
+                <div class="score-radial-progress">
+                  <span class="score-val" id="compat-score">88%</span>
+                </div>
+                <h3 class="compat-status-title" id="compat-title">คู่หูชวนกันอ้วน</h3>
+                <p class="compat-description" id="compat-desc">คำทำนายคู่สมพงษ์</p>
+              </div>
+            </div>
+            <div class="waiting-player-input" id="compat-waiting-text">
+              กำลังรอให้ผู้เล่นกรอกชื่อและข้อมูลเพื่อเริ่มประเมิน...
+            </div>
+          </div>
+
+          <!-- Who's Most Likely To Screen -->
+          <div id="host-subview-likely" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-host-menu3">← ย้อนกลับไปเลือกเกม</button>
+            <h3>🤔 ทำนายใจใครเอ่ย? (โหวตดวงหมู่ดาว)</h3>
+            <p>อ่านคำถามด้านล่างนี้ แล้วกดโหวตเพื่อนที่คุณคิดว่าตรงกับประเด็นที่สุดผ่านมือถือ!</p>
+
+            <div class="likely-question-card glass-card">
+              <h2 id="likely-question-text">ใครในกลุ่มนี้มีดวงจะถูกหวยรางวัลใหญ่แต่ทำสลากหาย?</h2>
+            </div>
+
+            <div class="voting-progress-area">
+              <h4>ผลโหวตในวง (<span id="vote-count-txt">0</span> โหวต)</h4>
+              <div class="votes-chart-container" id="likely-votes-chart">
+                <!-- Live voting charts will render here -->
+              </div>
+            </div>
+
+            <div class="btn-group text-center">
+              <button class="mystic-btn" id="btn-host-reveal-votes" disabled>👁️ เปิดเผยเสียงโหวตชะตากรรม</button>
+              <button class="mystic-btn" id="btn-next-likely-question">➡️ คำถามถัดไป</button>
+            </div>
+          </div>
+
+          <!-- King's Game Screen -->
+          <div id="host-subview-king" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-host-menu4">← ย้อนกลับไปเลือกเกม</button>
+            <h3>👑 พระราชาสายมูสั่งการ</h3>
+            
+            <div class="king-game-layout">
+              <div class="king-card-visual" id="king-card-anim">
+                <div class="card-inner">
+                  <div class="card-front">👑 กดสุ่มพระราชา 👑</div>
+                  <div class="card-back">
+                    <h2 id="king-name-reveal">สมชาย</h2>
+                    <p>ได้รับมอบอำนาจเด็ดขาดสถาปนาเป็นพระราชาสายมู</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="king-controls text-center">
+                <button class="mystic-btn" id="btn-host-draw-king">🪄 สุ่มพระราชาและคำสั่ง 🪄</button>
+                <div class="king-command-box hidden" id="king-command-container">
+                  <h4>📜 โองการจากสวรรค์:</h4>
+                  <div class="command-text" id="king-command-reveal">ให้คนที่เกิดวันพุธวิ่งรอบโต๊ะ 3 รอบแก้เคล็ด!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PLAYER CONTROLLER (ONLINE CLIENT JOIN) -->
+    <section id="sec-player-join" class="view-section hidden">
+      <button class="back-btn btn-back-lobby">← กลับหน้าหลัก</button>
+      
+      <!-- Join Form -->
+      <div class="glass-card" id="join-form-box">
+        <h2>📱 ร่วมปาร์ตี้ของเพื่อนๆ</h2>
+        <p class="desc-text">กรอกรหัสห้อง 4 หลักที่ปรากฏบนจอโฮสต์เพื่อจอยความสนุก</p>
+        
+        <div class="form-group">
+          <label for="input-room-code">รหัสห้อง (Room Code)</label>
+          <input type="text" id="input-room-code" placeholder="เช่น A7D2" maxlength="4" class="mystic-input uppercase">
+        </div>
+
+        <div class="form-group">
+          <label for="input-player-name">ชื่อเล่นของคุณ (Name)</label>
+          <input type="text" id="input-player-name" placeholder="เช่น สมหญิง" maxlength="12" class="mystic-input">
+        </div>
+
+        <div class="form-group" style="margin-top: 15px; opacity: 0.8;">
+          <label for="input-backend-url" style="font-size: 0.75rem;">🌐 URL เซิร์ฟเวอร์หลังบ้าน (กรณีเล่นข้ามจังหวัด - เว้นว่างไว้หากใช้เครื่องเดียวกัน)</label>
+          <input type="text" id="input-backend-url" placeholder="เช่น https://my-backend.onrender.com" class="mystic-input" style="font-size: 0.85rem; padding: 8px 12px;">
+        </div>
+
+        <button class="mystic-btn w-full" id="btn-player-submit-join">🔗 เชื่อมต่อดวงชะตา</button>
+      </div>
+
+      <!-- Player Active Controller Screen -->
+      <div class="glass-card hidden" id="player-controller-box">
+        <div class="controller-status-header">
+          <span class="user-avatar">🧙</span>
+          <div>
+            <h3 id="ctl-player-name">ผู้เล่น</h3>
+            <span class="room-tag">ห้อง: <b id="ctl-room-code">----</b></span>
+          </div>
+        </div>
+
+        <!-- 1. Controller Lobby Wait -->
+        <div id="ctl-screen-lobby" class="ctl-screen active text-center">
+          <div class="pulse-loader">🔮</div>
+          <h3>เข้าร่วมสำเร็จแล้ว!</h3>
+          <p>กรุณารอโฮสต์เริ่มเกมหลักของปาร์ตี้...</p>
+        </div>
+
+        <!-- 2. Controller Game Menu Wait -->
+        <div id="ctl-screen-menu-wait" class="ctl-screen hidden text-center">
+          <h3>🎮 โฮสต์กำลังเลือกปาร์ตี้เกม...</h3>
+          <p>เตรียมนิ้วและดวงของคุณให้พร้อมเล่น!</p>
+        </div>
+
+        <!-- 3. Controller Wheel Game -->
+        <div id="ctl-screen-wheel" class="ctl-screen hidden text-center">
+          <h3>🎡 วงล้อชะตา</h3>
+          <p>ลุ้นระทึกว่าดวงดาวจะตกที่ใครบนจอกลาง!</p>
+          <button class="mystic-btn secondary" id="btn-player-shake-wheel">💫 สั่นสปินวงล้อจากมือถือ</button>
+        </div>
+
+        <!-- 4. Controller Compatibility Input -->
+        <div id="ctl-screen-compatibility" class="ctl-screen hidden">
+          <h3>💑 เช็กระดับดวงสมพงษ์</h3>
+          <p>เลือกเพื่อนที่คุณต้องการประเมินดวงชะตาร่วมกัน</p>
+          
+          <div class="form-group">
+            <label for="select-partner">เลือกเพื่อนในห้อง:</label>
+            <select id="select-partner" class="mystic-select">
+              <option value="">-- เลือกเพื่อน --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="ctl-compat-birthday">วันเกิดของคุณ:</label>
+            <input type="date" id="ctl-compat-birthday" class="mystic-input">
+          </div>
+
+          <div class="form-group">
+            <label for="ctl-partner-birthday">วันเกิดของเพื่อน (ถ้าไม่ทราบ จะเป็นการสุ่มค่าตามดวงชะตา):</label>
+            <input type="date" id="ctl-partner-birthday" class="mystic-input">
+          </div>
+
+          <button class="mystic-btn w-full" id="btn-player-submit-compat">💖 ตรวจสอบระดับพลัง 💖</button>
+        </div>
+
+        <!-- 5. Controller Voting likely -->
+        <div id="ctl-screen-likely" class="ctl-screen hidden">
+          <h3>🤔 คำท้าชี้เป้าชะตากรรม</h3>
+          <p class="question-prompt">โหวตเพื่อนที่คุณคิดว่าตรงกับข้อคำถามบนจอกลางมากที่สุด:</p>
+          
+          <div class="players-vote-grid" id="likely-players-vote-buttons">
+            <!-- Dynamic buttons for voting on players in room -->
+          </div>
+        </div>
+
+        <!-- 6. Controller King's Game Status -->
+        <div id="ctl-screen-king" class="ctl-screen hidden text-center">
+          <div class="king-crown-icon">👑</div>
+          <h2 id="ctl-king-role-title">บทบาทของคุณ</h2>
+          <p id="ctl-king-role-desc">รอลุ้นประกาสสิทธิ์จากพระราชาของวงมูเตลู...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: OFFLINE LOCAL PARTY MODE (PASS & PLAY) -->
+    <section id="sec-offline-game" class="view-section hidden">
+      <button class="back-btn btn-back-lobby">← กลับหน้าหลัก</button>
+      
+      <!-- Name Entry Step -->
+      <div class="glass-card" id="offline-entry-panel">
+        <h2>👥 ตั้งวงปาร์ตี้ดวงชะตาแบบออฟไลน์</h2>
+        <p class="desc-text">กรอกชื่อเพื่อนที่จะเล่นร่วมกันตั้งแต่ 2 ถึง 6 คน</p>
+
+        <div class="offline-players-input-list" id="offline-name-inputs">
+          <div class="form-row-player">
+            <input type="text" class="mystic-input offline-name-field" placeholder="ชื่อเล่นเพื่อนคนที่ 1" maxlength="10">
+          </div>
+          <div class="form-row-player">
+            <input type="text" class="mystic-input offline-name-field" placeholder="ชื่อเล่นเพื่อนคนที่ 2" maxlength="10">
+          </div>
+        </div>
+
+        <div class="btn-actions-horizontal">
+          <button class="mystic-btn secondary" id="btn-offline-add-player">➕ เพิ่มเพื่อนอีกคน</button>
+          <button class="mystic-btn" id="btn-offline-start-board">🎮 เริ่มความสนุก</button>
+        </div>
+      </div>
+
+      <!-- Offline Active Board -->
+      <div class="offline-game-layout hidden" id="offline-board-panel">
+        <div class="glass-card room-info-sidebar">
+          <h3>👥 วงเล่นเกม (ออฟไลน์)</h3>
+          <ul class="player-list" id="offline-players-list-display">
+            <!-- List of player names -->
+          </ul>
+          <button class="mystic-btn danger" id="btn-quit-offline">❌ สลายวงปาร์ตี้</button>
+        </div>
+
+        <div class="glass-card main-game-board">
+          <!-- Offline Menu Selection -->
+          <div id="off-subview-game-menu" class="host-game-screen active">
+            <h2>เลือกเกมปาร์ตี้ออฟไลน์ (หน้าจอเดียว)</h2>
+            <div class="games-selector-grid">
+              <div class="game-select-card" data-offgame="wheel">
+                <span class="game-emoji">🎡</span>
+                <h4>วงล้อสุ่มดวงผู้เล่น</h4>
+                <p>สปินวงล้อสุ่มบทเรียนคำทำนายสายฮา</p>
+              </div>
+              <div class="game-select-card" data-offgame="compatibility">
+                <span class="game-emoji">💑</span>
+                <h4>ความสมพงษ์หน้าจอเดียว</h4>
+                <p>เลือกเพื่อน 2 คนประเมินดวงคู่รัก/คู่กัด</p>
+              </div>
+              <div class="game-select-card" data-offgame="likely">
+                <span class="game-emoji">🤔</span>
+                <h4>คำถามสุ่มท้าโหวตชี้เป้า</h4>
+                <p>ระบบสุ่มคำถามแล้วชี้นิ้วโหวตกันในวง</p>
+              </div>
+              <div class="game-select-card" data-offgame="king">
+                <span class="game-emoji">👑</span>
+                <h4>พระราชาออฟไลน์</h4>
+                <p>สุ่มคนเป็นจักรพรรดิ์สวรรค์และออกกฎเกณฑ์</p>
+              </div>
+              <div class="game-select-card" data-offgame="xo">
+                <span class="game-emoji">❌</span>
+                <h4>ศึกหมาก XO (Tic-Tac-Toe)</h4>
+                <p>แข่งดวลกระดาน XO 1v1 วัดสมองกับเพื่อนซี้</p>
+              </div>
+              <div class="game-select-card" data-offgame="racing">
+                <span class="game-emoji">🏎️</span>
+                <h4>แข่งรถวัดดวงประลองความเร็ว</h4>
+                <p>เลือกเชียร์รถคันโปรดแล้วกดปุ่มสตาร์ทลุ้นแชมป์</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offline Wheel of Fortune -->
+          <div id="off-subview-wheel" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-off-menu">← ย้อนกลับไปเลือกเกม</button>
+            <h3>🎡 วงล้อดวงชะตาออฟไลน์</h3>
+            <div class="wheel-game-container">
+              <div class="canvas-wheel-wrapper">
+                <canvas id="offline-wheel-canvas"></canvas>
+              </div>
+              <div class="wheel-control-card">
+                <button class="mystic-btn text-lg" id="btn-offline-spin-wheel">🌪️ สปินวงล้อ 🌪️</button>
+                <div class="spin-result-box hidden" id="off-wheel-result-box">
+                  <h4>ผู้โชคดี:</h4>
+                  <div class="winner-name" id="off-wheel-winner-display">ชื่อผู้เล่น</div>
+                  <p class="winner-fortune" id="off-wheel-winner-fortune">คำทำนายแบบกวนๆ</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offline Compatibility -->
+          <div id="off-subview-compatibility" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-off-menu2">← ย้อนกลับไปเลือกเกม</button>
+            <h3>💑 ประเมินความสมพงษ์ของเพื่อนซี้</h3>
+            
+            <div class="glass-card compat-local-form">
+              <div class="form-group">
+                <label>เพื่อนคนแรก:</label>
+                <select id="off-compat-select1" class="mystic-select"></select>
+              </div>
+              <div class="form-group">
+                <label>เพื่อนคนที่สอง:</label>
+                <select id="off-compat-select2" class="mystic-select"></select>
+              </div>
+              <button class="mystic-btn w-full" id="btn-offline-run-compat">💖 ตรวจสอบระดับความสมพงษ์</button>
+            </div>
+
+            <div class="compatibility-result-container hidden" id="off-compat-result-box">
+              <div class="glass-card result-panel">
+                <h4 class="couple-names" id="off-compat-names">สมชาย & สมใจ</h4>
+                <div class="score-radial-progress">
+                  <span class="score-val" id="off-compat-score">0%</span>
+                </div>
+                <h3 class="compat-status-title" id="off-compat-title">คู่ชวนกันกิน</h3>
+                <p class="compat-description" id="off-compat-desc">รายละเอียดดวงสมพงษ์</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offline Likely To -->
+          <div id="off-subview-likely" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-off-menu3">← ย้อนกลับไปเลือกเกม</button>
+            <h3>🤔 สุ่มจับฉลากคำถามชี้เป้า</h3>
+            
+            <div class="likely-question-card glass-card">
+              <h2 id="off-likely-question-text">ใครในกลุ่มนี้พร้อมจ่ายค่าน้ำอัดลมให้เพื่อนทุกคนในวงที่สุด?</h2>
+            </div>
+            
+            <p class="text-center font-sm">อ่านคำถามดังๆ ในกลุ่มแล้วให้นับ 1-2-3 จากนั้นชี้นิ้วใส่เพื่อนพร้อมกัน!</p>
+            
+            <div class="btn-group text-center">
+              <button class="mystic-btn" id="btn-offline-next-likely">➡️ สุ่มคำถามถัดไป</button>
+            </div>
+          </div>
+
+          <!-- Offline King's Game -->
+          <div id="off-subview-king" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-off-menu4">← ย้อนกลับไปเลือกเกม</button>
+            <h3>👑 พระราชาสายมูสั่งการ (ออฟไลน์)</h3>
+            
+            <div class="king-game-layout">
+              <div class="king-card-visual" id="off-king-card-anim">
+                <div class="card-inner">
+                  <div class="card-front">👑 กดสุ่มพระราชา 👑</div>
+                  <div class="card-back">
+                    <h2 id="off-king-name-reveal">สมหญิง</h2>
+                    <p>เป็นราชินีสายมูประจำรอบนี้</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="king-controls text-center">
+                <button class="mystic-btn" id="btn-offline-draw-king">🪄 สุ่มจับฉลากราชบัลลังก์ 🪄</button>
+                <div class="king-command-box hidden" id="off-king-command-container">
+                  <h4>📜 โองการจากสวรรค์:</h4>
+                  <div class="command-text" id="off-king-command-reveal">คำสั่งราชา...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offline XO Game -->
+          <div id="off-subview-xo" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-off-menu5">← ย้อนกลับไปเลือกเกม</button>
+            <h3>❌ ศึกกระดาน XO ดวลปาร์ตี้ ⭕</h3>
+            <p class="text-center desc-text" style="margin-bottom: 1.5rem;">ผลัดกันกดทำเครื่องหมาย X และ O วัดกึ๋นกระดาน 9 ช่องกับเพื่อนในวง</p>
+            
+            <!-- Player Selectors for XO -->
+            <div class="xo-players-setup glass-card" style="padding: 10px 14px; margin-bottom: 1.2rem; display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0, 0, 0, 0.2);">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                <span style="color: var(--color-magenta); font-weight: bold; font-size: 0.9rem;">❌ ผู้เล่น X:</span>
+                <select id="xo-select-player-x" class="mystic-select" style="padding: 4px 8px; font-size: 0.85rem; width: 120px; min-width: 100px; height: 32px;"></select>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                <span style="color: var(--color-cyan); font-weight: bold; font-size: 0.9rem;">⭕ ผู้เล่น O:</span>
+                <select id="xo-select-player-o" class="mystic-select" style="padding: 4px 8px; font-size: 0.85rem; width: 120px; min-width: 100px; height: 32px;"></select>
+              </div>
+            </div>
+
+            <div id="xo-status" class="xo-status-box">ตาของท่าน: X</div>
+            <div class="xo-grid">
+              <div class="xo-cell" data-cell-index="0"></div>
+              <div class="xo-cell" data-cell-index="1"></div>
+              <div class="xo-cell" data-cell-index="2"></div>
+              <div class="xo-cell" data-cell-index="3"></div>
+              <div class="xo-cell" data-cell-index="4"></div>
+              <div class="xo-cell" data-cell-index="5"></div>
+              <div class="xo-cell" data-cell-index="6"></div>
+              <div class="xo-cell" data-cell-index="7"></div>
+              <div class="xo-cell" data-cell-index="8"></div>
+            </div>
+            
+            <div class="text-center">
+              <button class="mystic-btn" id="btn-reset-xo">🔄 ล้างกระดานเล่นใหม่</button>
+            </div>
+          </div>
+
+          <!-- Offline Car Racing Game -->
+          <div id="off-subview-racing" class="host-game-screen hidden">
+            <button class="back-btn" id="btn-back-off-menu6">← ย้อนกลับไปเลือกเกม</button>
+            <h3>🏎️ แข่งรถประลองความเร็ววัดดวง 🏆</h3>
+            <p class="text-center desc-text" style="margin-bottom: 1.5rem;">เลือกเบอร์รถที่ชอบกับเพื่อนๆ ในวง แล้วกดสตาร์ตมาลุ้นกันว่าใครจะได้เป็นแชมป์สนามนี้!</p>
+
+            <div class="racing-track-container">
+              <div class="racing-lane" id="lane-1">
+                <span class="lane-num">1</span>
+                <div class="car-sprite red-car" id="car-1">🏎️🔴</div>
+                <span class="finish-line">🏁</span>
+              </div>
+              <div class="racing-lane" id="lane-2">
+                <span class="lane-num">2</span>
+                <div class="car-sprite blue-car" id="car-2">🏎️🔵</div>
+                <span class="finish-line">🏁</span>
+              </div>
+              <div class="racing-lane" id="lane-3">
+                <span class="lane-num">3</span>
+                <div class="car-sprite green-car" id="car-3">🏎️🟢</div>
+                <span class="finish-line">🏁</span>
+              </div>
+              <div class="racing-lane" id="lane-4">
+                <span class="lane-num">4</span>
+                <div class="car-sprite yellow-car" id="car-4">🏎️🟡</div>
+                <span class="finish-line">🏁</span>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button class="mystic-btn w-full" id="btn-start-race" style="font-size: 1.25rem; padding: 12px;">🏁 ปล่อยตัวรถแข่ง! 🏁</button>
+            </div>
+
+            <div class="race-winner-box hidden text-center" id="race-winner-box">
+              <h4>🏆 ผู้ชนะการแข่งขัน:</h4>
+              <div class="winner-car-name" id="race-winner-display">รถคันที่ 1 (สีแดง)</div>
+              <button class="mystic-btn" id="btn-reset-race">🔄 เคลียร์สนามแข่งใหม่</button>
+            </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- End App Container -->
+
+  <!-- Card Fortune Dialog / Modal (Solo Results Display) -->
+  <div class="modal-overlay hidden" id="fortune-modal">
+    <div class="glass-card modal-content animate-pop">
+      <span class="close-modal" id="btn-close-modal">&times;</span>
+      
+      <!-- Result content -->
+      <div id="modal-esiimsi-result" class="hidden">
+        <span class="modal-badge-decor">🎋 เซียมซีศักดิ์สิทธิ์</span>
+        <h2 id="esiimsi-result-num">ใบที่ 1</h2>
+        <h3 id="esiimsi-result-title">หัวข้อดวง</h3>
+        <p class="fortune-description" id="esiimsi-result-desc">คำทำนายแบบยาวๆ</p>
+      </div>
+
+      <div id="modal-tarot-result" class="hidden">
+        <span class="modal-badge-decor">🃏 คำทำนายไพ่ยิปซี</span>
+        <div class="tarot-card-showcase" id="tarot-modal-cards-container">
+          <!-- 3 rendered results with their respective categories -->
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <button class="mystic-btn" id="btn-modal-done">ปิดหน้านี้เพื่อกลับมาเสี่ยงโชคใหม่</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Angel Pam Mascot -->
+  <div class="angel-pam-container" id="mascot-pam" title="คลิกรับคำอวยพรจากนางฟ้าแพม">
+    <div class="wing left-wing"></div>
+    <div class="wing right-wing"></div>
+    <div class="pam-avatar"></div>
+    <div class="halo"></div>
+    <div class="speech-bubble hidden" id="pam-speech">
+      <p id="pam-speech-text">เพี้ยง! วันนี้ดวงจะดี มีแต่เงินทองไหลมาเทมานะจ๊ะ ✨</p>
+    </div>
+  </div>
+
+  <!-- Client-side Scripts -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
