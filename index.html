@@ -594,9 +594,9 @@
         <h2>📈 กราฟชีวิตพยากรณ์ลิขิตโชคชะตา</h2>
         <p class="desc-text">วิเคราะห์พลังชีวิต 12 ด้าน คำนวณด้วยเกณฑ์ตัวเลขโบราณจาก วันเกิด, เดือนเกิด, และวันในสัปดาห์</p>
 
-        <div class="compat-local-form lifegraph-form-grid" style="max-width: 500px; margin: 0 auto 1.5rem auto; gap: 10px;">
+        <div class="compat-local-form lifegraph-form-grid" style="max-width: 600px; margin: 0 auto 1.5rem auto; gap: 10px;">
           <div class="form-group" style="margin-bottom: 0;">
-            <label for="select-lg-weekday">วันเกิดในสัปดาห์:</label>
+            <label for="select-lg-weekday" style="text-align: center; display: block;">วันเกิดในสัปดาห์:</label>
             <select id="select-lg-weekday" class="mystic-select" style="width: 100%;">
               <option value="1">วันอาทิตย์</option>
               <option value="2">วันจันทร์</option>
@@ -608,7 +608,7 @@
             </select>
           </div>
           <div class="form-group" style="margin-bottom: 0;">
-            <label for="select-lg-date">วันที่เกิด:</label>
+            <label for="select-lg-date" style="text-align: center; display: block;">วันที่เกิด:</label>
             <select id="select-lg-date" class="mystic-select" style="width: 100%;">
               <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
               <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
@@ -620,7 +620,7 @@
             </select>
           </div>
           <div class="form-group" style="margin-bottom: 0;">
-            <label for="select-lg-month">เดือนเกิด:</label>
+            <label for="select-lg-month" style="text-align: center; display: block;">เดือนเกิด:</label>
             <select id="select-lg-month" class="mystic-select" style="width: 100%;">
               <option value="1">ม.ค. (1)</option>
               <option value="2">ก.พ. (2)</option>
@@ -636,7 +636,24 @@
               <option value="12">ธ.ค. (12)</option>
             </select>
           </div>
-          <button class="mystic-btn w-full" id="btn-submit-lifegraph" style="grid-column: span 3; margin-top: 8px;">📈 คำนวณแผนภูมิกราฟชีวิต</button>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="select-lg-year" style="text-align: center; display: block;">ปีนักษัตรเกิด:</label>
+            <select id="select-lg-year" class="mystic-select" style="width: 100%;">
+              <option value="1">ปีชวด 🐭</option>
+              <option value="2">ปีฉลู 🐮</option>
+              <option value="3">ปีขาล 🐯</option>
+              <option value="4">ปีเถาะ 🐰</option>
+              <option value="5">ปีมะโรง 🐲</option>
+              <option value="6">ปีมะเส็ง 🐍</option>
+              <option value="7">ปีมะเมีย 🐴</option>
+              <option value="8">ปีมะแม 🐐</option>
+              <option value="9">ปีวอก 🐵</option>
+              <option value="10">ปีระกา 🐔</option>
+              <option value="11">ปีจอ 🐶</option>
+              <option value="12">ปีกุน 🐷</option>
+            </select>
+          </div>
+          <button class="mystic-btn w-full" id="btn-submit-lifegraph" style="grid-column: span 4; margin-top: 8px;">📈 คำนวณแผนภูมิกราฟชีวิต</button>
         </div>
 
         <!-- Life Graph Result Panel -->

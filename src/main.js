@@ -1825,10 +1825,11 @@ const LIFE_GRAPH_CATEGORIES = [
   { name: "เจริญสุข (Happiness)", color: "#00ff88", desc: "ความสุขทางจิตใจ ความสำเร็จในปลายชีวิต ความร่มเย็น" }
 ];
 
-function calculateLifeGraph(weekday, date, month) {
+function calculateLifeGraph(weekday, date, month, year) {
   const scores = [];
   for (let i = 0; i < 12; i++) {
-    let baseScore = (weekday + month + date + (i * 3)) % 12;
+    // Traditional formula incorporates weekday, month, date, and zodiac year values
+    let baseScore = (weekday + month + date + year + (i * 3)) % 12;
     if (baseScore === 0) baseScore = 12;
     scores.push(baseScore);
   }
@@ -1841,8 +1842,9 @@ if (btnSubmitLifeGraph) {
     const weekday = parseInt(document.getElementById('select-lg-weekday').value);
     const date = parseInt(document.getElementById('select-lg-date').value);
     const month = parseInt(document.getElementById('select-lg-month').value);
+    const year = parseInt(document.getElementById('select-lg-year').value);
     
-    const scores = calculateLifeGraph(weekday, date, month);
+    const scores = calculateLifeGraph(weekday, date, month, year);
     const container = document.getElementById('lifegraph-bars-container');
     if (!container) return;
     
