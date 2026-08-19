@@ -1871,9 +1871,24 @@ p {
   grid-template-columns: repeat(5, 1fr);
 }
 
+.lifegraph-form-grid #btn-submit-lifegraph {
+  grid-column: span 5;
+  margin-top: 8px;
+}
+
 @media (max-width: 600px) {
   .lifegraph-form-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Make 5th item (Zodiac Year) span full width in 2-column mobile layout */
+  .lifegraph-form-grid .form-group:nth-child(5) {
+    grid-column: span 2 !important;
+  }
+  
+  /* Make button span full width in 2-column mobile layout */
+  .lifegraph-form-grid #btn-submit-lifegraph {
+    grid-column: span 2 !important;
   }
 }
 
