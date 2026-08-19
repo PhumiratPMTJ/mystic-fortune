@@ -594,7 +594,7 @@
         <h2>📈 กราฟชีวิตพยากรณ์ลิขิตโชคชะตา</h2>
         <p class="desc-text">วิเคราะห์พลังชีวิต 12 ด้าน คำนวณด้วยเกณฑ์ตัวเลขโบราณจาก วันเกิด, เดือนเกิด, และวันในสัปดาห์</p>
 
-        <div class="compat-local-form lifegraph-form-grid" style="max-width: 600px; margin: 0 auto 1.5rem auto; gap: 10px;">
+        <div class="compat-local-form lifegraph-form-grid" style="max-width: 700px; margin: 0 auto 1.5rem auto; gap: 10px;">
           <div class="form-group" style="margin-bottom: 0;">
             <label for="select-lg-weekday" style="text-align: center; display: block;">วันเกิดในสัปดาห์:</label>
             <select id="select-lg-weekday" class="mystic-select" style="width: 100%;">
@@ -637,6 +637,12 @@
             </select>
           </div>
           <div class="form-group" style="margin-bottom: 0;">
+            <label for="select-lg-be-year" style="text-align: center; display: block;">ปีเกิด (พ.ศ.):</label>
+            <select id="select-lg-be-year" class="mystic-select" style="width: 100%;">
+              <!-- Populated dynamically via JS -->
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
             <label for="select-lg-year" style="text-align: center; display: block;">ปีนักษัตรเกิด:</label>
             <select id="select-lg-year" class="mystic-select" style="width: 100%;">
               <option value="1">ปีชวด 🐭</option>
@@ -653,7 +659,7 @@
               <option value="12">ปีกุน 🐷</option>
             </select>
           </div>
-          <button class="mystic-btn w-full" id="btn-submit-lifegraph" style="grid-column: span 4; margin-top: 8px;">📈 คำนวณแผนภูมิกราฟชีวิต</button>
+          <button class="mystic-btn w-full" id="btn-submit-lifegraph" style="grid-column: span 5; margin-top: 8px;">📈 คำนวณแผนภูมิกราฟชีวิต</button>
         </div>
 
         <!-- Life Graph Result Panel -->

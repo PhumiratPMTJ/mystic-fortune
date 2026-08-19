@@ -1825,15 +1825,39 @@ const LIFE_GRAPH_CATEGORIES = [
   { name: "เจริญสุข (Happiness)", color: "#00ff88", desc: "ความสุขทางจิตใจ ความสำเร็จในปลายชีวิต ความร่มเย็น" }
 ];
 
-function calculateLifeGraph(weekday, date, month, year) {
+function calculateLifeGraph(weekday, date, month, year, beYear) {
   const scores = [];
   for (let i = 0; i < 12; i++) {
-    // Traditional formula incorporates weekday, month, date, and zodiac year values
-    let baseScore = (weekday + month + date + year + (i * 3)) % 12;
+    // Incorporate all parameters, adding B.E. year weight for age personalization
+    let baseScore = (weekday + month + date + year + (beYear % 12) + (i * 3)) % 12;
     if (baseScore === 0) baseScore = 12;
     scores.push(baseScore);
   }
   return scores;
+}
+
+// Populate B.E. Years dynamically and bind automatic Zodiac year updates
+const selectBeYear = document.getElementById('select-lg-be-year');
+if (selectBeYear) {
+  for (let y = 2570; y >= 2500; y--) {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = `พ.ศ. ${y}`;
+    selectBeYear.appendChild(opt);
+  }
+  // Set default B.E. Year to 2540 (which corresponds to Year of Ox)
+  selectBeYear.value = "2540";
+
+  selectBeYear.addEventListener('change', () => {
+    const beYearVal = parseInt(selectBeYear.value);
+    let zodiacIdx = (beYearVal - 2538) % 12;
+    if (zodiacIdx <= 0) zodiacIdx += 12;
+    
+    const selectZodiac = document.getElementById('select-lg-year');
+    if (selectZodiac) {
+      selectZodiac.value = String(zodiacIdx);
+    }
+  });
 }
 
 const btnSubmitLifeGraph = document.getElementById('btn-submit-lifegraph');
@@ -1843,8 +1867,9 @@ if (btnSubmitLifeGraph) {
     const date = parseInt(document.getElementById('select-lg-date').value);
     const month = parseInt(document.getElementById('select-lg-month').value);
     const year = parseInt(document.getElementById('select-lg-year').value);
+    const beYear = parseInt(document.getElementById('select-lg-be-year').value) || 2540;
     
-    const scores = calculateLifeGraph(weekday, date, month, year);
+    const scores = calculateLifeGraph(weekday, date, month, year, beYear);
     const container = document.getElementById('lifegraph-bars-container');
     if (!container) return;
     
