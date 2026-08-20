@@ -52,6 +52,7 @@ const sections = {
   dream: document.getElementById('sec-dream'),
   outfit: document.getElementById('sec-outfit'),
   lifegraph: document.getElementById('sec-lifegraph'),
+  chatbot: document.getElementById('sec-chatbot'),
   onlineHost: document.getElementById('sec-online-host'),
   playerJoin: document.getElementById('sec-player-join'),
   offlineGame: document.getElementById('sec-offline-game')
@@ -154,6 +155,11 @@ document.getElementById('btn-start-outfit').addEventListener('click', () => {
 document.getElementById('btn-start-lifegraph').addEventListener('click', () => {
   showSection('sec-lifegraph');
   document.getElementById('lifegraph-result-box').classList.add('hidden');
+});
+
+document.getElementById('btn-start-chatbot').addEventListener('click', () => {
+  showSection('sec-chatbot');
+  resetChatMessages();
 });
 
 document.querySelectorAll('.btn-back-lobby').forEach(btn => {
@@ -1905,6 +1911,190 @@ if (btnSubmitLifeGraph) {
     MysticAudio.playSuccess();
   });
 }
+
+// ==========================================================================
+// MAE MHO PAM'S COMFORT CHATBOT LOGIC (FRONTEND AI SHUFFLE ENGINE)
+// ==========================================================================
+function resetChatMessages() {
+  const box = document.getElementById('chat-messages-box');
+  if (box) {
+    box.innerHTML = `
+      <!-- Initial Mae Mho Pam Message -->
+      <div class="chat-bubble pam">
+        <div class="bubble-avatar">
+          <img src="/images/pam_mascot.png" alt="Pam">
+        </div>
+        <div class="bubble-content">
+          <div class="bubble-text">
+            สวัสดีจ้าเด็กๆ! มีเรื่องกังวลใจหรือเหงาอะไรอยู่หรือเปล่าจ๊ะ? พิมพ์มาเล่าให้ฟังได้เลยนะ หรือกดปุ่มด้านล่างถามคำถามด่วนได้เลยจ้า! 💕🔮
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  const input = document.getElementById('input-chat-message');
+  if (input) input.value = '';
+}
+
+// Function to handle chatbot reply logic
+function getChatbotReply(userText) {
+  const text = userText.trim().toLowerCase();
+  
+  // Keyword mapping and responses
+  if (text.includes('เหงา') || text.includes('เศร้า') || text.includes('ดวงตก') || text.includes('ร้องไห้') || text.includes('ดวงไม่ดี') || text.includes('ซวย')) {
+    const pool = [
+      "กอดๆ นะจ๊ะเด็กดี! ดวงคนเรามันก็เหมือนคลื่นทะเลแหละจ้า มีขึ้นมีลงได้ วันนี้ดวงตก พรุ่งนี้ต้องก้าวเดินปังๆ แน่นอน! พักสายตาแล้วหาอะไรอร่อยๆ กินกันดีกว่านะจ๊ะ! 💖🧸",
+      "โถ่ๆๆ... ดวงไม่ดีวันนี้ไม่ได้แปลว่าโชคร้ายตลอดไปน้า! นางฟ้าแพมแผ่เมตตาอธิษฐานจิตขอความเฮงแสนล้านให้หนูแล้วจ้า เพี้ยง! ยิ้มเข้าไว้น้า ยิ้มสวยสะกดความซวยไปเลยจ้า! 🥰✨"
+    ];
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+  
+  if (text.includes('อกหัก') || text.includes('รัก') || text.includes('แฟน') || text.includes('คนคุย') || text.includes('ชอบ')) {
+    const pool = [
+      "เรื่องหัวใจนี่มันซับซ้อนจริงๆ น้า! ถ้าคนคุยเค้าไม่ชัดเจน มาเอาความชัดเจนกับคำทำนายไพ่ยิปซีดีกว่าจ้า! แต่แม่หมอขอบอกเลยนะว่า คนน่ารักๆ แบบหนู เดี๋ยวก็มีคนตาถึงวิ่งเข้ามาหาแน่นอนจ้า โสดแบบมีค่า ดีกว่าคุกเข่าอ้อนวอนคนไม่มีหัวใจนะจ๊ะ! 💘👑",
+      "ความรักที่ดีคือความรักที่รักตัวเองก่อนนะจ๊ะ! ส่วนคนที่จะเข้ามาคู่เรา ถ้าเค้าเข้ามาช้า แสดงว่าเทวดากำลังคัดเลือกสิ่งที่ดีที่สุดให้อยู่ไงจ๊ะ! ชื่นใจขึ้นรึยังเอ่ย? 💕"
+    ];
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+  
+  if (text.includes('เงิน') || text.includes('ทอง') || text.includes('จน') || text.includes('หนี้') || text.includes('รวย') || text.includes('ทรัพย์')) {
+    return "เรื่องเงินเรื่องใหญ่ม๊ากกก! 💸 ช่วงนี้ให้ลองหาสีกระเป๋าสตางค์มงคล หรือใส่เสื้อสีมงคลดึงทรัพย์ดูนะจ๊ะ! แต่แม่หมอบอกเลยว่า ชะตาชีวิตหนูมีเกณฑ์หยิบจับอะไรก็เป็นเงินเป็นทอง ขอแค่ขยันและเชื่อมั่นในตัวเองจ้า สู้ๆ น้าเศรษฐีป้ายแดง! 💰🪙";
+  }
+  
+  if (text.includes('งาน') || text.includes('เรียน') || text.includes('สอบ') || text.includes('เครียด') || text.includes('เหนื่อย')) {
+    return "เหนื่อยก็พักก่อนนะจ๊ะเด็กดี! 🔋 การเรียนหรือการทำงานมันหนัก แม่หมอรู้และเข้าใจหนูเลยจ้า ลองหลับตาลงสัก 5 นาที สูดหายใจลึกๆ แล้วค่อยลุยใหม่นะจ๊ะ พลังวิเศษของนางฟ้าแพมส่งไปช่วยอยู่เคียงข้างหนูเสมอน้า! ✌️🌟";
+  }
+  
+  if (text.includes('ตลก') || text.includes('มุก') || text.includes('ขำ') || text.includes('ฮา')) {
+    return "คิกคิก คุยกับแม่หมอแล้วหายเหงาเลยล่ะสิ! อะแฮ่ม... วันนี้แม่หมอถามหน่อย: คนอะไรวิ่งเร็วที่สุด? เฉลย... คนที่หิวหมูกระทะไงล่ะ! วิ่งสู้ฟัดข้ามถนนไปหาหมูกระทะกินประชดชะตากันดีกว่าจ้า! 🐷🤣";
+  }
+  
+  if (text.includes('หิว') || text.includes('กิน') || text.includes('หมูกระทะ') || text.includes('ชาบู') || text.includes('ชานม') || text.includes('อร่อย')) {
+    return "ฮั่นแน่! พอหิวแล้วดวงใจมันสั่นเลยใช่ไหมล่ะจ๊ะ? แม่หมอแนะนำให้จัดหมูกระทะร้อนๆ หรือชานมไข่มุกหวาน 100% สักแก้วด่วนๆ เลยจ้า! เติมพลังบำบัดจิตวิญญาณด้วยของอร่อยกันเถอะจ้า ชาติหน้าค่อยลดความอ้วนเนอะ! 🍕🧋🥓";
+  }
+  
+  if (text.includes('เลข') || text.includes('หวย') || text.includes('โชค') || text.includes('รางวัล')) {
+    return "แหมๆๆ ตาเป็นประกายเชียวนะเรื่องเลขเด็ด! 🔮 ลองเปิดเข้าไปจิ้มหน้า 'ทำนายฝันแปลเลขเด็ด' หรือยังจ๊ะ? แม่หมอฝันเห็นเลขเด่นงวดนี้เป็นเลขคู่ชื่นชอบ แต่หลักการง่ายๆ คือขอให้ลุ้นสนุกแต่พอดีน้า ขอให้โดนรางวัลใหญ่ปังๆ เลยจ้า! 💰🍀";
+  }
+  
+  if (text.includes('สวย') || text.includes('น่ารัก') || text.includes('แพม') || text.includes('นางฟ้า')) {
+    return "อุ๊ย! ปากหวานจริงเชียวจ้าแม่คู๊ณรรร! 🥰 ขอบคุณสำหรับคำชมนะจ๊ะ มีกำลังใจทำนายดวงให้เพื่อนๆ อีกร้อยล้านปีเลย! หนูก็ตัวจริงน่ารักและมีเสน่ห์มากๆ น้า ขอให้วันนี้มีแต่เรื่องแฮปปี้ชื่นใจตลอดทั้งวันเลยจ้า! 💕";
+  }
+  
+  // General Fallbacks
+  const fallbacks = [
+    "รับทราบคำพูดจ้าเด็กน้อย! เรื่องที่เล่ามาแม่หมอรับฟังเสมอนะ ขอส่งรอยยิ้มหวานๆ และคำอวยพรให้วันของคุณสดใสมีพลังขึ้นในทันตาเลยน้า ✨💖",
+    "เรื่องนี้ช่างน่าคิดยิ่งนัก! 🔮 แต่จำไว้นะจ๊ะว่าดวงชะตาเป็นแค่แนวทาง 50% อีก 50% เกิดจากการลงมือทำและความตั้งใจของเราเองจ้า หนูเก่งที่สุดอยู่แล้ว ลุยเลยจ้า!",
+    "แม่หมอแพมและเจ้าหมูแด็บเป็นกำลังใจให้เสมอนะจ๊ะ! วันนี้ถ้าเหนื่อย ลองกดเปิดเพลงฟังในเว็บวนไป สูดกลิ่นผ่อนคลาย แล้วปล่อยใจสบายๆ นะจ๊ะคนเก่ง 🐷💕"
+  ];
+  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+}
+
+// Function to send a message
+function sendChatMessage(text) {
+  if (!text || text.trim() === '') return;
+  
+  const messagesBox = document.getElementById('chat-messages-box');
+  if (!messagesBox) return;
+  
+  // 1. Append User Bubble
+  const userBubble = document.createElement('div');
+  userBubble.className = 'chat-bubble user';
+  userBubble.innerHTML = `
+    <div class="bubble-avatar">
+      <img src="/images/esiimsi_cup.jpg" alt="User">
+    </div>
+    <div class="bubble-content">
+      <div class="bubble-text">${text}</div>
+    </div>
+  `;
+  messagesBox.appendChild(userBubble);
+  
+  // Play sound
+  MysticAudio.playClick();
+  
+  // Clear input
+  const inputEl = document.getElementById('input-chat-message');
+  if (inputEl) inputEl.value = '';
+  
+  // Scroll to bottom
+  messagesBox.scrollTop = messagesBox.scrollHeight;
+  
+  // 2. Add Typing Indicator Bubble
+  const typingBubble = document.createElement('div');
+  typingBubble.className = 'chat-bubble pam typing-indicator-bubble-wrapper';
+  typingBubble.innerHTML = `
+    <div class="bubble-avatar">
+      <img src="/images/pam_mascot.png" alt="Pam">
+    </div>
+    <div class="bubble-content">
+      <div class="typing-indicator-bubble">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      </div>
+    </div>
+  `;
+  messagesBox.appendChild(typingBubble);
+  messagesBox.scrollTop = messagesBox.scrollHeight;
+  
+  // 3. Delay and Reply
+  setTimeout(() => {
+    // Remove typing indicator
+    const indicator = messagesBox.querySelector('.typing-indicator-bubble-wrapper');
+    if (indicator) indicator.remove();
+    
+    // Get Reply
+    const replyText = getChatbotReply(text);
+    
+    // Append Pam Bubble
+    const pamBubble = document.createElement('div');
+    pamBubble.className = 'chat-bubble pam';
+    pamBubble.innerHTML = `
+      <div class="bubble-avatar">
+        <img src="/images/pam_mascot.png" alt="Pam">
+      </div>
+      <div class="bubble-content">
+        <div class="bubble-text">${replyText}</div>
+      </div>
+    `;
+    messagesBox.appendChild(pamBubble);
+    
+    // Play Success sound
+    MysticAudio.playSuccess();
+    
+    // Scroll to bottom
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+  }, 1200);
+}
+
+// Bind Chat Actions
+const btnSendChat = document.getElementById('btn-send-chat');
+if (btnSendChat) {
+  btnSendChat.addEventListener('click', () => {
+    const inputEl = document.getElementById('input-chat-message');
+    if (inputEl) {
+      sendChatMessage(inputEl.value);
+    }
+  });
+}
+
+const inputChatMessage = document.getElementById('input-chat-message');
+if (inputChatMessage) {
+  inputChatMessage.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      sendChatMessage(inputChatMessage.value);
+    }
+  });
+}
+
+// Bind quick suggestions click events
+document.querySelectorAll('#chat-quick-suggestions .chat-badge').forEach(badge => {
+  badge.addEventListener('click', () => {
+    const msg = badge.getAttribute('data-msg');
+    sendChatMessage(msg);
+  });
+});
 
 // ==========================================================================
 // ON DOM LOAD INITIALIZATION

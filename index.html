@@ -142,6 +142,13 @@
             <h3>ดูดวงส่วนตัวแบบละเอียด</h3>
             <p>ปรึกษาชะตาชีวิต 1 ต่อ 1 เชิงลึกแบบแม่นยำ 100% กับหมอดูแพมผ่านช่องทาง Discord</p>
           </div>
+
+          <!-- Option Chatbot (ห้องคุยแก้เหงา) -->
+          <div class="sub-option-card" id="btn-start-chatbot" style="border-color: var(--color-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);">
+            <div class="sub-icon" style="color: var(--color-cyan);">💬</div>
+            <h3>คุยแก้เหงากับแม่หมอแพม</h3>
+            <p>เหงาใจ ดวงตก หรือไม่มีคนปลอบ? แวะมาคุยเล่นรับพลังบวกกับระบบแชทบอทแม่หมอได้ 24 ชั่วโมง!</p>
+          </div>
         </div>
       </div>
     </section>
@@ -1173,6 +1180,57 @@
               <button class="mystic-btn" id="btn-reset-race">🔄 เคลียร์สนามแข่งใหม่</button>
             </div>
 
+        </div>
+      </div>
+    <!-- SUB-SECTION: PAM'S COMFORT CHATBOT -->
+    <section id="sec-chatbot" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card text-center" style="max-width: 600px; margin: 0 auto; padding: 1.5rem 1.2rem;">
+        <h2>💬 ห้องปลอบใจคุยกับแม่หมอแพม</h2>
+        <p class="desc-text">เหงาหรอจ๊ะ? หรือดวงตกไม่มีใครปลอบ? พิมพ์อะไรมาก็ได้นะ เดี๋ยวแม่หมอแพมตอบแก้เหงาให้เอง!</p>
+
+        <!-- Messenger Container -->
+        <div class="chat-container">
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="chat-header-avatar">
+              <img src="/images/pam_mascot.png" alt="Mae Mho Pam">
+              <span class="online-indicator"></span>
+            </div>
+            <div class="chat-header-info">
+              <h4>แม่หมอแพม 🔮</h4>
+              <span class="chat-status">ออนไลน์อยู่ (พร้อมปลอบใจ)</span>
+            </div>
+          </div>
+
+          <!-- Chat Body (Messages Box) -->
+          <div class="chat-messages" id="chat-messages-box">
+            <!-- Initial Mae Mho Pam Message -->
+            <div class="chat-bubble pam">
+              <div class="bubble-avatar">
+                <img src="/images/pam_mascot.png" alt="Pam">
+              </div>
+              <div class="bubble-content">
+                <div class="bubble-text">
+                  สวัสดีจ้าเด็กๆ! มีเรื่องกังวลใจหรือเหงาอะไรอยู่หรือเปล่าจ๊ะ? พิมพ์มาเล่าให้ฟังได้เลยนะ หรือกดปุ่มด้านล่างถามคำถามด่วนได้เลยจ้า! 💕🔮
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Suggestions Badges -->
+          <div class="chat-suggestions" id="chat-quick-suggestions">
+            <button class="chat-badge" data-msg="กอดปลอบใจฉันหน่อยดวงไม่ดีเลย">🤗 กอดปลอบใจหน่อย</button>
+            <button class="chat-badge" data-msg="ชวนกินของอร่อยแก้เครียดที">🍕 ชวนกินของอร่อย</button>
+            <button class="chat-badge" data-msg="ขอนักษัตรกาลกิณีเสริมโชคลาภ">💸 ขอทริคเรียกทรัพย์</button>
+            <button class="chat-badge" data-msg="ชวนคุยเล่นหน่อยสุ่มมุกกวนๆ">🃏 ชวนคุยเล่นหน่อย</button>
+          </div>
+
+          <!-- Chat Input Bar -->
+          <div class="chat-input-bar">
+            <input type="text" id="input-chat-message" class="mystic-input" placeholder="พิมพ์ข้อความคุยกับแม่หมอ..." style="flex: 1; border-radius: 20px; font-size: 0.9rem; padding: 10px 15px;">
+            <button class="mystic-btn" id="btn-send-chat" style="padding: 10px 18px; border-radius: 20px; font-size: 0.9rem;">ส่ง 🚀</button>
+          </div>
         </div>
       </div>
     </section>
