@@ -184,7 +184,9 @@ app.post('/api/chat', async (req, res) => {
     // Construct request contents array including recent history for context
     const contents = [];
     if (history && Array.isArray(history)) {
-      history.slice(-6).forEach(h => {
+      // Exclude the last item from history because it is already the current message (avoiding consecutive user roles)
+      const historyCtx = history.slice(0, -1);
+      historyCtx.slice(-5).forEach(h => {
         contents.push({
           role: h.role === 'user' ? 'user' : 'model',
           parts: [{ text: h.text }]
