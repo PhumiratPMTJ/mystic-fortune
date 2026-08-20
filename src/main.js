@@ -1915,7 +1915,10 @@ if (btnSubmitLifeGraph) {
 // ==========================================================================
 // MAE MHO PAM'S COMFORT CHATBOT LOGIC (FRONTEND AI SHUFFLE ENGINE)
 // ==========================================================================
+let chatHistory = [];
+
 function resetChatMessages() {
+  chatHistory = [];
   const box = document.getElementById('chat-messages-box');
   if (box) {
     box.innerHTML = `
@@ -1936,7 +1939,7 @@ function resetChatMessages() {
   if (input) input.value = '';
 }
 
-// Function to handle chatbot reply logic
+// Function to handle chatbot reply logic (Fallback local engine)
 function getChatbotReply(userText) {
   const text = userText.trim().toLowerCase();
   
@@ -2037,15 +2040,28 @@ function sendChatMessage(text) {
   `;
   messagesBox.appendChild(typingBubble);
   messagesBox.scrollTop = messagesBox.scrollHeight;
+
+  // Add to local chat memory
+  chatHistory.push({ role: 'user', text });
   
-  // 3. Delay and Reply
-  setTimeout(() => {
+  // 3. Request AI response from server with fallback to local engine
+  fetch('/api/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: text,
+      history: chatHistory
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
     // Remove typing indicator
     const indicator = messagesBox.querySelector('.typing-indicator-bubble-wrapper');
     if (indicator) indicator.remove();
     
-    // Get Reply
-    const replyText = getChatbotReply(text);
+    const replyText = data.reply;
     
     // Append Pam Bubble
     const pamBubble = document.createElement('div');
@@ -2060,12 +2076,44 @@ function sendChatMessage(text) {
     `;
     messagesBox.appendChild(pamBubble);
     
+    // Add to history
+    chatHistory.push({ role: 'model', text: replyText });
+    
     // Play Success sound
     MysticAudio.playSuccess();
     
     // Scroll to bottom
     messagesBox.scrollTop = messagesBox.scrollHeight;
-  }, 1200);
+  })
+  .catch(err => {
+    console.warn("Fallback to local chatbot responses:", err);
+    
+    // Fallback delay simulation
+    setTimeout(() => {
+      // Remove typing indicator
+      const indicator = messagesBox.querySelector('.typing-indicator-bubble-wrapper');
+      if (indicator) indicator.remove();
+      
+      const replyText = getChatbotReply(text);
+      
+      const pamBubble = document.createElement('div');
+      pamBubble.className = 'chat-bubble pam';
+      pamBubble.innerHTML = `
+        <div class="bubble-avatar">
+          <img src="/images/pam_mascot.png" alt="Pam">
+        </div>
+        <div class="bubble-content">
+          <div class="bubble-text">${replyText}</div>
+        </div>
+      `;
+      messagesBox.appendChild(pamBubble);
+      
+      chatHistory.push({ role: 'model', text: replyText });
+      
+      MysticAudio.playSuccess();
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+    }, 1200);
+  });
 }
 
 // Bind Chat Actions
