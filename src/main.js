@@ -1942,6 +1942,20 @@ function resetChatMessages() {
 // Function to handle chatbot reply logic (Fallback local engine)
 function getChatbotReply(userText) {
   const text = userText.trim().toLowerCase();
+
+  // Simple math expression check (e.g. "1+1", "5*5", etc.)
+  const match = text.replace(/\s+/g, '').match(/^(\d+)([\+\-\*\/])(\d+)$/);
+  if (match) {
+    const num1 = parseFloat(match[1]);
+    const op = match[2];
+    const num2 = parseFloat(match[3]);
+    let result = 0;
+    if (op === '+') result = num1 + num2;
+    else if (op === '-') result = num1 - num2;
+    else if (op === '*') result = num1 * num2;
+    else if (op === '/') result = num2 !== 0 ? num1 / num2 : "หาค่าไม่ได้จ้า";
+    return `ข้อนี้ง่ายม๊ากกก! ${num1} ${op} ${num2} ได้คำตอบเท่ากับ ${result} จ้า! เก่งไหมล่ะแม่หมอ 🧠✨`;
+  }
   
   // Keyword mapping and responses
   if (text.includes('เหงา') || text.includes('เศร้า') || text.includes('ดวงตก') || text.includes('ร้องไห้') || text.includes('ดวงไม่ดี') || text.includes('ซวย')) {
