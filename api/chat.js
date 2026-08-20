@@ -67,7 +67,8 @@ export default async function handler(req, res) {
       return res.status(200).json({ reply: replyText });
     } else {
       console.error("Gemini API Error Response:", data);
-      return res.status(200).json({ reply: "เพี้ยง! (สัญญานเวทมนตร์อัญเชิญตำราบททำนายขัดข้องเล็กน้อยจ้า ลองส่งข้อความหาแม่หมออีกรอบนะจ๊ะ 🔮)" });
+      const errMsg = data.error ? (data.error.message || JSON.stringify(data.error)) : JSON.stringify(data);
+      return res.status(200).json({ reply: "เพี้ยง! (สัญญานเวทมนตร์ขัดข้อง: " + errMsg + ")" });
     }
   } catch (err) {
     console.error("Chat API Error:", err);
