@@ -244,6 +244,7 @@ function resetTarotGame() {
   AppState.tarotSelection = [];
   document.getElementById('tarot-slots-container').classList.add('hidden');
   document.getElementById('tarot-result-actions').classList.add('hidden');
+  document.getElementById('tarot-spread-board').classList.remove('hidden'); // Ensure board is visible
   document.getElementById('tarot-deck').classList.remove('hidden');
   document.getElementById('tarot-instructions').textContent = 'ทำจิตใจให้สงบ จากนั้นคลิกเลือกไพ่ทั้งหมด 3 ใบเพื่อดูผลอดีต ปัจจุบัน และอนาคต';
   
@@ -369,6 +370,7 @@ function selectTarotCard(cardInfo, cardEl) {
       // Transition to slots view
       setTimeout(() => {
         document.getElementById('tarot-deck').classList.add('hidden');
+        document.getElementById('tarot-spread-board').classList.add('hidden'); // Hide the entire board space to remove vertical gap
         document.getElementById('tarot-slots-container').classList.remove('hidden');
         document.getElementById('tarot-instructions').textContent = 'จิ้มเปิดไพ่ทีละใบเพื่อเปิดเผยชะตากรรม!';
       }, 300);
