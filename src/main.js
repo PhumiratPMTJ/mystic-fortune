@@ -264,6 +264,7 @@ function resetTarotGame() {
   deckContainer.innerHTML = '';
 
   const N = shuffledCards.length;
+  const isMobile = window.innerWidth <= 480;
   shuffledCards.forEach((card, idx) => {
     const cardEl = document.createElement('div');
     cardEl.className = 'tarot-card-deck';
@@ -273,9 +274,9 @@ function resetTarotGame() {
     const progress = idx / (N - 1);
     const angle = -75 + progress * 150; // -75deg to +75deg
     const angleRad = angle * Math.PI / 180;
-    const R = 240; // radius of circle
+    const R = isMobile ? 120 : 240; // smaller radius on mobile
     const x = R * Math.sin(angleRad);
-    const y = 300 - R * Math.cos(angleRad); // Shifted down by 40px to prevent overlapping text
+    const y = (isMobile ? 160 : 300) - R * Math.cos(angleRad); // Shifted down by 40px/20px to prevent overlapping text
 
     cardEl.style.left = `calc(50% + ${x}px)`;
     cardEl.style.top = `${y}px`;
@@ -328,9 +329,10 @@ function selectTarotCard(cardInfo, cardEl) {
       const deltaY = targetY - cardCenterY;
       
       // Animate smoothly to center and scale
+      const isMobile = window.innerWidth <= 480;
       flipCard.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.22, 1)';
       flipCard.style.zIndex = '1000';
-      flipCard.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.8)`;
+      flipCard.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${isMobile ? 1.4 : 1.8})`;
       
       // Flip the card after moving to center
       setTimeout(() => {

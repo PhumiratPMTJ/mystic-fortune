@@ -2150,3 +2150,29 @@ p {
   pointer-events: none;
   z-index: 90 !important;
 }
+@media (max-width: 480px) {
+  .deck-container {
+    height: 200px !important;
+    max-width: 320px !important;
+    margin: 1.5rem auto 0 auto !important;
+  }
+  .tarot-card-deck {
+    width: 50px !important;
+    height: 77px !important;
+  }
+  .tarot-card-deck.selected {
+    --hover-y: -20px !important; /* Smaller lift on mobile */
+  }
+  .tarot-card-deck.hidden {
+    --hover-y: 80px !important;
+  }
+  .tarot-showcase-item {
+    grid-template-columns: 65px 1fr !important;
+    gap: 12px !important;
+    padding: 0.75rem !important;
+  }
+  .tarot-showcase-item svg {
+    width: 65px !important;
+    height: 98px !important;
+  }
+}
