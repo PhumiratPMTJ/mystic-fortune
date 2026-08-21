@@ -218,20 +218,35 @@ export function analyzeNumbers(numStr, type = 'mobile') {
   const goodPairsMatched = [];
   const badPairsMatched = [];
 
+  const seenGood = new Set();
+  const seenBad = new Set();
+
   pairs.forEach(pair => {
     // Check both standard pair and reversed pair (numerology reads bi-directionally)
     const revPair = pair.split('').reverse().join('');
     
     if (NUMBER_COMBINATIONS.good[pair]) {
-      goodPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.good[pair] });
+      if (!seenGood.has(pair)) {
+        seenGood.add(pair);
+        goodPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.good[pair] });
+      }
     } else if (NUMBER_COMBINATIONS.good[revPair]) {
-      goodPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.good[revPair] });
+      if (!seenGood.has(pair)) {
+        seenGood.add(pair);
+        goodPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.good[revPair] });
+      }
     }
 
     if (NUMBER_COMBINATIONS.bad[pair]) {
-      badPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.bad[pair] });
+      if (!seenBad.has(pair)) {
+        seenBad.add(pair);
+        badPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.bad[pair] });
+      }
     } else if (NUMBER_COMBINATIONS.bad[revPair]) {
-      badPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.bad[revPair] });
+      if (!seenBad.has(pair)) {
+        seenBad.add(pair);
+        badPairsMatched.push({ pair, meaning: NUMBER_COMBINATIONS.bad[revPair] });
+      }
     }
   });
 
