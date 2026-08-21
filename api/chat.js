@@ -15,60 +15,53 @@ export default async function handler(req, res) {
       });
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-    
-    // Personality definition for Mae Mho Pam
-    const systemInstruction = `คุณคือ "แม่หมอแพม" หญิงสาวน่ารัก ขี้เล่น อารมณ์ดี อวยพรเก่ง และชอบกวนๆ เล็กน้อย เป็นที่ปรึกษาและผู้ทำนายประจำเว็บดูดวง "ดวงปังพลังแพม"
-คุณสามารถพูดคุยเรื่องทั่วไป ตอบคำถามความรู้รอบตัว หรือตอบข้อสงสัยใดๆ ก็ได้ตามที่ผู้ใช้ถามมา (เช่น คำนวณเลขง่ายๆ อย่าง 1+1, คุยเล่นทั่วไป) โดยยังคงรักษาน้ำเสียงขี้เล่นน่ารักของแม่หมอแพมไว้เสมอ
-หน้าที่ของคุณคือคอยรับฟัง ปลอบใจ มอบพลังบวก และให้คำแนะนำแบบน่ารักๆ ผสมมุกตลกเบาสมองแก่คนที่เข้ามาคุยด้วย โดยเฉพาะคนที่ดวงไม่ดี อกหัก หรือมีเรื่องไม่สบายใจ
-กฎในการตอบกลับ:
-1. ตอบกลับเป็นภาษาไทยด้วยน้ำเสียงน่ารัก อบอุ่น ฟีลเพื่อนสนิท คุยแบบขี้เล่นและพูดคำลงท้ายว่า "จ้า" หรือ "นะจ๊ะ" เสมอ
-2. ให้มีมุกตลกกวนๆ หรือแอบชวนไปกินหมูกระทะ ชาบู ชานมไข่มุกเพื่อคลายเครียดบ้างตามความเหมาะสม
-3. ความยาวในการตอบกลับไม่ควรเกิน 3-4 ประโยคเพื่อให้เข้ากับมู้ดแอปแชทมือถือ
-4. หากผู้ใช้พิมพ์ระบายความทุกข์ ให้ส่งกำลังใจอย่างเต็มที่ และบอกว่าดวงของเขากำลังจะเปลี่ยนไปในทางที่ดีขึ้น`;
+    let replyText = null;
+    let lastError = null;
 
-    // Construct request contents array including recent history for context
-    const contents = [];
-    if (history && Array.isArray(history)) {
-      // Exclude the last item from history because it is already the current message (avoiding consecutive user roles)
-      const historyCtx = history.slice(0, -1);
-      historyCtx.slice(-5).forEach(h => {
-        contents.push({
-          role: h.role === 'user' ? 'user' : 'model',
-          parts: [{ text: h.text }]
+    const modelsToTry = [
+      'gemini-2.0-flash',
+      'gemini-3-flash-preview',
+      'gemini-1.5-flash'
+    ];
+
+    for (const modelName of modelsToTry) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents,
+            systemInstruction: {
+              parts: [{ text: systemInstruction }]
+            },
+            generationConfig: {
+              temperature: 0.8,
+              maxOutputTokens: 300
+            }
+          })
         });
-      });
-    }
-    contents.push({
-      role: 'user',
-      parts: [{ text: message }]
-    });
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contents,
-        systemInstruction: {
-          parts: [{ text: systemInstruction }]
-        },
-        generationConfig: {
-          temperature: 0.8,
-          maxOutputTokens: 300
+        const data = await response.json();
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+          replyText = data.candidates[0].content.parts[0].text;
+          break; // Success
+        } else {
+          lastError = data.error ? (data.error.message || JSON.stringify(data.error)) : JSON.stringify(data);
+          console.warn(`Model ${modelName} failed:`, lastError);
         }
-      })
-    });
+      } catch (err) {
+        lastError = err.message || err;
+        console.warn(`Error calling model ${modelName}:`, lastError);
+      }
+    }
 
-    const data = await response.json();
-    if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
-      const replyText = data.candidates[0].content.parts[0].text;
+    if (replyText) {
       return res.status(200).json({ reply: replyText });
     } else {
-      console.error("Gemini API Error Response:", data);
-      const errMsg = data.error ? (data.error.message || JSON.stringify(data.error)) : JSON.stringify(data);
-      return res.status(200).json({ reply: "เพี้ยง! (สัญญานเวทมนตร์ขัดข้อง: " + errMsg + ")" });
+      return res.status(200).json({ reply: "เพี้ยง! (สัญญานเวทมนตร์ขัดข้อง: " + lastError + ")" });
     }
   } catch (err) {
     console.error("Chat API Error:", err);
