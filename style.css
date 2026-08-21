@@ -552,11 +552,11 @@ p {
 }
 
 .deck-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  max-width: 600px;
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  height: 280px;
+  margin: 0 auto;
 }
 
 .tarot-card-deck {
@@ -567,23 +567,23 @@ p {
   background: url('/images/tarot_card_back.jpg') no-repeat center center;
   background-size: cover;
   cursor: pointer;
-  position: relative;
+  position: absolute;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  transition: all 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.tarot-card-deck::after {
-  content: '';
+  transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) translateY(var(--hover-y, 0px)) scale(var(--hover-scale, 1));
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  z-index: var(--z-index, 1);
 }
 
 .tarot-card-deck:hover {
-  transform: translateY(-8px) rotate(3deg);
-  box-shadow: 0 8px 16px rgba(142, 45, 226, 0.4);
+  --hover-y: -15px;
+  --hover-scale: 1.08;
   border-color: #fff;
+  box-shadow: 0 8px 20px rgba(142, 45, 226, 0.6);
+  z-index: 100 !important;
 }
 
 .tarot-card-deck.hidden {

@@ -252,16 +252,35 @@ function resetTarotGame() {
   document.getElementById('slot-2').innerHTML = '';
   document.getElementById('slot-3').innerHTML = '';
 
-  // Generate 6 random cards to select
-  const shuffledCards = [...TAROT_CARDS].sort(() => 0.5 - Math.random()).slice(0, 6);
+  // Generate 35 random cards (using duplicate/repeated cards since TAROT_CARDS has 12 items)
+  const shuffledCards = [];
+  for (let i = 0; i < 35; i++) {
+    const randomCard = TAROT_CARDS[Math.floor(Math.random() * TAROT_CARDS.length)];
+    shuffledCards.push(randomCard);
+  }
+
   const deckContainer = document.getElementById('tarot-deck');
   deckContainer.innerHTML = '';
 
+  const N = shuffledCards.length;
   shuffledCards.forEach((card, idx) => {
     const cardEl = document.createElement('div');
     cardEl.className = 'tarot-card-deck';
     cardEl.dataset.idx = idx;
     
+    // Calculate arc position (semi-circle)
+    const progress = idx / (N - 1);
+    const angle = -75 + progress * 150; // -75deg to +75deg
+    const angleRad = angle * Math.PI / 180;
+    const R = 240; // radius of circle
+    const x = R * Math.sin(angleRad);
+    const y = 260 - R * Math.cos(angleRad);
+
+    cardEl.style.left = `calc(50% + ${x}px)`;
+    cardEl.style.top = `${y}px`;
+    cardEl.style.setProperty('--rot', `${angle}deg`);
+    cardEl.style.setProperty('--z-index', idx);
+
     cardEl.addEventListener('click', () => {
       if (AppState.tarotSelection.length < 3) {
         selectTarotCard(card, cardEl);
