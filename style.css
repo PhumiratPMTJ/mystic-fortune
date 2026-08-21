@@ -555,8 +555,8 @@ p {
   position: relative;
   width: 100%;
   max-width: 650px;
-  height: 280px;
-  margin: 0 auto;
+  height: 320px;
+  margin: 2rem auto 0 auto;
 }
 
 .tarot-card-deck {
@@ -588,7 +588,8 @@ p {
 
 .tarot-card-deck.hidden {
   opacity: 0;
-  transform: scale(0.1);
+  --hover-y: 120px;
+  --hover-scale: 0.1;
   pointer-events: none;
 }
 

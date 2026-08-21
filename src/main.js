@@ -274,7 +274,7 @@ function resetTarotGame() {
     const angleRad = angle * Math.PI / 180;
     const R = 240; // radius of circle
     const x = R * Math.sin(angleRad);
-    const y = 260 - R * Math.cos(angleRad);
+    const y = 300 - R * Math.cos(angleRad); // Shifted down by 40px to prevent overlapping text
 
     cardEl.style.left = `calc(50% + ${x}px)`;
     cardEl.style.top = `${y}px`;
@@ -312,16 +312,45 @@ function selectTarotCard(cardInfo, cardEl) {
   `;
   
   flipCard.addEventListener('click', () => {
-    if (!flipCard.classList.contains('flipped')) {
-      flipCard.classList.add('flipped');
-      MysticAudio.playFlip();
+    if (!flipCard.classList.contains('flipped') && !flipCard.classList.contains('animating')) {
+      flipCard.classList.add('animating');
       
-      // Update state
-      const slotIndex = currentSlot - 1;
-      AppState.tarotSelection[slotIndex].flipped = true;
+      // Calculate delta to viewport center
+      const cardRect = flipCard.getBoundingClientRect();
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+      const cardCenterY = cardRect.top + cardRect.height / 2;
       
-      // Check if all flipped
-      checkAllTarotFlipped();
+      const targetX = window.innerWidth / 2;
+      const targetY = window.innerHeight / 2;
+      
+      const deltaX = targetX - cardCenterX;
+      const deltaY = targetY - cardCenterY;
+      
+      // Animate smoothly to center and scale
+      flipCard.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.22, 1)';
+      flipCard.style.zIndex = '1000';
+      flipCard.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.8)`;
+      
+      // Flip the card after moving to center
+      setTimeout(() => {
+        flipCard.classList.add('flipped');
+        MysticAudio.playFlip();
+        
+        // Move back to slot after 1.5s
+        setTimeout(() => {
+          flipCard.style.transform = '';
+          
+          // Complete animation and state updates after returning
+          setTimeout(() => {
+            flipCard.style.zIndex = '';
+            flipCard.classList.remove('animating');
+            
+            const slotIndex = currentSlot - 1;
+            AppState.tarotSelection[slotIndex].flipped = true;
+            checkAllTarotFlipped();
+          }, 600);
+        }, 1500);
+      }, 600);
     }
   });
 
