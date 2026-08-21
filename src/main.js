@@ -292,7 +292,7 @@ function resetTarotGame() {
 
 function selectTarotCard(cardInfo, cardEl) {
   MysticAudio.playFlip();
-  cardEl.classList.add('hidden');
+  cardEl.classList.add('selected'); // Lift card up to show it is selected
   
   AppState.tarotSelection.push({ cardInfo, flipped: false });
   const currentSlot = AppState.tarotSelection.length;
@@ -357,9 +357,22 @@ function selectTarotCard(cardInfo, cardEl) {
   slot.appendChild(flipCard);
 
   if (AppState.tarotSelection.length === 3) {
-    document.getElementById('tarot-deck').classList.add('hidden');
-    document.getElementById('tarot-slots-container').classList.remove('hidden');
-    document.getElementById('tarot-instructions').textContent = 'จิ้มเปิดไพ่ทีละใบเพื่อเปิดเผยชะตากรรม!';
+    // Disable clicks on remaining deck cards
+    const allCards = document.querySelectorAll('.tarot-card-deck');
+    allCards.forEach(c => c.style.pointerEvents = 'none');
+
+    // Wait 1 second to let user see their 3 cards standing tall
+    setTimeout(() => {
+      // Fade out all cards in the deck
+      allCards.forEach(c => c.classList.add('hidden'));
+
+      // Transition to slots view
+      setTimeout(() => {
+        document.getElementById('tarot-deck').classList.add('hidden');
+        document.getElementById('tarot-slots-container').classList.remove('hidden');
+        document.getElementById('tarot-instructions').textContent = 'จิ้มเปิดไพ่ทีละใบเพื่อเปิดเผยชะตากรรม!';
+      }, 300);
+    }, 1000);
   }
 }
 
