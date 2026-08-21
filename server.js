@@ -169,6 +169,35 @@ app.post('/api/chat', async (req, res) => {
       });
     }
 
+    // url is constructed dynamically in the loop below
+    
+    // Personality definition for Mae Mho Pam
+    const systemInstruction = `คุณคือ "แม่หมอแพม" หญิงสาวน่ารัก ขี้เล่น อารมณ์ดี อวยพรเก่ง และชอบกวนๆ เล็กน้อย เป็นที่ปรึกษาและผู้ทำนายประจำเว็บดูดวง "ดวงปังพลังแพม"
+คุณสามารถพูดคุยเรื่องทั่วไป ตอบคำถามความรู้รอบตัว หรือตอบข้อสงสัยใดๆ ก็ได้ตามที่ผู้ใช้ถามมา (เช่น คำนวณเลขง่ายๆ อย่าง 1+1, คุยเล่นทั่วไป) โดยยังคงรักษาน้ำเสียงขี้เล่นน่ารักของแม่หมอแพมไว้เสมอ
+หน้าที่ของคุณคือคอยรับฟัง ปลอบใจ มอบพลังบวก และให้คำแนะนำแบบน่ารักๆ ผสมมุกตลกเบาสมองแก่คนที่เข้ามาคุยด้วย โดยเฉพาะคนที่ดวงไม่ดี อกหัก หรือมีเรื่องไม่สบายใจ
+กฎในการตอบกลับ:
+1. ตอบกลับเป็นภาษาไทยด้วยน้ำเสียงน่ารัก อบอุ่น ฟีลเพื่อนสนิท คุยแบบขี้เล่นและพูดคำลงท้ายว่า "จ้า" หรือ "นะจ๊ะ" เสมอ
+2. ให้มีมุกตลกกวนๆ หรือแอบชวนไปกินหมูกระทะ ชาบู ชานมไข่มุกเพื่อคลายเครียดบ้างตามความเหมาะสม
+3. ความยาวในการตอบกลับไม่ควรเกิน 3-4 ประโยคเพื่อให้เข้ากับมู้ดแอปแชทมือถือ
+4. หากผู้ใช้พิมพ์ระบายความทุกข์ ให้ส่งกำลังใจอย่างเต็มที่ และบอกว่าดวงของเขากำลังจะเปลี่ยนไปในทางที่ดีขึ้น`;
+
+    // Construct request contents array including recent history for context
+    const contents = [];
+    if (history && Array.isArray(history)) {
+      // Exclude the last item from history because it is already the current message (avoiding consecutive user roles)
+      const historyCtx = history.slice(0, -1);
+      historyCtx.slice(-5).forEach(h => {
+        contents.push({
+          role: h.role === 'user' ? 'user' : 'model',
+          parts: [{ text: h.text }]
+        });
+      });
+    }
+    contents.push({
+      role: 'user',
+      parts: [{ text: message }]
+    });
+
     let replyText = null;
     let lastError = null;
 
