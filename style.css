@@ -2199,21 +2199,19 @@ p {
 }
 
 .duck-sticker {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3.5px solid #fff;
-  background: url('/images/duck.jpg') no-repeat center center;
-  background-size: cover;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  width: 70px;
+  height: 70px;
+  background: url('/images/duck.png') no-repeat center center;
+  background-size: contain;
   cursor: pointer;
   animation: duckWaddle 1.4s ease-in-out infinite alternate;
   transition: transform 0.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
 }
 
 .duck-sticker:hover {
   transform: scale(1.15) rotate(10deg);
-  box-shadow: 0 12px 24px rgba(255, 215, 0, 0.6);
+  filter: drop-shadow(0 10px 20px rgba(255, 215, 0, 0.75));
 }
 
 .lobby-duck-container.spin-active .duck-sticker {
