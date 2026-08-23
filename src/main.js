@@ -55,7 +55,9 @@ const sections = {
   chatbot: document.getElementById('sec-chatbot'),
   onlineHost: document.getElementById('sec-online-host'),
   playerJoin: document.getElementById('sec-player-join'),
-  offlineGame: document.getElementById('sec-offline-game')
+  offlineGame: document.getElementById('sec-offline-game'),
+  rekindle: document.getElementById('sec-rekindle'),
+  moveon: document.getElementById('sec-moveon')
 };
 
 // ==========================================================================
