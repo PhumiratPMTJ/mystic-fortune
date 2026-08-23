@@ -165,6 +165,20 @@
             <h3>คุยแก้เหงากับแม่หมอแพม</h3>
             <p>เหงาใจ ดวงตก หรือไม่มีคนปลอบ? แวะมาคุยเล่นรับพลังบวกกับระบบแชทบอทแม่หมอได้ 24 ชั่วโมง!</p>
           </div>
+
+          <!-- Option Rekindle -->
+          <div class="sub-option-card" id="btn-start-rekindle" style="border-color: var(--color-magenta); box-shadow: 0 0 10px rgba(255, 65, 108, 0.15);">
+            <div class="sub-icon" style="color: var(--color-magenta);">🔥</div>
+            <h3>ถ่านไฟเก่าจะกลับมาคุไหม?</h3>
+            <p>เช็กดวงชะตาคนรักเก่า จะมีโอกาสลมพัดหวนหรือมอดดับไปตลอดกาล</p>
+          </div>
+
+          <!-- Option Move On -->
+          <div class="sub-option-card" id="btn-start-moveon" style="border-color: var(--color-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);">
+            <div class="sub-icon" style="color: var(--color-gold);">⏳</div>
+            <h3>ชาตินี้จะมูฟออนได้กี่โมง?</h3>
+            <p>ประเมินเกราะป้องกันใจและพลังงานมูฟออน พร้อมคำแนะนำดึงสติสุดจ๊าบ</p>
+          </div>
         </div>
       </div>
     </section>
@@ -287,6 +301,108 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: REKINDLE OR NOT -->
+    <section id="sec-rekindle" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--color-gold);">🔥 ถ่านไฟเก่าจะกลับมาคุไหม? (Ex Rekindle Predictor)</h2>
+        <p class="desc-text" style="text-align: center; margin-bottom: 1.5rem;">วิเคราะห์ดวงจิต พลังงานดวงดาวคู่ครองอดีตชาติ ว่าจะมีแรงลมพัดหวนหรือมอดดับถาวร</p>
+
+        <div class="compat-local-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>วันเกิดของคุณ (ตามวันในสัปดาห์):</label>
+            <select id="select-rekindle-day1" class="mystic-select" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); color: #fff;">
+              <option value="วันอาทิตย์">วันอาทิตย์ (ธาตุไฟ)</option>
+              <option value="วันจันทร์">วันจันทร์ (ธาตุดิน)</option>
+              <option value="วันอังคาร">วันอังคาร (ธาตุลม)</option>
+              <option value="วันพุธ">วันพุธ (ธาตุน้ำ)</option>
+              <option value="วันพฤหัสบดี">วันพฤหัสบดี (ธาตุดิน)</option>
+              <option value="วันศุกร์">วันศุกร์ (ธาตุน้ำ)</option>
+              <option value="วันเสาร์">วันเสาร์ (ธาตุไฟ)</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label>วันเกิดของแฟนเก่า:</label>
+            <select id="select-rekindle-day2" class="mystic-select" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); color: #fff;">
+              <option value="วันอาทิตย์">วันอาทิตย์ (ธาตุไฟ)</option>
+              <option value="วันจันทร์">วันจันทร์ (ธาตุดิน)</option>
+              <option value="วันอังคาร">วันอังคาร (ธาตุลม)</option>
+              <option value="วันพุธ">วันพุธ (ธาตุน้ำ)</option>
+              <option value="วันพฤหัสบดี">วันพฤหัสบดี (ธาตุดิน)</option>
+              <option value="วันศุกร์">วันศุกร์ (ธาตุน้ำ)</option>
+              <option value="วันเสาร์">วันเสาร์ (ธาตุไฟ)</option>
+            </select>
+          </div>
+
+          <button class="mystic-btn w-full" id="btn-submit-rekindle" style="padding: 12px; font-size: 1.05rem;">
+            🔥 เริ่มเช็กถ่านไฟเก่า 🔥
+          </button>
+        </div>
+
+        <!-- Result Box -->
+        <div id="rekindle-result-box" class="compat-result-box hidden" style="max-width: 500px; margin: 20px auto 0 auto; padding: 15px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1.5px solid var(--color-gold);">
+          <h3 style="color: var(--color-gold); font-size: 1.2rem; margin-bottom: 10px; text-align: center;">🔮 ผลการวิเคราะห์ถ่านไฟเก่า</h3>
+          
+          <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin: 15px 0;">
+            <div class="score-radial-progress" style="border-color: var(--color-gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); width: 90px; height: 90px; margin-bottom: 0;">
+              <span class="score-val" id="rekindle-result-percent" style="color: var(--color-gold); font-size: 1.5rem;">50%</span>
+            </div>
+          </div>
+          
+          <p id="rekindle-result-text" style="font-size: 0.95rem; line-height: 1.5; color: #fff; text-align: left; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; margin: 0; white-space: pre-line;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-SECTION: WHEN TO MOVE ON -->
+    <section id="sec-moveon" class="view-section hidden">
+      <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
+      <div class="glass-card">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--color-cyan);">⏳ ชาตินี้จะมูฟออนได้กี่โมง? (Move On Shield Calculator)</h2>
+        <p class="desc-text" style="text-align: center; margin-bottom: 1.5rem;">วิเคราะห์ความแข็งแกร่งของเกาะป้องกันใจ และประเมินเพื่อหาทางหลุดพ้นจากลูปแฟนเก่า</p>
+
+        <div class="compat-local-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>ระยะเวลาที่คุณเลิกรากันมา:</label>
+            <select id="select-moveon-time" class="mystic-select" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); color: #fff;">
+              <option value="1">น้อยกว่า 1 เดือน (แผลสด)</option>
+              <option value="2">1 - 6 เดือน (ยังหน่วงๆ)</option>
+              <option value="3">6 เดือน - 1 ปี (พยายามลืม)</option>
+              <option value="4">มากกว่า 1 ปี (ยาวนานแต่ยังคิดถึง)</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label>พฤติกรรมปัจจุบันของคุณ:</label>
+            <select id="select-moveon-behavior" class="mystic-select" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); color: #fff;">
+              <option value="1">ยังแอบส่องโซเชียลเขาทุกวันสิคะ</option>
+              <option value="2">ยังทักไลน์ไปคุย/หาเรื่องคุยบางครั้ง</option>
+              <option value="3">เพ้อสตอรี่ดราม่าบ่อยๆ เผื่อเขาจะมาเห็น</option>
+              <option value="4">บล็อกทุกช่องทาง แต่ในใจยังคิดถึงวนลูป</option>
+            </select>
+          </div>
+
+          <button class="mystic-btn w-full" id="btn-submit-moveon" style="padding: 12px; font-size: 1.05rem;">
+            ⏳ คำนวณเวลามูฟออน ⏳
+          </button>
+        </div>
+
+        <!-- Result Box -->
+        <div id="moveon-result-box" class="compat-result-box hidden" style="max-width: 500px; margin: 20px auto 0 auto; padding: 15px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1.5px solid var(--color-cyan);">
+          <h3 style="color: var(--color-cyan); font-size: 1.2rem; margin-bottom: 10px; text-align: center;">🔮 ดัชนีความแข็งแกร่งมูฟออน (Move-On Shield)</h3>
+          
+          <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin: 15px 0;">
+            <div class="score-radial-progress" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); width: 90px; height: 90px; margin-bottom: 0;">
+              <span class="score-val" id="moveon-result-percent" style="color: var(--color-cyan); font-size: 1.5rem;">5%</span>
+            </div>
+          </div>
+          
+          <p id="moveon-result-text" style="font-size: 0.95rem; line-height: 1.5; color: #fff; text-align: left; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; margin: 0; white-space: pre-line;"></p>
         </div>
       </div>
     </section>

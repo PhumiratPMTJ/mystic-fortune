@@ -2460,6 +2460,107 @@ window.addEventListener('DOMContentLoaded', () => {
           window.removeEventListener('click', startOnInteraction);
           window.removeEventListener('touchstart', startOnInteraction);
         };
+
+  // ==========================================================================
+  // EX-PARTNER FORTUNE-TELLING LOGIC (ถ่านไฟเก่า & มูฟออน)
+  // ==========================================================================
+  
+  // 1. Rekindle triggers
+  const btnStartRekindle = document.getElementById('btn-start-rekindle');
+  if (btnStartRekindle) {
+    btnStartRekindle.addEventListener('click', () => {
+      document.getElementById('rekindle-result-box').classList.add('hidden');
+      showSection('sec-rekindle');
+    });
+  }
+
+  const btnSubmitRekindle = document.getElementById('btn-submit-rekindle');
+  if (btnSubmitRekindle) {
+    btnSubmitRekindle.addEventListener('click', () => {
+      const day1 = document.getElementById('select-rekindle-day1').value;
+      const day2 = document.getElementById('select-rekindle-day2').value;
+      
+      let percent = 50;
+      let text = '';
+      
+      // Calculate a pseudo-random yet deterministic value based on charCodes
+      const dayScore = (day1.charCodeAt(3) + day2.charCodeAt(3)) % 10;
+      percent = 20 + dayScore * 8; // 20% to 100%
+      
+      if (AppState.soloCategory === 'serious') {
+        // Serious/Astrology tone
+        text = `[วิเคราะห์ตามรากพลังดาวเกณฑ์คู่ธาตุ]
+คุณเกิด${day1} และแฟนเก่าเกิด${day2} การจรของดาวอริผ่านจุดเชื่อมดาวราหู ส่งผลให้กระแสจิตเดิมยังเหนี่ยวรั้งกันในระดับความถี่ ${percent}% เกณฑ์ชะตาระบุว่าพลังคู่แทรกยังไม่ตัดขาดสนิท มีโอกาสลมพัดหวนได้หากข้ามผ่านช่วงดาวพุธพักร์องศาในเดือนถัดไป แนะนำให้สวดมนต์บทกรณียเมตตาสูตรเพื่อปรับระดับพลังงานดวงจิตให้เกื้อหนุนกันในกรรมดีครับ`;
+      } else if (AppState.soloCategory === 'inspiration') {
+        // Warm/Inspirational tone
+        text = `[บันทึกการเยียวยาใจจากแม่หมอแพม]
+ดวงพลังความรู้สึกของคุณกับแฟนเก่ามีแรงดึงดูดอยู่ที่ ${percent}% ค่ะ ทุกการพบเจอและจากลามีเหตุผลนำพาเสมอค่ะ ไม่ว่าอดีตไฟจะเคยร้อนแรงแค่ไหน แต่อนาคตดวงชะตาชีวิตของคุณเตรียมที่จะส่องประกายสว่างไสว ขอให้คุณสวมกอดตัวเองให้มากๆ และก้าวเดินต่อไปข้างหน้าอย่างมั่นใจนะคะ แม่หมอเอาใจช่วยเสมอจ้า 💕`;
+      } else {
+        // Gag/Funny tone (scold to move on!)
+        percent = Math.min(percent, 30); // Keep it low
+        text = `🚨 [คำเตือนสติฉุกเฉินจากแม่หมอแพม!]
+โอกาสลมพัดหวนคืนดีคือ ${percent}% ถ้วนจ้าแม่! ดับสนิทไม่มีเหลือแม้ขี้เถ้าแล้วค่ะกี่โมง! เลิกนอนร้องไห้ เลิกส่องไอจีเขาได้แล้วจ้า วงจรอุบาทว์ที่เธอเจ็บช้ำมาพอยังคะ? แม่หมอสั่งให้เชิดหน้าสวยๆ แล้วมูฟออนไปหาคนใหม่ที่จะหล่อ รวย และดูแลใจเราดีกว่าเดิมร้อยเท่าดีกว่าจ้า! ขืนกลับไปคือปัญญาอ่อนรอบสองเตือนแล้วนะจ๊ะ! 💥`;
+      }
+      
+      document.getElementById('rekindle-result-percent').textContent = `${percent}%`;
+      document.getElementById('rekindle-result-text').textContent = text;
+      document.getElementById('rekindle-result-box').classList.remove('hidden');
+      MysticAudio.playSuccess();
+    });
+  }
+
+  // 2. MoveOn triggers
+  const btnStartMoveon = document.getElementById('btn-start-moveon');
+  if (btnStartMoveon) {
+    btnStartMoveon.addEventListener('click', () => {
+      document.getElementById('moveon-result-box').classList.add('hidden');
+      showSection('sec-moveon');
+    });
+  }
+
+  const btnSubmitMoveon = document.getElementById('btn-submit-moveon');
+  if (btnSubmitMoveon) {
+    btnSubmitMoveon.addEventListener('click', () => {
+      const timeVal = document.getElementById('select-moveon-time').value;
+      const behaviorVal = document.getElementById('select-moveon-behavior').value;
+      
+      let base = 30;
+      if (timeVal === '1') base = 15;
+      else if (timeVal === '2') base = 40;
+      else if (timeVal === '3') base = 70;
+      else if (timeVal === '4') base = 90;
+      
+      let penalty = 20;
+      if (behaviorVal === '1') penalty = 40;
+      else if (behaviorVal === '2') penalty = 30;
+      else if (behaviorVal === '3') penalty = 25;
+      else if (behaviorVal === '4') penalty = 10;
+      
+      let percent = Math.max(5, base - penalty + Math.floor(Math.random() * 10));
+      let text = '';
+      
+      if (AppState.soloCategory === 'serious') {
+        // Serious/Astrology tone
+        text = `[ประเมินตามองศาพลังจันทร์เสี้ยว]
+ดัชนีเกราะคุ้มกันใจ (Move-On Shield) อยู่ที่ ${percent}% จิตใต้สำนึกของคุณยังคงได้รับแรงสั่นสะเทือนจากดาวจันทร์เดิมที่สถิตในภพมรณะ ทำให้จิตวิญญาณมีอาการโหยหาอดีตซ้ำๆ โหราศาสตร์แนะนำให้คุณสวดถอนสัมผัสพลังงานเชิงลบ และหลีกเลี่ยงการสืบค้นความเคลื่อนไหวใดๆ ของเขาเพื่อช่วยตัดวงโคจรพลังหม่นหมองในเรือนชีวิตให้ฟื้นคืนกลับมาเต็มร้อยโดยเร็วครับ`;
+      } else if (AppState.soloCategory === 'inspiration') {
+        // Warm/Inspirational tone
+        text = `[พลังกอดเพื่อการเริ่มต้นใหม่]
+      เกราะป้องกันใจของคุณมีความแข็งแกร่งระดับ ${percent}% แล้วนะคะ เก่งมากๆ เลยค่ะ การเยียวยาใจอาจต้องใช้เวลาและไม่มีใครมูฟออนได้ในวันเดียวอย่างสมบูรณ์หรอกค่ะ โอบกอดความเหงาความเจ็บปวดในวันนี้ไว้ แล้วค่อยๆ เดินต่อทีละก้าว ท้องฟ้าที่สดใสกำลังเตรียมกอดคุณอยู่ข้างหน้านะคะคุณคนเก่ง 💖`;
+      } else {
+        // Gag/Funny tone (scold to move on!)
+        percent = Math.min(percent, 10); // Keep it extremely low
+        text = `💥 [ตื่นกี่โมงจ๊ะ! โดนดึงสติด่วนจ้าวัยรุ่น!]
+ดัชนีเกราะคุ้มกันใจบางเบาระดับใยแมงมุมตากฝนแค่ ${percent}% สภาพแบบนี้คือพร้อมวนกลับไปเป็นสนามอารมณ์และตัวตลกให้เขาหลอกล้อได้ตลอดเวลาจ้า! เลิกดราม่าลงสตอรี่เรียกร้องความสนใจ เลิกทักไลน์ไปชวนคุยแก้ขัดได้แล้ว! เชิดหน้าหยิ่งๆ ปิดหน้าจอแล้วก้าวเดินไปหาอนาคตที่ปังและรวยๆ กว่าเขาให้มันเสียดายดิ้นพล่านสะใจกว่าเยอะจ้าแม่! 💅`;
+      }
+      
+      document.getElementById('moveon-result-percent').textContent = `${percent}%`;
+      document.getElementById('moveon-result-text').textContent = text;
+      document.getElementById('moveon-result-box').classList.remove('hidden');
+      MysticAudio.playSuccess();
+    });
+  }
+
         window.addEventListener('click', startOnInteraction, { passive: true });
         window.addEventListener('touchstart', startOnInteraction, { passive: true });
       });
