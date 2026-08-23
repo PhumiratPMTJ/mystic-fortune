@@ -2305,6 +2305,49 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Walking Duck Mascot Interaction
+  const mascotDuck = document.getElementById('lobby-duck');
+  const duckSpeechBubble = document.getElementById('duck-speech');
+  const duckSpeechText = document.getElementById('duck-speech-text');
+  let duckSpeechTimeout = null;
+
+  const duckQuotes = [
+    "ก๊าบ! วันนี้ดวงดีมีโชคจ้าวัยรุ่น! 🦆💰",
+    "มองหน้าหาเรื่องกวักเงินกวักทองหรอจ๊ะ! ก๊าบๆ! 🔮✨",
+    "ขอให้ดวงดี ปังเปรี้ยงปร้าง แซงหน้าพี่หมูแด็บไปเลยนะจ๊ะ! 🦆🔥",
+    "ก๊าบๆ! แอบมองเธอนะจ๊ะแต่เธอไม่รู้หรอก คิกคิก 🐷💕",
+    "เพี้ยง! วันนี้เดินกวักเงินสิบล้านเข้าบ้านจ้าพี่ๆ! 💰🏡",
+    "เป็ดสวมวิกผมทรงเท่ขนาดนี้... วันนี้ดวงคุณต้องเท่ระเบิดแน่นอน! 😎"
+  ];
+
+  if (mascotDuck && duckSpeechBubble && duckSpeechText) {
+    mascotDuck.addEventListener('click', (e) => {
+      // Prevent triggers when clicking inside bubble text
+      if (e.target.closest('#duck-speech')) return;
+
+      const randomQuote = duckQuotes[Math.floor(Math.random() * duckQuotes.length)];
+      duckSpeechText.textContent = randomQuote;
+
+      mascotDuck.classList.add('spin-active');
+      setTimeout(() => {
+        mascotDuck.classList.remove('spin-active');
+      }, 750);
+
+      if (duckSpeechBubble.classList.contains('hidden')) {
+        duckSpeechBubble.classList.remove('hidden');
+        MysticAudio.playSuccess();
+      } else {
+        duckSpeechBubble.classList.add('hidden');
+        MysticAudio.playClick();
+      }
+
+      clearTimeout(duckSpeechTimeout);
+      duckSpeechTimeout = setTimeout(() => {
+        duckSpeechBubble.classList.add('hidden');
+      }, 6000);
+    });
+  }
+
   // Floating Tarot Card Particles in Lobby
   function spawnLobbyCard() {
     const container = document.getElementById('lobby-card-particles');

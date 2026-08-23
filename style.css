@@ -2184,3 +2184,81 @@ p {
     flex: none !important;
   }
 }
+
+/* Duck Mascot */
+.lobby-duck-container {
+  position: absolute;
+  top: 15%;
+  left: -120px;
+  z-index: 1;
+  pointer-events: auto;
+  animation: duckSlide 45s linear infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.duck-sticker {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3.5px solid #fff;
+  background: url('/images/duck.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  cursor: pointer;
+  animation: duckWaddle 1.4s ease-in-out infinite alternate;
+  transition: transform 0.2s ease;
+}
+
+.duck-sticker:hover {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 12px 24px rgba(255, 215, 0, 0.6);
+}
+
+.lobby-duck-container.spin-active .duck-sticker {
+  animation: duckSpin 0.75s ease-in-out !important;
+}
+
+/* Duck Speech Bubble */
+.lobby-duck-container .duck-speech-bubble {
+  position: absolute;
+  bottom: 105px;
+  background: rgba(13, 17, 38, 0.9);
+  border: 1px solid var(--color-gold);
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 200px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
+  pointer-events: none;
+  z-index: 20;
+  animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-duck-container .duck-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: rgba(13, 17, 38, 0.9) transparent;
+  display: block;
+  width: 0;
+}
+
+@keyframes duckSlide {
+  0% { left: -120px; }
+  100% { left: 100%; }
+}
+
+@keyframes duckWaddle {
+  0% { transform: translateY(0) rotate(-6deg); }
+  100% { transform: translateY(-10px) rotate(6deg); }
+}
+
+@keyframes duckSpin {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.3) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
