@@ -2462,6 +2462,11 @@ window.addEventListener('DOMContentLoaded', () => {
           window.removeEventListener('click', startOnInteraction);
           window.removeEventListener('touchstart', startOnInteraction);
         };
+        window.addEventListener('click', startOnInteraction, { passive: true });
+        window.addEventListener('touchstart', startOnInteraction, { passive: true });
+      });
+    }
+  }, 500);
 
   // ==========================================================================
   // EX-PARTNER FORTUNE-TELLING LOGIC (ถ่านไฟเก่า & มูฟออน)
@@ -2563,9 +2568,4 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-        window.addEventListener('click', startOnInteraction, { passive: true });
-        window.addEventListener('touchstart', startOnInteraction, { passive: true });
-      });
-    }
-  }, 500);
 });
