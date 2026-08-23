@@ -2175,4 +2175,12 @@ p {
     width: 65px !important;
     height: 98px !important;
   }
+  .category-buttons {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .cat-btn {
+    width: 100% !important;
+    flex: none !important;
+  }
 }
