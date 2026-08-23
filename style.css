@@ -2260,3 +2260,79 @@ p {
   50% { transform: scale(1.3) rotate(180deg); }
   100% { transform: scale(1) rotate(360deg); }
 }
+
+/* Lizard Mascot */
+.lobby-lizard-container {
+  position: absolute;
+  top: 30%;
+  right: -120px;
+  z-index: 1;
+  pointer-events: auto;
+  animation: lizardSlide 52s linear infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lizard-sticker {
+  width: 70px;
+  height: 70px;
+  background: url('/images/lizard.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+  animation: lizardWaddle 1.6s ease-in-out infinite alternate;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+}
+
+.lizard-sticker:hover {
+  transform: scale(1.15) rotate(-10deg);
+  filter: drop-shadow(0 10px 20px rgba(0, 255, 128, 0.75));
+}
+
+.lobby-lizard-container.spin-active .lizard-sticker {
+  animation: lizardSpin 0.75s ease-in-out !important;
+}
+
+/* Lizard Speech Bubble */
+.lobby-lizard-container .lizard-speech-bubble {
+  position: absolute;
+  bottom: 105px;
+  background: rgba(13, 17, 38, 0.9);
+  border: 1px solid #00ff88;
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 200px;
+  box-shadow: 0 4px 15px rgba(0, 255, 128, 0.25);
+  pointer-events: none;
+  z-index: 20;
+  animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-lizard-container .lizard-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: rgba(13, 17, 38, 0.9) transparent;
+  display: block;
+  width: 0;
+}
+
+@keyframes lizardSlide {
+  0% { right: -120px; }
+  100% { right: 100%; }
+}
+
+@keyframes lizardWaddle {
+  0% { transform: translateY(0) rotate(5deg) scaleX(-1); }
+  100% { transform: translateY(-8px) rotate(-5deg) scaleX(-1); }
+}
+
+@keyframes lizardSpin {
+  0% { transform: scaleX(-1) scale(1) rotate(0deg); }
+  50% { transform: scaleX(-1) scale(1.3) rotate(-180deg); }
+  100% { transform: scaleX(-1) scale(1) rotate(-360deg); }
+}

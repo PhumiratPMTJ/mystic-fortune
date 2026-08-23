@@ -2348,6 +2348,49 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Walking Lizard Mascot Interaction
+  const mascotLizard = document.getElementById('lobby-lizard');
+  const lizardSpeechBubble = document.getElementById('lizard-speech');
+  const lizardSpeechText = document.getElementById('lizard-speech-text');
+  let lizardSpeechTimeout = null;
+
+  const lizardQuotes = [
+    "กิ๊กๆ! วันนี้เฮงๆ ปังๆ จ้าวัยรุ่น! 🦎💚",
+    "มองหน้าหาเรื่องเสริมพลังธาตุสีเขียวหรอจ๊ะ! 🦎✨",
+    "ขอให้โชคดี มีเงินไหลมาเทมาดั่งหางกิ้งก่าที่งอกใหม่เรื่อยๆ! 💰🦎",
+    "กิ๊กๆ! แดดเมืองไทยแรงจนกิ้งก่าอยากส้มปาก แต่ดวงคุณจะส้มหล่นทับเงินแสนแทนจ้า! 🍊💸",
+    "เพี้ยง! วันนี้เดินกวักความร่ำรวยร้อยล้านจ้าพี่ๆ! 💰🔥",
+    "กิ้งก่าเขียวเหนี่ยวทรัพย์มาโปรยถึงหน้าบ้านแล้วจ้า! 🏡💸"
+  ];
+
+  if (mascotLizard && lizardSpeechBubble && lizardSpeechText) {
+    mascotLizard.addEventListener('click', (e) => {
+      // Prevent triggers when clicking inside bubble text
+      if (e.target.closest('#lizard-speech')) return;
+
+      const randomQuote = lizardQuotes[Math.floor(Math.random() * lizardQuotes.length)];
+      lizardSpeechText.textContent = randomQuote;
+
+      mascotLizard.classList.add('spin-active');
+      setTimeout(() => {
+        mascotLizard.classList.remove('spin-active');
+      }, 750);
+
+      if (lizardSpeechBubble.classList.contains('hidden')) {
+        lizardSpeechBubble.classList.remove('hidden');
+        MysticAudio.playSuccess();
+      } else {
+        lizardSpeechBubble.classList.add('hidden');
+        MysticAudio.playClick();
+      }
+
+      clearTimeout(lizardSpeechTimeout);
+      lizardSpeechTimeout = setTimeout(() => {
+        lizardSpeechBubble.classList.add('hidden');
+      }, 6000);
+    });
+  }
+
   // Floating Tarot Card Particles in Lobby
   function spawnLobbyCard() {
     const container = document.getElementById('lobby-card-particles');
