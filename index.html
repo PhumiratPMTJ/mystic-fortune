@@ -3,62 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🔮 ดวงปังพลังแพม - เว็บไซต์ดูดวงและมินิเกมปาร์ตี้ของเพื่อนซี้</title>
+  <title>ดวงปังพลังแพม | โหราศาสตร์ไทยเชิงวิเคราะห์ & ศาสตร์พยากรณ์</title>
+  <meta name="description" content="ดวงเป็นแค่แผนที่ แต่ชีวิตนี้เป็นของคุณ โหราศาสตร์ไทยเชิงวิเคราะห์ คำนวณ วิเคราะห์ และเปิดศาสตร์พยากรณ์ 12 มิติ โดยแม่หมอแพม">
   <link rel="icon" type="image/png" href="/images/pam_mascot.png">
   
-  <!-- Google Fonts: Mitr & Kanit for beautiful Thai typography -->
+  <!-- Google Fonts: Noto Serif Thai & Noto Sans Thai (Same as MyDuang) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400;600&family=Mitr:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <!-- Accessibility & Reading Progress (MyDuang Style) -->
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+  <label class="motion-control">
+    <input id="pause-motion" type="checkbox"/>
+    <span>หยุดภาพเคลื่อนไหว</span>
+  </label>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <div class="pointer-glow" id="pointer-glow" aria-hidden="true"></div>
+  <a class="back-to-top" id="back-to-top" href="#main" aria-label="กลับด้านบน">↑</a>
 
-  <!-- Starry Background Canvas -->
-  <canvas id="star-canvas"></canvas>
+  <!-- Animated Celestial Star Field (MyDuang Style) -->
+  <div class="star-field" aria-hidden="true">
+    <i style="left:7%;top:3%;opacity:0.18;width:3px;height:3px"></i>
+    <i style="left:44%;top:26%;opacity:0.3;width:2px;height:2px"></i>
+    <i style="left:81%;top:49%;opacity:0.42;width:2px;height:2px"></i>
+    <i style="left:18%;top:72%;opacity:0.54;width:2px;height:2px"></i>
+    <i style="left:55%;top:95%;opacity:0.66;width:2px;height:2px"></i>
+    <i style="left:92%;top:18%;opacity:0.18;width:2px;height:2px"></i>
+    <i style="left:29%;top:41%;opacity:0.3;width:2px;height:2px"></i>
+    <i style="left:66%;top:64%;opacity:0.42;width:3px;height:3px"></i>
+    <i style="left:3%;top:87%;opacity:0.54;width:2px;height:2px"></i>
+    <i style="left:40%;top:10%;opacity:0.66;width:2px;height:2px"></i>
+    <i style="left:77%;top:33%;opacity:0.18;width:2px;height:2px"></i>
+    <i style="left:14%;top:56%;opacity:0.3;width:2px;height:2px"></i>
+    <i style="left:51%;top:79%;opacity:0.42;width:2px;height:2px"></i>
+    <i style="left:88%;top:2%;opacity:0.54;width:2px;height:2px"></i>
+    <i style="left:25%;top:25%;opacity:0.66;width:3px;height:3px"></i>
+    <i style="left:62%;top:48%;opacity:0.18;width:2px;height:2px"></i>
+    <i style="left:99%;top:71%;opacity:0.3;width:2px;height:2px"></i>
+    <i style="left:36%;top:94%;opacity:0.42;width:2px;height:2px"></i>
+    <i style="left:73%;top:17%;opacity:0.54;width:2px;height:2px"></i>
+    <i style="left:10%;top:40%;opacity:0.66;width:2px;height:2px"></i>
+    <i style="left:47%;top:63%;opacity:0.18;width:2px;height:2px"></i>
+    <i style="left:84%;top:86%;opacity:0.3;width:3px;height:3px"></i>
+    <i style="left:21%;top:9%;opacity:0.42;width:2px;height:2px"></i>
+    <i style="left:58%;top:32%;opacity:0.54;width:2px;height:2px"></i>
+    <i style="left:95%;top:55%;opacity:0.66;width:2px;height:2px"></i>
+  </div>
 
   <!-- Ambient Audio Indicator (Floating top-right) -->
   <div class="audio-control playing" id="audio-toggle-btn" title="เปิด/ปิดเพลงคลออวกาศ">
     <div class="audio-icon">🔊</div>
   </div>
 
+  <!-- STICKY SITE HEADER (MyDuang Style) -->
+  <header class="site-header wrap" id="app-header-logo">
+    <a href="#main" class="wordmark" aria-label="ดวงปังพลังแพม หน้าหลัก">
+      <span aria-hidden="true">✦</span> ดวงปังพลังแพม
+    </a>
+    <nav aria-label="เมนูหลัก">
+      <a href="#weekday-guide">เจ็ดวัน เจ็ดดาว</a>
+      <a href="#interactive-divinations">ศาสตร์พยากรณ์ ๑๒ มิติ</a>
+      <a href="#services">บริการและราคา</a>
+      <a href="#history">เรื่องราวโหราศาสตร์</a>
+      <a class="nav-contact" href="#contact">ติดต่อปรึกษา <span class="arrow-icon">↗</span></a>
+    </nav>
+  </header>
+
   <!-- Main Container -->
   <div class="app-container">
     
-    <!-- HEADER -->
-    <header class="app-header hidden" id="app-header-logo">
-      <h1 class="logo-text">ดวงปังพลังแพม</h1>
-      <p class="subtitle-text">ดวงชะตาลิขิต & ปาร์ตี้มินิเกมส์กับเพื่อนซี้</p>
-    </header>
+    <!-- VIEW SECTION: MAIN CLONED LANDING / LOBBY -->
+    <main id="sec-lobby" class="view-section active">
 
-    <!-- SECTION 0: WELCOME SPLASH SCREEN -->
-    <section id="sec-welcome" class="view-section active">
-      <div class="glass-card text-center" style="max-width: 500px; margin: 3rem auto; padding: 3rem 2rem; border-color: var(--color-gold);">
-        <!-- Floating Mascot Wrapper -->
-        <div class="angel-pam-container" style="position: relative; bottom: 0; right: 0; margin: 0 auto 2.5rem auto; transform: scale(1.3); display: flex;">
-          <div class="wing left-wing"></div>
-          <div class="wing right-wing"></div>
-          <div class="pam-avatar"></div>
-          <div class="halo"></div>
-        </div>
-
-        <h1 class="logo-text" style="font-size: clamp(2rem, 8vw, 3.2rem); margin-bottom: 0.5rem;">ดวงปังพลังแพม</h1>
-        <p class="subtitle-text" style="margin-bottom: 2.5rem;">ดินแดนดูดวงและมินิเกมปาร์ตี้ของเพื่อนซี้</p>
-
-        <button class="mystic-btn w-full" id="btn-enter-land" style="font-size: 1.2rem; padding: 14px 28px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);">
-          🔮 เปิดประตูชะตาชีวิต 🔮
-        </button>
-      </div>
-    </section>
-
-    <!-- SECTION 1: MAIN LOBBY (FORTUNE SELECTION) -->
-    <section id="sec-lobby" class="view-section hidden">
-      <!-- Floating Tarot Cards Particle Container -->
-      <div id="lobby-card-particles" class="card-particles-wrapper"></div>
-
-      <!-- Dabbing Pig Mascot (Left Side of Lobby) -->
+      <!-- Mascots in background (Easter eggs) -->
       <div class="lobby-pig-container" id="lobby-pig" title="พี่หมูแด็บสุดจ๊าบ! คลิกทักทายกวนๆ">
         <img src="/images/dabbing_pig.png" class="pig-avatar" alt="Dabbing Pig">
         <div class="speech-bubble hidden" id="pig-speech">
@@ -66,7 +88,6 @@
         </div>
       </div>
 
-      <!-- Walking Duck Mascot (Background of Lobby) -->
       <div class="lobby-duck-container" id="lobby-duck">
         <div class="duck-speech-bubble hidden" id="duck-speech">
           <p id="duck-speech-text">ก๊าบ! วันนี้ดวงดีมีโชคจ้าวัยรุ่น! 🦆💰</p>
@@ -74,7 +95,6 @@
         <div class="duck-sticker" title="น้องเป็ดสุดเกรียน! คลิกทักทายกวนๆ 🦆"></div>
       </div>
 
-      <!-- Walking Lizard Mascot (Background of Lobby) -->
       <div class="lobby-lizard-container" id="lobby-lizard">
         <div class="lizard-speech-bubble hidden" id="lizard-speech">
           <p id="lizard-speech-text">กิ๊กๆ! วันนี้เฮงๆ ปังๆ จ้าวัยรุ่น! 🦎💚</p>
@@ -82,9 +102,245 @@
         <div class="lizard-sticker" title="น้องกิ้งก่าจอมซน! คลิกทักทายกวนๆ 🦎"></div>
       </div>
 
-      <div class="glass-card">
-        <h2 style="text-align: center; margin-bottom: 1.5rem; font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--color-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">🔮 เลือกศาสตร์พยากรณ์ชะตาชีวิต 🔮</h2>
+      <!-- 1. HERO SECTION (MyDuang Style) -->
+      <section class="hero narrow" id="main" aria-labelledby="hero-title">
+        <p class="eyebrow">โหราศาสตร์ไทยเชิงวิเคราะห์ & ศาสตร์พยากรณ์</p>
         
+        <!-- Rotating Celestial Compass Emblem -->
+        <div class="celestial-mark" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-compass">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path>
+          </svg>
+        </div>
+
+        <h1 id="hero-title">ดวงเป็นแค่แผนที่<br/><span>แต่ชีวิตนี้เป็นของคุณ</span></h1>
+        
+        <p class="hero-description">
+          ดูดวงเพื่อเข้าใจชีวิต ไม่ใช่การลิขิตโชคชะตา<br/>
+          สำรวจแนวโน้มด้วยการคำนวณ วิเคราะห์ และเปิดศาสตร์พยากรณ์ ๑๒ มิติ<br class="desktop-break"/>
+          เพื่อให้คุณมองเห็นทางเลือก และตัดสินใจด้วยตัวเอง
+        </p>
+        
+        <p class="birth-note">ศาสตร์แห่งดวงดาว เหตุผล และการคำนวณ โดยแม่หมอแพม</p>
+        
+        <div class="hero-cta-group">
+          <a class="button gold hero-cta" href="#interactive-divinations">
+            🔮 สำรวจ ๑๒ ศาสตร์พยากรณ์สด <span class="arrow-icon">↗</span>
+          </a>
+          <a class="button outline" href="#services">
+            ปรึกษาดวงส่วนตัว · เริ่มต้น 99 บาท <span class="arrow-icon">↗</span>
+          </a>
+        </div>
+        
+        <p class="microcopy">พูดคุยผ่าน Discord หรือ Instagram ก่อนนัดหมาย</p>
+        
+        <div class="trust-row">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>
+            วิเคราะห์โดยแม่หมอแพม
+          </span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg>
+            หลักโหราศาสตร์ไทย & ไพ่ยิปซี
+          </span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+            ระบบพยากรณ์สด & คุยแชท ๒๔ ชม.
+          </span>
+        </div>
+
+        <a class="scroll-cue" href="#approach" aria-label="อ่านแนวทางการวิเคราะห์">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+        </a>
+      </section>
+
+      <!-- 2. APPROACH SECTION (MyDuang Style) -->
+      <section id="approach" class="approach narrow section-space" aria-labelledby="approach-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <p class="eyebrow">มากกว่าคำทำนาย</p>
+        <h2 id="approach-title">ดวงของแต่ละคนไม่เหมือนกัน<br/><span>เรื่องราวของคุณก็เช่นกัน</span></h2>
+        <p class="section-description">
+          เรื่องเดียวกัน อาจมีความหมายต่างกันในแต่ละช่วงชีวิต<br class="desktop-break"/>
+          การปรึกษาจึงเริ่มจากพื้นดวงของคุณ และสิ่งที่คุณกำลังเผชิญ
+        </p>
+        <blockquote>
+          “เหตุอยู่ที่ดาว ผลอยู่ที่เรา”
+          <p>มองเห็นแนวโน้ม เพื่อเลือกก้าวต่อไปอย่างไม่ประมาท</p>
+        </blockquote>
+
+        <div class="approach-grid">
+          <article>
+            <div class="article-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg>
+            </div>
+            <h3>คำนวณจากข้อมูลเกิด</h3>
+            <p>ใช้วัน เดือน ปี เวลา และวันเกิด พร้อมเครื่องมือวิเคราะห์ตำแหน่งดาวและจักรราศี</p>
+          </article>
+          <article>
+            <div class="article-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><circle cx="12" cy="12" r="3"></circle><path d="m16 16-1.9-1.9"></path></svg>
+            </div>
+            <h3>วิเคราะห์อย่างมีเหตุผล</h3>
+            <p>พิจารณาความสัมพันธ์ของดวงดาว ธาตุ และสถิติเลขศาสตร์ตามหลักโบราณ</p>
+          </article>
+          <article>
+            <div class="article-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+            </div>
+            <h3>อธิบายให้คุณเข้าใจ</h3>
+            <p>อธิบายแนวโน้ม สิ่งที่ควรระวัง และแนวทางให้คุณนำไปพิจารณา โดยคุณเป็นผู้ตัดสินใจ</p>
+          </article>
+        </div>
+
+        <div class="principles">
+          <p class="eyebrow">สิ่งที่แม่หมอแพมให้ความสำคัญ</p>
+          <p class="microcopy">แตะเพื่ออ่านแนวทางแต่ละข้อ</p>
+          
+          <details class="principle">
+            <summary>
+              <span class="principle-number">01</span>
+              <h3>เลือกโหราศาสตร์ไทย โดยเคารพความต่าง</h3>
+              <span class="faq-symbol" aria-hidden="true">+</span>
+            </summary>
+            <p>เราชอบการเริ่มจากข้อมูลเกิดและโครงสร้างดวง แล้วอธิบายความสัมพันธ์ให้คุณตามความคิดไปด้วยได้ แต่ละศาสตร์มีเครื่องมือและแนวทางของตนเอง การเลือกศึกษาศาสตร์นี้ไม่ได้แปลว่าศาสตร์อื่นด้อยกว่า สิ่งสำคัญคือคุณเข้าใจขอบเขตของคำปรึกษาและตัดสินใจได้ด้วยตัวเอง</p>
+          </details>
+
+          <details class="principle">
+            <summary>
+              <span class="principle-number">02</span>
+              <h3>ดวงเป็นแผนที่ ชีวิตเป็นของคุณ</h3>
+              <span class="faq-symbol" aria-hidden="true">+</span>
+            </summary>
+            <p>เรามองว่าดวงช่วยให้เห็นแนวโน้มและรูปแบบที่เราคุ้นเคย แต่การเปลี่ยนแปลงยังต้องอาศัยการตัดสินใจและการลงมือทำของเราเอง คุณเป็นผู้เลือกว่าจะนำคำปรึกษาไปใช้อย่างไร</p>
+          </details>
+
+          <details class="principle">
+            <summary>
+              <span class="principle-number">03</span>
+              <h3>พูดตรง พร้อมอธิบายอย่างเคารพ</h3>
+              <span class="faq-symbol" aria-hidden="true">+</span>
+            </summary>
+            <p>ทั้งเรื่องที่ดีและเรื่องที่ควรระวัง ควรได้รับคำอธิบายอย่างเหมาะสม เราให้ความสำคัญกับการเลือกใช้คำพูด ไม่ตัดสินคุณจากดวง และชวนมองสิ่งที่ทำได้ในชีวิตจริงเพื่อใช้ชีวิตอย่างไม่ประมาท</p>
+          </details>
+
+          <details class="principle">
+            <summary>
+              <span class="principle-number">04</span>
+              <h3>เครื่องมือช่วยคำนวณ แม่หมอเป็นผู้วิเคราะห์</h3>
+              <span class="faq-symbol" aria-hidden="true">+</span>
+            </summary>
+            <p>ใช้เครื่องมือช่วยคำนวณตำแหน่งดาวและเลขศาสตร์เพื่อความสะดวกรวดเร็ว แล้วนำมาพิจารณาตามหลักโหราศาสตร์ไทยด้วยตัวเอง ไม่อ่านคำทำนายอัตโนมัติแทนการปรึกษา</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- 3. WEEKDAY GUIDE SECTION (#weekday-guide) (MyDuang Style) -->
+      <section id="weekday-guide" class="weekday-guide wrap section-space" aria-labelledby="weekday-guide-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <div class="guide-heading">
+          <p class="eyebrow">รู้จักภาษาของดาว</p>
+          <h2 id="weekday-guide-title">เจ็ดวัน เจ็ดดาว<br/><span>มองทั้งพลังและด้านที่ควรระวัง</span></h2>
+          <p class="section-description">
+            เลือกวันเกิดเพื่อเริ่มรู้จักดาวที่สัมพันธ์กับวันนั้น<br/>
+            แล้วลองสำรวจวันอื่น เพื่อเข้าใจความหมายของดาวทั้งเจ็ด
+          </p>
+        </div>
+
+        <fieldset class="weekday-picks" id="weekday-picks" aria-label="เลือกวันเพื่ออ่านความหมายดาว">
+          <button type="button" aria-pressed="true" data-day-index="0" style="--day-color:#e5b65a">
+            <span aria-hidden="true">๑</span><span>อาทิตย์</span>
+          </button>
+          <button type="button" aria-pressed="false" data-day-index="1" style="--day-color:#e5d4a2">
+            <span aria-hidden="true">๒</span><span>จันทร์</span>
+          </button>
+          <button type="button" aria-pressed="false" data-day-index="2" style="--day-color:#dca08e">
+            <span aria-hidden="true">๓</span><span>อังคาร</span>
+          </button>
+          <button type="button" aria-pressed="false" data-day-index="3" style="--day-color:#a7c4ab">
+            <span aria-hidden="true">๔</span><span>พุธ</span>
+          </button>
+          <button type="button" aria-pressed="false" data-day-index="4" style="--day-color:#d7ad7e">
+            <span aria-hidden="true">๕</span><span>พฤหัสบดี</span>
+          </button>
+          <button type="button" aria-pressed="false" data-day-index="5" style="--day-color:#b3bde1">
+            <span aria-hidden="true">๖</span><span>ศุกร์</span>
+          </button>
+          <button type="button" aria-pressed="false" data-day-index="6" style="--day-color:#b8a2cd">
+            <span aria-hidden="true">๗</span><span>เสาร์</span>
+          </button>
+        </fieldset>
+
+        <div id="weekday-reading" class="weekday-reading" style="--day-color:#e5b65a" aria-live="polite" aria-atomic="true">
+          <div class="weekday-reading-inner" id="weekday-reading-content">
+            <div class="weekday-lead">
+              <div class="weekday-seal" id="w-seal" aria-hidden="true">
+                <span id="w-symbol">☉</span>
+                <small id="w-num">๑</small>
+              </div>
+              <div>
+                <p class="eyebrow" id="w-eyebrow">ดาวประจำวันอาทิตย์</p>
+                <h3 id="w-planet">อาทิตย์</h3>
+                <p class="weekday-theme" id="w-theme">พลังของการนำและความมุ่งมั่น</p>
+              </div>
+            </div>
+            <div class="weekday-nature">
+              <h4>ธรรมชาติของดาว</h4>
+              <p id="w-nature">ในคติที่ใช้อธิบายนี้ อาทิตย์เปรียบกับไฟที่ให้แสงและพลัง สื่อถึงความชัดเจน ความภาคภูมิใจ และแรงผลักดันที่จะลงมือทำ</p>
+            </div>
+            <div class="weekday-sides">
+              <div>
+                <h4><span aria-hidden="true">✦</span> จุดแข็งเมื่อใช้ได้พอดี</h4>
+                <ul id="w-strengths">
+                  <li>กล้ารับผิดชอบและตัดสินใจ</li>
+                  <li>มีเป้าหมายและคิดเพื่อส่วนรวม</li>
+                  <li>จริงใจ ให้ความสำคัญกับศักดิ์ศรี</li>
+                </ul>
+              </div>
+              <div>
+                <h4><span aria-hidden="true">◐</span> ด้านที่ควรระวัง</h4>
+                <ul id="w-cautions">
+                  <li>ยึดความคิดตัวเองจนรับฟังยาก</li>
+                  <li>ต้องการการยอมรับมากเกินไป</li>
+                  <li>ใช้อำนาจหรือความมั่นใจจนกดดันคนอื่น</li>
+                </ul>
+              </div>
+            </div>
+            <div class="weekday-reflection">
+              <span>คำถามชวนสำรวจตัวเอง</span>
+              <p id="w-reflection">ความมั่นใจของเราช่วยให้คนรอบตัวเติบโตไปด้วยหรือเปล่า?</p>
+              <small>คำถามเรียบเรียงโดย ดวงปังพลังแพม</small>
+            </div>
+          </div>
+        </div>
+
+        <p class="weekday-context">
+          นี่คือความหมายเชิงสัญลักษณ์ตามคติโหราศาสตร์ ไม่ใช่ข้อสรุปนิสัยหรืออนาคตจากวันเกิดเพียงอย่างเดียว<br/>
+          การอ่านดวงเฉพาะบุคคลต้องพิจารณาข้อมูลเกิด ตำแหน่ง และความสัมพันธ์ของดาวร่วมกัน
+        </p>
+
+        <details class="weekday-sources">
+          <summary>ที่มาและขอบเขตของคำอธิบาย <span aria-hidden="true">+</span></summary>
+          <p>สรุปและเรียบเรียงใหม่จากบทความธรรมชาติและข้อดี–ข้อเสียของดาว โดยบ้านคุณยายกลิ่นโสม ซึ่งระบุที่มาจากตำราและบทเรียนของครูโหร เนื้อหานี้เลือกเฉพาะความหมายทั่วไป ไม่ใช้ข้อกล่าวเรื่องโรค รูปลักษณ์ หรือคุณค่าของบุคคลมาตัดสินผู้ชมจากวันเกิด</p>
+          <p>ส่วนนี้ใช้ดาวเจ็ดดวงตามชื่อวัน พุธหมายถึงดาวพุธ ไม่ได้แยกพุธกลางคืนหรือคำนวณทักษา ธาตุที่กล่าวถึงเป็นการจัดตามตำราที่อ้างอิง ไม่ใช่องค์ประกอบทางกายภาพของดาว</p>
+        </details>
+
+        <a href="#contact" class="button outline weekday-consult">
+          อยากเข้าใจดวงเฉพาะตัว · พูดคุยกับแม่หมอแพม <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <!-- 4. INTERACTIVE 12 DIVINATIONS PORTAL (Our complete feature suite restyled!) -->
+      <section id="interactive-divinations" class="wrap section-space" aria-labelledby="divinations-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <div class="guide-heading">
+          <p class="eyebrow">สถาบันพยากรณ์ชะตาชีวิต & ปาร์ตี้เกม</p>
+          <h2 id="divinations-title">เปิดชะตาชีวิต ๑๒ มิติ<br/><span>เลือกศาสตร์พยากรณ์ออนไลน์</span></h2>
+          <p class="section-description">
+            สัมผัสประสบการณ์พยากรณ์สดแบบ Interactive ผ่านไพ่ยิปซี เซียมซี เลขศาสตร์ กราฟชีวิต แชทบอท และมินิเกมปาร์ตี้
+          </p>
+        </div>
+
         <!-- Category Selector -->
         <div class="category-selector-container">
           <p class="label-text">เลือกแนวคำทำนายที่คุณต้องการ:</p>
@@ -95,95 +351,374 @@
           </div>
         </div>
 
+        <!-- 12 Divination Cards Grid -->
         <div class="solo-options-grid">
-          <!-- Option Esiimsi -->
+          <!-- 1. Option Esiimsi -->
           <div class="sub-option-card" id="btn-start-esiimsi">
-            <div class="card-icon-img" style="background-image: url('/images/esiimsi_cup.jpg'); margin: 0 auto 1.2rem auto; width: 85px; height: 85px; border-radius: 50%;"></div>
-            <h3>เซียมซีเสี่ยงดวง</h3>
-            <p>ตั้งจิตอธิษฐานแล้วเขย่ากระบอกเซียมซีลุ้นใบทำนายมงคล</p>
+            <div class="sub-icon">🎋</div>
+            <h3>เซียมซีอธิษฐานจิต</h3>
+            <p>ตั้งจิตอธิษฐานแล้วเขย่ากระบอกเซียมซีลุ้นใบทำนายมงคลโบราณ</p>
           </div>
 
-          <!-- Option Tarot -->
+          <!-- 2. Option Tarot -->
           <div class="sub-option-card" id="btn-start-tarot">
-            <div class="card-icon-img" style="background-image: url('/images/tarot_card_back.jpg'); margin: 0 auto 1.2rem auto; width: 65px; height: 95px;"></div>
+            <div class="sub-icon">🃏</div>
             <h3>ไพ่ยิปซีชี้ทาง</h3>
             <p>เลือกไพ่ 3 ใบ ทำนายอดีต ปัจจุบัน อนาคต อย่างแม่นยำ</p>
           </div>
 
-          <!-- Option Numeric -->
+          <!-- 3. Option Numeric -->
           <div class="sub-option-card" id="btn-start-numeric">
             <div class="sub-icon">🔢</div>
             <h3>วิเคราะห์ตัวเลขมงคล</h3>
             <p>ถอดรหัสวิเคราะห์เบอร์โทรศัพท์ มือถือ เลขทะเบียนรถนำโชคตามตำราเลขศาสตร์</p>
           </div>
 
-          <!-- Option Zodiac Match -->
+          <!-- 4. Option Zodiac Match -->
           <div class="sub-option-card" id="btn-start-zodmatch">
             <div class="sub-icon">💘</div>
             <h3>เช็กดวงเนื้อคู่สมพงษ์</h3>
             <p>วิเคราะห์ดวงความเข้ากันได้ตามจักรราศีและวันเกิดแม่นยำ 100%</p>
           </div>
 
-          <!-- Option Zodiac Reading -->
+          <!-- 5. Option Zodiac Reading -->
           <div class="sub-option-card" id="btn-start-zodread">
             <div class="sub-icon">☀️</div>
             <h3>คำนวณราศีและธาตุเกิด</h3>
             <p>ตรวจสอบสัญลักษณ์ดวงชะตา ราศีเกิด ธาตุเจ้าเรือน สีและเลขนำโชคประจำตัว</p>
           </div>
 
-          <!-- Option Dream Dictionary (ทำนายฝันเลขเด็ด) -->
+          <!-- 6. Option Dream Dictionary -->
           <div class="sub-option-card" id="btn-start-dream">
             <div class="sub-icon">🛌</div>
             <h3>ทำนายฝันแปลเลขเด็ด</h3>
-            <p>สืบค้นความฝัน วิเคราะห์ความหมายลี้ลับบอกเหตุการณ์ พร้อมถอดเลขเด็ดมงคลโชคลาภ 2 ตัวและ 3 ตัว</p>
+            <p>สืบค้นความฝัน วิเคราะห์ความหมายลี้ลับ พร้อมถอดเลขเด็ดมงคลโชคลาภ 2 ตัวและ 3 ตัว</p>
           </div>
 
-          <!-- Option Daily Outfit Color (เสื้อสีมงคล) -->
+          <!-- 7. Option Daily Outfit Color -->
           <div class="sub-option-card" id="btn-start-outfit">
             <div class="sub-icon">👕</div>
             <h3>ตารางเสื้อสีมงคลประจำวัน</h3>
-            <p>คำนวณสีเสื้อผ้าเสริมดวงรายวันเสริม โชคลาภ การเงิน การงาน เสน่ห์เมตตา และเลี่ยงสีกาลกิณี</p>
+            <p>คำนวณสีเสื้อผ้าเสริมดวงรายวันเสริม โชคลาภ การเงิน การงาน เสน่ห์เมตตา และเลี่ยงกาลกิณี</p>
           </div>
 
-          <!-- Option Life Graph (กราฟชีวิต) -->
+          <!-- 8. Option Life Graph -->
           <div class="sub-option-card" id="btn-start-lifegraph">
             <div class="sub-icon">📈</div>
             <h3>กราฟชีวิตลิขิตโชคชะตา</h3>
-            <p>วิเคราะห์กราฟพลังชีวิต 12 ด้าน (วาสนา, ทรัพย์, การงาน, คู่ครอง, ลาภยศ) คำนวณเลขศาสตร์โบราณ</p>
+            <p>วิเคราะห์กราฟพลังชีวิต 12 ด้าน (วาสนา, ทรัพย์, การงาน, คู่ครอง, ลาภยศ) คำนวณเลขศาสตร์</p>
           </div>
 
-          <!-- Option Contact (ดูดวงแบบละเอียด) -->
-          <div class="sub-option-card" id="btn-start-contact" style="border-color: var(--color-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);">
-            <div class="sub-icon" style="color: var(--color-gold);">⭐</div>
+          <!-- 9. Option Contact -->
+          <div class="sub-option-card" id="btn-start-contact">
+            <div class="sub-icon" style="color: var(--gold);">⭐</div>
             <h3>ดูดวงส่วนตัวแบบละเอียด</h3>
-            <p>ปรึกษาชะตาชีวิต 1 ต่อ 1 เชิงลึกแบบแม่นยำ 100% กับหมอดูแพมผ่านช่องทาง Discord</p>
+            <p>ปรึกษาชะตาชีวิต 1 ต่อ 1 เชิงลึกแบบแม่นยำ 100% กับแม่หมอแพมผ่านช่องทาง Discord</p>
           </div>
 
-          <!-- Option Chatbot (ห้องคุยแก้เหงา) -->
-          <div class="sub-option-card" id="btn-start-chatbot" style="border-color: var(--color-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);">
-            <div class="sub-icon" style="color: var(--color-cyan);">💬</div>
+          <!-- 10. Option Chatbot -->
+          <div class="sub-option-card" id="btn-start-chatbot">
+            <div class="sub-icon" style="color: #64dfdf;">💬</div>
             <h3>คุยแก้เหงากับแม่หมอแพม</h3>
             <p>เหงาใจ ดวงตก หรือไม่มีคนปลอบ? แวะมาคุยเล่นรับพลังบวกกับระบบแชทบอทแม่หมอได้ 24 ชั่วโมง!</p>
           </div>
 
-          <!-- Option Rekindle -->
-          <div class="sub-option-card" id="btn-start-rekindle" style="border-color: var(--color-magenta); box-shadow: 0 0 10px rgba(255, 65, 108, 0.15);">
-            <div class="sub-icon" style="color: var(--color-magenta);">🔥</div>
+          <!-- 11. Option Rekindle -->
+          <div class="sub-option-card" id="btn-start-rekindle">
+            <div class="sub-icon" style="color: #ff4d6d;">🔥</div>
             <h3>ถ่านไฟเก่าจะกลับมาคุไหม?</h3>
             <p>เช็กดวงชะตาคนรักเก่า จะมีโอกาสลมพัดหวนหรือมอดดับไปตลอดกาล</p>
           </div>
 
-          <!-- Option Move On -->
-          <div class="sub-option-card" id="btn-start-moveon" style="border-color: var(--color-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);">
-            <div class="sub-icon" style="color: var(--color-gold);">⏳</div>
+          <!-- 12. Option Move On -->
+          <div class="sub-option-card" id="btn-start-moveon">
+            <div class="sub-icon" style="color: var(--gold);">⏳</div>
             <h3>ชาตินี้จะมูฟออนได้กี่โมง?</h3>
             <p>ประเมินเกราะป้องกันใจและพลังงานมูฟออน พร้อมคำแนะนำดึงสติสุดจ๊าบ</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- SUB-SECTION: ESIIMSI PLAYGROUND -->
+        <!-- Party Game Entry Area -->
+        <div class="party-entry-box">
+          <p class="eyebrow">หรือเปิดห้องเล่นสนุกกับเพื่อนฝูง</p>
+          <div class="hero-cta-group" style="margin-top: 1rem;">
+            <button class="button gold" id="btn-host-create-room">
+              🎉 สร้างห้องปาร์ตี้ (โฮสต์) <span class="arrow-icon">↗</span>
+            </button>
+            <button class="button outline" id="btn-open-join-view">
+              🎮 เข้าร่วมห้องเพื่อน <span class="arrow-icon">↗</span>
+            </button>
+            <button class="button outline" id="btn-start-offline-pass">
+              📱 เล่นผลัดกันในเครื่องเดียว (ออฟไลน์)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SERVICES & PRICING SECTION (MyDuang Style) -->
+      <section id="services" class="services wrap section-space" aria-labelledby="services-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <p class="eyebrow">บริการและราคา</p>
+        <h2 id="services-title">เริ่มจากเรื่องที่คุณ<span>อยากเข้าใจ</span></h2>
+        <p class="section-description">
+          ถามเฉพาะประเด็น หรือสำรวจชีวิตให้ลึกขึ้น<br/>
+          เลือกบริการตามสิ่งที่คุณอยากปรึกษา
+        </p>
+
+        <div class="price-grid">
+          <!-- Card 1 -->
+          <article class="price-card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
+            </div>
+            <h3>วิเคราะห์คำถาม</h3>
+            <p class="card-description">คำถามเฉพาะประเด็น โดยไม่เจาะลึก</p>
+            <div class="starting-price">
+              <span>เริ่มต้น</span><strong>99</strong><span>บาท</span>
+            </div>
+            <dl>
+              <div><dt>1 คำถาม</dt><dd>99 บาท</dd></div>
+              <div><dt>3 คำถาม</dt><dd>249 บาท</dd></div>
+            </dl>
+            <p class="card-detail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+              ไม่จำกัดเวลา · ตามจำนวนคำถามที่เลือก
+            </p>
+            <a class="button gold price-action" href="#contact">
+              ปรึกษาแบบคำถาม <span class="arrow-icon">↗</span>
+            </a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="price-card deep">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+            </div>
+            <h3>วิเคราะห์เชิงลึก</h3>
+            <p class="card-description">สำหรับเรื่องชีวิตที่อยากทำความเข้าใจมากขึ้น</p>
+            <div class="starting-price">
+              <span>เริ่มต้น</span><strong>390</strong><span>บาท</span>
+            </div>
+            <dl>
+              <div><dt>1 เรื่องชีวิต</dt><dd>390 บาท</dd></div>
+              <div><dt>3 เรื่องชีวิต</dt><dd>990 บาท</dd></div>
+              <div><dt>12 เรื่องชีวิต</dt><dd>2,890 บาท</dd></div>
+            </dl>
+            <p class="card-detail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+              ไม่จำกัดเวลาและคำถามในเรื่องที่เลือก
+            </p>
+            <a class="button gold price-action" href="#contact">
+              ปรึกษาแบบเชิงลึก <span class="arrow-icon">↗</span>
+            </a>
+          </article>
+        </div>
+
+        <p class="pricing-note">วิเคราะห์เป็นรายบุคคล · ใช้ข้อมูลเกิดของคุณ · รับงานจำกัดต่อวัน</p>
+
+        <aside class="free-reading">
+          <div class="free-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+          </div>
+          <div>
+            <p class="eyebrow">เริ่มต้นทำความรู้จัก</p>
+            <h3>วิเคราะห์พื้นดวงเบื้องต้น <span>ฟรี</span></h3>
+            <p>รับเพียง 5 ท่านต่อวัน ติดต่อสอบถามคิวที่ว่างก่อนรับบริการ</p>
+          </div>
+          <a href="#contact" class="text-link">
+            สอบถามคิวฟรี <span class="arrow-icon">↗</span>
+          </a>
+        </aside>
+      </section>
+
+      <!-- 6. STEPS SECTION (MyDuang Style) -->
+      <section class="steps narrow section-space" aria-labelledby="steps-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <p class="eyebrow">จากคำถาม สู่ความเข้าใจ</p>
+        <h2 id="steps-title">เริ่มต้นได้ใน <span>3 ขั้นตอน</span></h2>
+        <div class="steps-grid">
+          <article>
+            <span class="step-number">๑</span>
+            <h3>เลือกเรื่องที่อยากปรึกษา</h3>
+            <p>ดูบริการที่สนใจ แล้วทักมาบอกเรื่องที่คุณอยากทำความเข้าใจ</p>
+          </article>
+          <article>
+            <span class="step-number">๒</span>
+            <h3>พูดคุยและนัดหมาย</h3>
+            <p>สอบถามรายละเอียดและคิว พร้อมเตรียมวัน เดือน ปี เวลา และจังหวัดที่เกิด</p>
+          </article>
+          <article>
+            <span class="step-number">๓</span>
+            <h3>รับการวิเคราะห์เฉพาะคุณ</h3>
+            <p>รับฟังเหตุผลและแนวโน้ม เพื่อนำไปประกอบการตัดสินใจของคุณ</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 7. READING NOTE SECTION (MyDuang Style) -->
+      <section class="reading-note narrow section-space" aria-labelledby="reading-note-title">
+        <div class="note-copy">
+          <p class="eyebrow">ดวงปังพลังแพม · THAI ASTROLOGY</p>
+          <h2 id="reading-note-title">จากคนที่เคยสงสัย<br/><span>สู่การศึกษาเพื่อเข้าใจ</span></h2>
+          <p>แม่หมอแพมเริ่มต้นจากคนที่เชื่อในเหตุผล และเคยมองว่าการดูดวงเป็นเรื่องที่ไกลตัว แต่ความมหัศจรรย์ของสถิติดวงดาวและเลขศาสตร์โบราณ เป็นจุดเริ่มต้นให้ลองศึกษาและดูดวงให้คนอื่นฟรี ก่อนจะเกิดคำถามว่า ศาสตร์นี้มีอะไรที่ลึกซึ้งกว่าที่เราเห็น</p>
+          <p>เมื่อคิดจะให้บริการอย่างจริงจัง จึงตั้งใจศึกษาให้เข้าใจด้วยตัวเอง เพราะการรับค่าปรึกษาควรมาพร้อมความรู้และความรับผิดชอบต่อคำอธิบายที่มอบให้</p>
+          <p>วันนี้สิ่งที่เราให้ความสำคัญ คือการวิเคราะห์ อธิบายอย่างมีเหตุผล และพูดกับผู้มาปรึกษาด้วยความเคารพ เพื่อให้คุณได้มุมมองกลับไปพิจารณาชีวิตของตัวเอง</p>
+        </div>
+      </section>
+
+      <!-- 8. HISTORY SECTION (#history) (MyDuang Style) -->
+      <section id="history" class="history-section wrap section-space" aria-labelledby="history-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <div class="history-intro">
+          <p class="eyebrow">JOURNAL · รากของศาสตร์</p>
+          <h2 id="history-title">ก่อนดวงดาวจะอยู่บนหน้าจอ<br/><span>เรื่องราวเดินทางมาอย่างไร</span></h2>
+          <p class="section-description">
+            ตามรากความรู้สู่โหราศาสตร์ไทย แวะอ่านเรื่องราวระหว่างทาง<br/>
+            เลือกช่วงเวลาที่สนใจ หรือเดินทางตามลำดับตั้งแต่ต้น
+          </p>
+        </div>
+
+        <div class="history-explorer">
+          <div class="era-controls" role="group" aria-label="เลือกช่วงประวัติศาสตร์">
+            <button type="button" aria-pressed="true" data-era-index="0">
+              <span class="era-dot" aria-hidden="true"></span>
+              <span>รากความรู้</span>
+              <small>01</small>
+            </button>
+            <button type="button" aria-pressed="false" data-era-index="1">
+              <span class="era-dot" aria-hidden="true"></span>
+              <span>สุโขทัย</span>
+              <small>02</small>
+            </button>
+            <button type="button" aria-pressed="false" data-era-index="2">
+              <span class="era-dot" aria-hidden="true"></span>
+              <span>อยุธยา</span>
+              <small>03</small>
+            </button>
+            <button type="button" aria-pressed="false" data-era-index="3">
+              <span class="era-dot" aria-hidden="true"></span>
+              <span>รัตนโกสินทร์</span>
+              <small>04</small>
+            </button>
+            <button type="button" aria-pressed="false" data-era-index="4">
+              <span class="era-dot" aria-hidden="true"></span>
+              <span>สู่ปัจจุบัน</span>
+              <small>05</small>
+            </button>
+          </div>
+
+          <div id="era-story" class="era-story" aria-live="polite" aria-atomic="true">
+            <div class="era-copy">
+              <span class="era-index" id="era-index-num" aria-hidden="true">01</span>
+              <div>
+                <p class="eyebrow" id="era-kind">การแลกเปลี่ยนในภูมิภาค</p>
+                <h3 id="era-title">ความรู้เดินทาง ก่อนจะเป็นตำราไทย</h3>
+                <p id="era-desc">ท้องฟ้าผืนเดียวเชื่อมโยงความรู้หลายภาษา ทั้งการคำนวณปฏิทินและการตีความ ก่อนจะปรับเป็นแนวทางของแต่ละท้องถิ่นในเอเชียตะวันออกเฉียงใต้</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="era-footer">
+            <span id="era-page-indicator">1 / 5</span>
+            <div>
+              <button type="button" id="btn-era-prev" aria-label="ยุคก่อนหน้า" disabled>←</button>
+              <button type="button" id="btn-era-next" aria-label="ยุคถัดไป">→</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. FAQ SECTION (MyDuang Style) -->
+      <section class="faq narrow section-space" aria-labelledby="faq-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <p class="eyebrow">ก่อนเริ่มปรึกษา</p>
+        <h2 id="faq-title">คำถามที่พบบ่อย</h2>
+        
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary class="faq-question">ต้องเตรียมข้อมูลอะไรบ้าง?<span aria-hidden="true" class="faq-symbol">+</span></summary>
+            <div class="faq-answer">
+              <p>สำหรับการวิเคราะห์เชิงลึก เตรียมวัน เดือน ปี เวลา และจังหวัดที่เกิด พร้อมเรื่องที่อยากปรึกษา ตรวจสอบข้อมูลจากสูติบัตรให้แน่ใจก่อน โดยเตรียมเฉพาะข้อมูลเกิด ไม่ต้องส่งภาพเอกสาร หากไม่รู้เวลาเกิดหรือข้อมูลไม่ครบ ให้ทักมาสอบถามก่อนเลือกบริการ</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">วิเคราะห์คำถามกับวิเคราะห์เชิงลึกต่างกันอย่างไร?<span aria-hidden="true" class="faq-symbol">+</span></summary>
+            <div class="faq-answer">
+              <p>แบบคำถามเหมาะกับประเด็นเฉพาะที่ไม่ต้องการเจาะลึก เลือกได้ 1 หรือ 3 คำถาม และไม่จำกัดเวลา ส่วนแบบเชิงลึกเลือกได้ 1, 3 หรือ 12 เรื่องชีวิต ไม่จำกัดเวลาและคำถามในเรื่องที่เลือก พูดคุยเพื่อกำหนดขอบเขตและนัดหมายก่อนเริ่มปรึกษาได้</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">ใช้ AI หรือคำทำนายอัตโนมัติหรือไม่?<span aria-hidden="true" class="faq-symbol">+</span></summary>
+            <div class="faq-answer">
+              <p>ในหน้าเว็บเรามีทั้งระบบมินิเกม AI ช่วยถอดรหัสความบันเทิง และการปรึกษาส่วนตัว 1 ต่อ 1 กับแม่หมอแพม ซึ่งผู้ให้บริการเป็นผู้ตีความและอธิบายด้วยตัวเองตามหลักโหราศาสตร์ไทย</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">ต้องเชื่อทุกอย่างที่ดวงบอกหรือไม่?<span aria-hidden="true" class="faq-symbol">+</span></summary>
+            <div class="faq-answer">
+              <p>คุณเป็นผู้พิจารณาและตัดสินใจเอง เรามองดวงเป็นแผนที่สำหรับทำความเข้าใจแนวโน้ม ไม่ใช่ข้อกำหนดว่าชีวิตต้องเป็นอย่างไร การปรึกษามีไว้ให้เห็นมุมมองและสิ่งที่ควรระวัง เพื่อนำไปประกอบการใช้ชีวิตอย่างมีสติ</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">จะนัดหมายและรับผลได้อย่างไร?<span aria-hidden="true" class="faq-symbol">+</span></summary>
+            <div class="faq-answer">
+              <p>ติดต่อผ่าน Discord หรือ Instagram ของแม่หมอแพม เพื่อสอบถามคิว รูปแบบการปรึกษา ระยะเวลา และรายละเอียดก่อนเริ่มรับบริการ</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">การวิเคราะห์พื้นดวงเบื้องต้นฟรี มีเงื่อนไขอย่างไร?<span aria-hidden="true" class="faq-symbol">+</span></summary>
+            <div class="faq-answer">
+              <p>รับเพียง 5 ท่านต่อวัน กรุณาทักมาสอบถามคิวที่ว่างก่อน เป็นการตรวจสอบและวิเคราะห์พื้นดวงเบื้องต้น หากต้องการปรึกษาเพิ่มเติม สามารถสอบถามบริการวิเคราะห์คำถามหรือวิเคราะห์เชิงลึกได้</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 10. CONTACT SECTION (MyDuang Style) -->
+      <section id="contact" class="contact narrow section-space" aria-labelledby="contact-title">
+        <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
+        <p class="eyebrow">พื้นที่สำหรับเรื่องราวของคุณ</p>
+        <h2 id="contact-title">เริ่มต้นความเข้าใจ<br/><span>ด้วยการพูดคุยกัน</span></h2>
+        <p class="section-description">
+          บอกเรื่องที่คุณอยากปรึกษาและบริการที่สนใจ<br/>
+          เพื่อสอบถามรายละเอียดและคิวก่อนเริ่มวิเคราะห์
+        </p>
+
+        <div class="contact-actions">
+          <a class="button gold" href="https://discord.com" target="_blank" rel="noopener noreferrer">
+            พูดคุยผ่าน Discord <span class="arrow-icon">↗</span>
+          </a>
+          <a class="button outline" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            ติดต่อทาง Instagram <span class="arrow-icon">↗</span>
+          </a>
+        </div>
+
+        <p class="contact-handles">
+          Discord: <strong>แม่หมอแพม</strong><span> · </span>Instagram: <strong>@duang.pam</strong>
+        </p>
+        <p class="microcopy">พร้อมรับฟังและให้คำปรึกษาด้วยความจริงใจและเป็นกันเอง</p>
+      </section>
+
+      <!-- 11. FOOTER (MyDuang Style) -->
+      <footer class="footer narrow">
+        <a class="wordmark" href="#main">
+          <span aria-hidden="true">✦</span> ดวงปังพลังแพม
+        </a>
+        <p>เหตุอยู่ที่ดาว ผลอยู่ที่เรา</p>
+        <p class="footer-note">
+          โหราศาสตร์เป็นแนวทางประกอบการพิจารณาตามความเชื่อ<br/>
+          การตัดสินใจและการลงมือทำยังอยู่ที่ตัวคุณ
+        </p>
+        <small>© 2026 ดวงปังพลังแพม · THAI ASTROLOGY & MYSTIC GAMES</small>
+      </footer>
+    </main>
+
+<!-- SUB-SECTION: ESIIMSI PLAYGROUND -->
     <section id="sec-esiimsi" class="view-section hidden">
       <button class="back-btn btn-back-solo">← กลับหน้าหลัก</button>
       

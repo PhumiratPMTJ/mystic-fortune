@@ -1,3 +1,261 @@
+
+// ==========================================================================
+// MYDUANG CLONE: WEEKDAY PLANETS & HISTORY INTERACTIVE CONTROLLER
+// ==========================================================================
+const WEEKDAY_PLANETS_DATA = [
+  {
+    day: 'อาทิตย์',
+    number: '๑',
+    planet: 'อาทิตย์',
+    symbol: '☉',
+    color: '#e5b65a',
+    theme: 'พลังของการนำและความมุ่งมั่น',
+    nature: 'ในคติที่ใช้อธิบายนี้ อาทิตย์เปรียบกับไฟที่ให้แสงและพลัง สื่อถึงความชัดเจน ความภาคภูมิใจ และแรงผลักดันที่จะลงมือทำ',
+    strengths: ['กล้ารับผิดชอบและตัดสินใจ', 'มีเป้าหมายและคิดเพื่อส่วนรวม', 'จริงใจ ให้ความสำคัญกับศักดิ์ศรี'],
+    cautions: ['ยึดความคิดตัวเองจนรับฟังยาก', 'ต้องการการยอมรับมากเกินไป', 'ใช้อำนาจหรือความมั่นใจจนกดดันคนอื่น'],
+    reflection: 'ความมั่นใจของเราช่วยให้คนรอบตัวเติบโตไปด้วยหรือเปล่า?'
+  },
+  {
+    day: 'จันทร์',
+    number: '๒',
+    planet: 'จันทร์',
+    symbol: '☽',
+    color: '#e5d4a2',
+    theme: 'ความอ่อนโยนและการใส่ใจ',
+    nature: 'จันทร์เปรียบกับดินที่อ่อนนุ่มและชุ่มชื้น สื่อถึงการดูแล ความละเอียดอ่อน และการตอบสนองต่อสิ่งรอบตัว ความอ่อนไหวจึงมีทั้งด้านที่ช่วยเข้าใจคนและด้านที่ต้องดูแลใจตนเอง',
+    strengths: ['สังเกตความรู้สึกของผู้อื่นได้ละเอียด', 'เอาใจใส่และพร้อมช่วยเหลือ', 'ประณีต อ่อนโยน และประนีประนอม'],
+    cautions: ['หวั่นไหวกับคำพูดหรือบรรยากาศง่าย', 'ลังเลและเปลี่ยนใจตามคนรอบข้าง', 'คิดฝันจนเลื่อนสิ่งที่ควรลงมือทำ'],
+    reflection: 'วันนี้เราใส่ใจคนอื่นพร้อมกับดูแลขอบเขตของตัวเองแล้วหรือยัง?'
+  },
+  {
+    day: 'อังคาร',
+    number: '๓',
+    planet: 'อังคาร',
+    symbol: '♂',
+    color: '#dca08e',
+    theme: 'ความกล้าและพลังลงมือทำ',
+    nature: 'อังคารเปรียบกับลมที่แรงและเคลื่อนเร็ว สื่อถึงพลังแข่งขัน ความกล้าเผชิญปัญหา และการบุกเบิก พลังแบบนี้สร้างสิ่งใหม่ได้ แต่ต้องมีทิศทางและจังหวะหยุด',
+    strengths: ['กล้าลงมือและไม่ยอมแพ้ง่าย', 'ตัดสินใจรวดเร็วเมื่อจำเป็น', 'ทุ่มเทและตรงไปตรงมา'],
+    cautions: ['ตัดสินใจก่อนคิดผลตามมา', 'คำพูดตรงเกินไปจนกระทบความรู้สึก', 'มุ่งเอาชนะจนกลายเป็นความขัดแย้ง'],
+    reflection: 'เรื่องนี้ต้องการให้เราเร่งเดินหน้า หรือหยุดฟังก่อนอีกนิด?'
+  },
+  {
+    day: 'พุธ',
+    number: '๔',
+    planet: 'พุธ',
+    symbol: '☿',
+    color: '#a7c4ab',
+    theme: 'การสื่อสารและการปรับตัว',
+    nature: 'พุธเปรียบกับน้ำที่เปลี่ยนรูปตามภาชนะ สื่อถึงภาษา ไหวพริบ และการเรียนรู้จากสิ่งแวดล้อม ความยืดหยุ่นเป็นจุดเด่น แต่สิ่งที่รับเข้ามาก็อาจเปลี่ยนทิศทางของเราได้',
+    strengths: ['เรียนรู้และจับประเด็นได้ไว', 'เจรจาและอธิบายเรื่องต่าง ๆ ได้คล่อง', 'พลิกแพลงแก้ปัญหาเฉพาะหน้า'],
+    cautions: ['เปลี่ยนคำพูดหรือจุดยืนง่ายเกินไป', 'ใช้ความฉลาดเพื่อเอาเปรียบแทนการทำความเข้าใจ', 'ส่งต่อข่าวหรือพูดเร็วโดยยังไม่ตรวจสอบ'],
+    reflection: 'คำพูดของเราทำให้เรื่องชัดขึ้น หรือเพียงทำให้เราได้เปรียบ?'
+  },
+  {
+    day: 'พฤหัสบดี',
+    number: '๕',
+    planet: 'พฤหัสบดี',
+    symbol: '♃',
+    color: '#d7ad7e',
+    theme: 'ปัญญา หลักการ และการเกื้อกูล',
+    nature: 'พฤหัสบดีเปรียบกับดินที่แน่นและมั่นคง สื่อถึงการศึกษา หลักคิด ความเป็นธรรม และการแบ่งปันความรู้ ความหนักแน่นมีคุณค่าเมื่อยังเปิดพื้นที่ให้เรียนรู้สิ่งใหม่',
+    strengths: ['ใฝ่รู้และมองหาเหตุผล', 'ยึดความเป็นธรรมและมีความรับผิดชอบ', 'ให้คำแนะนำและช่วยเหลือผู้อื่น'],
+    cautions: ['เชื่อว่าความคิดของตนถูกเสมอ', 'ติดกฎจนมองข้ามบริบทของคน', 'สั่งสอนหรือแสดงความรู้จนไม่ได้รับฟัง'],
+    reflection: 'หลักการที่เรายึดอยู่ยังช่วยเข้าใจสถานการณ์จริงได้ดีแค่ไหน?'
+  },
+  {
+    day: 'ศุกร์',
+    number: '๖',
+    planet: 'ศุกร์',
+    symbol: '♀',
+    color: '#b3bde1',
+    theme: 'ความรื่นรมย์ ความสัมพันธ์ และความงาม',
+    nature: 'ศุกร์เปรียบกับน้ำฝน สื่อถึงความพอใจ ความรัก ศิลปะ และสิ่งที่ทำให้ชีวิตรื่นรมย์ ความต้องการเติบโตได้เรื่อย ๆ จึงต้องรู้จักความพอดีควบคู่กับการมีความสุข',
+    strengths: ['สร้างบรรยากาศที่เป็นมิตร', 'มีจินตนาการและชื่นชมความงาม', 'อ่อนโยนและมองเห็นด้านที่น่ายินดี'],
+    cautions: ['ใช้จ่ายตามความอยากเกินกำลัง', 'เลือกความสบายจนละเลยหน้าที่', 'คาดหวังความสุขหรือความสัมพันธ์อย่างเกินจริง'],
+    reflection: 'ความสุขที่เลือกวันนี้พอดีกับชีวิตและทรัพยากรของเราหรือยัง?'
+  },
+  {
+    day: 'เสาร์',
+    number: '๗',
+    planet: 'เสาร์',
+    symbol: '♄',
+    color: '#b8a2cd',
+    theme: 'ความอดทนและความรับผิดชอบระยะยาว',
+    nature: 'เสาร์เปรียบกับไฟที่คุกรุ่นยาวนาน สื่อถึงความหนักแน่น ระเบียบ และการแบกรับหน้าที่ พลังที่ค่อยเป็นค่อยไปเหมาะกับงานระยะยาว แต่ต้องไม่ลืมพื้นที่พักและความยืดหยุ่น',
+    strengths: ['อดทนและทำงานต่อเนื่องได้', 'รอบคอบ วางแผน และรักษาวินัย', 'ประหยัดและรับผิดชอบต่อสิ่งที่รับปาก'],
+    cautions: ['กังวลหรือมองด้านลบมากเกินไป', 'ยึดวิธีเดิมจนปรับตัวลำบาก', 'เก็บภาระไว้คนเดียวและไม่ยอมพัก'],
+    reflection: 'มีหน้าที่ส่วนไหนที่เราแบ่งเบา หรือขอความช่วยเหลือได้บ้าง?'
+  }
+];
+
+const HISTORY_ERAS_DATA = [
+  {
+    index: '01',
+    kind: 'การแลกเปลี่ยนในภูมิภาค',
+    title: 'ความรู้เดินทาง ก่อนจะเป็นตำราไทย',
+    desc: 'ท้องฟ้าผืนเดียวเชื่อมโยงความรู้หลายภาษา ทั้งการคำนวณปฏิทินและการตีความจากเมโสโปเตเมียและอินเดีย ก่อนจะปรับเป็นแนวทางของแต่ละท้องถิ่นในเอเชียตะวันออกเฉียงใต้'
+  },
+  {
+    index: '02',
+    kind: 'หลักฐานและข้อถกเถียง',
+    title: 'สุโขทัย: ปฏิทินกับพระราชอำนาจ',
+    desc: 'พญาลิไทกับจารึกวัดป่ามะม่วง พ.ศ. 1904 สะท้อนการใช้ความรู้ดาราศาสตร์เชื่อมโยงกับปฏิทินสงกรานต์และการเปลี่ยนราศีของดวงอาทิตย์ในราชสำนัก'
+  },
+  {
+    index: '03',
+    kind: 'สถาบันและพิธีกรรม',
+    title: 'อยุธยา: พระโหราธิบดีและกรมโหร',
+    desc: 'งานของโหรหลวงเกี่ยวข้องกับการคำนวณปฏิทิน การให้ฤกษ์พระราชพิธี การยกทัพ ตลอดจนการตั้งเมืองหลวงตามตำราสุริยยาตร์'
+  },
+  {
+    index: '04',
+    kind: 'การปฏิรูปและฟื้นฟู',
+    title: 'รัตนโกสินทร์: จากคัมภีร์ใบลานสู่การพิมพ์',
+    desc: 'การรวบรวมตำราโหราศาสตร์ในรัชกาลที่ 1 ถึงรัชกาลที่ 4 และการพัฒนาการคำนวณคราสและดวงชะตาให้มีความแม่นยำทางดาราศาสตร์สากล'
+  },
+  {
+    index: '05',
+    kind: 'ยุคดิจิทัลและร่วมสมัย',
+    title: 'สู่ปัจจุบัน: จากตำราบนโต๊ะ สู่หน้าจอมือถือ',
+    desc: 'โหราศาสตร์กลายเป็นเครื่องมือสำรวจตนเอง การทำความเข้าใจจิตวิทยา และพื้นที่สร้างพลังบวกในการใช้ชีวิตอย่างมีสติในโลกยุคใหม่'
+  }
+];
+
+function initMyDuangFeatures() {
+  // 1. Weekday Guide Controller
+  const weekdayButtons = document.querySelectorAll('#weekday-picks button');
+  const readingBox = document.getElementById('weekday-reading');
+  const sealSymbol = document.getElementById('w-symbol');
+  const sealNum = document.getElementById('w-num');
+  const eyebrow = document.getElementById('w-eyebrow');
+  const planetTitle = document.getElementById('w-planet');
+  const theme = document.getElementById('w-theme');
+  const nature = document.getElementById('w-nature');
+  const strengthsUl = document.getElementById('w-strengths');
+  const cautionsUl = document.getElementById('w-cautions');
+  const reflection = document.getElementById('w-reflection');
+
+  weekdayButtons.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      weekdayButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+
+      const data = WEEKDAY_PLANETS_DATA[idx];
+      if (!data) return;
+
+      if (readingBox) readingBox.style.setProperty('--day-color', data.color);
+      if (sealSymbol) sealSymbol.textContent = data.symbol;
+      if (sealNum) sealNum.textContent = data.number;
+      if (eyebrow) eyebrow.textContent = `ดาวประจำวัน${data.day}`;
+      if (planetTitle) planetTitle.textContent = data.planet;
+      if (theme) theme.textContent = data.theme;
+      if (nature) nature.textContent = data.nature;
+      if (reflection) reflection.textContent = data.reflection;
+
+      if (strengthsUl) {
+        strengthsUl.innerHTML = data.strengths.map(s => `<li>${s}</li>`).join('');
+      }
+      if (cautionsUl) {
+        cautionsUl.innerHTML = data.cautions.map(c => `<li>${c}</li>`).join('');
+      }
+
+      // Re-trigger animation
+      const inner = document.getElementById('weekday-reading-content');
+      if (inner) {
+        inner.style.animation = 'none';
+        inner.offsetHeight; // trigger reflow
+        inner.style.animation = '0.35s ease-out weekday-arrive';
+      }
+    });
+  });
+
+  // 2. History Explorer Controller
+  let currentEraIndex = 0;
+  const eraButtons = document.querySelectorAll('.era-controls button');
+  const eraIndexEl = document.getElementById('era-index-num');
+  const eraKindEl = document.getElementById('era-kind');
+  const eraTitleEl = document.getElementById('era-title');
+  const eraDescEl = document.getElementById('era-desc');
+  const eraPageIndicator = document.getElementById('era-page-indicator');
+  const btnEraPrev = document.getElementById('btn-era-prev');
+  const btnEraNext = document.getElementById('btn-era-next');
+
+  function renderEra(index) {
+    if (index < 0 || index >= HISTORY_ERAS_DATA.length) return;
+    currentEraIndex = index;
+    const data = HISTORY_ERAS_DATA[index];
+
+    eraButtons.forEach((btn, i) => {
+      btn.setAttribute('aria-pressed', i === index ? 'true' : 'false');
+    });
+
+    if (eraIndexEl) eraIndexEl.textContent = data.index;
+    if (eraKindEl) eraKindEl.textContent = data.kind;
+    if (eraTitleEl) eraTitleEl.textContent = data.title;
+    if (eraDescEl) eraDescEl.textContent = data.desc;
+    if (eraPageIndicator) eraPageIndicator.textContent = `${index + 1} / ${HISTORY_ERAS_DATA.length}`;
+
+    if (btnEraPrev) btnEraPrev.disabled = (index === 0);
+    if (btnEraNext) btnEraNext.disabled = (index === HISTORY_ERAS_DATA.length - 1);
+  }
+
+  eraButtons.forEach((btn, idx) => {
+    btn.addEventListener('click', () => renderEra(idx));
+  });
+
+  if (btnEraPrev) {
+    btnEraPrev.addEventListener('click', () => renderEra(currentEraIndex - 1));
+  }
+  if (btnEraNext) {
+    btnEraNext.addEventListener('click', () => renderEra(currentEraIndex + 1));
+  }
+
+  // 3. Pointer Glow & Reading Progress
+  window.addEventListener('mousemove', (e) => {
+    document.documentElement.style.setProperty('--pointer-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--pointer-y', `${e.clientY}px`);
+  }, { passive: true });
+
+  const progressEl = document.getElementById('reading-progress');
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight > 0) {
+      const progress = Math.min(1, Math.max(0, window.scrollY / totalHeight));
+      if (progressEl) progressEl.style.transform = `scaleX(${progress})`;
+    }
+
+    if (backToTopBtn) {
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }
+  }, { passive: true });
+
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // 4. Motion toggle
+  const motionCheck = document.getElementById('pause-motion');
+  if (motionCheck) {
+    motionCheck.addEventListener('change', () => {
+      if (motionCheck.checked) {
+        document.body.classList.add('reduce-motion');
+      } else {
+        document.body.classList.remove('reduce-motion');
+      }
+    });
+  }
+}
+
 import { StarBg } from './particles.js';
 import MysticAudio from './audio.js';
 import { ESIIMSI_DATA, TAROT_CARDS, PARTY_QUESTIONS, KING_COMMANDS } from './fortuneData.js';
@@ -2209,6 +2467,7 @@ document.querySelectorAll('#chat-quick-suggestions .chat-badge').forEach(badge =
 // ON DOM LOAD INITIALIZATION
 // ==========================================================================
 window.addEventListener('DOMContentLoaded', () => {
+  initMyDuangFeatures();
   // Start star particles background
   StarBg.init('star-canvas');
 
