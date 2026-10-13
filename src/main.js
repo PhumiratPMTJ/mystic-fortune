@@ -1,5 +1,122 @@
 
 // ==========================================================================
+// MYDUANG ORIGINAL INTERACTIVE SITE-EXPERIENCE (Scroll, Tilts, Pointer-glow, Ripples, Chapters)
+// ==========================================================================
+function setupOriginalSiteExperience() {
+  let e = document.documentElement;
+  let t = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let n = window.matchMedia('(hover: hover) and (pointer: fine)');
+  let r = document.querySelector('#pause-motion');
+  let i = () => !t.matches && !r?.checked;
+  let a = 0;
+  let o = 0;
+  let s = 0;
+  let c = 0;
+  let l = null;
+  let u = null;
+
+  let d = () => {
+    l?.style.removeProperty('--tilt-x');
+    l?.style.removeProperty('--tilt-y');
+    l?.classList.remove('pointer-card');
+    l = null;
+  };
+
+  let f = () => {
+    a = 0;
+    let t = e.scrollHeight - window.innerHeight;
+    e.style.setProperty('--page-progress', String(t > 0 ? Math.min(1, Math.max(0, window.scrollY / t)) : 0));
+    e.classList.toggle('page-scrolled', window.scrollY > 90);
+    let n = document.querySelector('.celestial-mark');
+    if (n) {
+      n.style.setProperty('--parallax', i() ? `${Math.min(window.scrollY, 700) * 0.13}px` : '0px');
+    }
+  };
+
+  let p = () => {
+    a ||= requestAnimationFrame(f);
+  };
+
+  let m = (t) => {
+    if (!i() || !n.matches || t.pointerType === 'touch') return;
+    s = t.clientX;
+    c = t.clientY;
+    u = t.target instanceof Element ? t.target.closest('.price-card,.approach-grid article,.history-explorer,.sub-option-card') : null;
+    if (!o) {
+      o = requestAnimationFrame(() => {
+        o = 0;
+        e.style.setProperty('--pointer-x', `${s}px`);
+        e.style.setProperty('--pointer-y', `${c}px`);
+        e.classList.add('pointer-present');
+        if (l !== u) d();
+        l = u;
+        if (l) {
+          let b = l.getBoundingClientRect();
+          let tx = (s - b.left) / b.width;
+          let ty = (c - b.top) / b.height;
+          l.style.setProperty('--tilt-x', `${(ty - 0.5) * -5}deg`);
+          l.style.setProperty('--tilt-y', `${(tx - 0.5) * 5}deg`);
+          l.style.setProperty('--card-x', `${tx * 100}%`);
+          l.style.setProperty('--card-y', `${ty * 100}%`);
+          l.classList.add('pointer-card');
+        }
+      });
+    }
+  };
+
+  let h = () => {
+    cancelAnimationFrame(o);
+    o = 0;
+    d();
+    e.classList.remove('pointer-present');
+  };
+
+  let g = (e) => {
+    if (!i()) return;
+    let t = e.target instanceof Element ? e.target.closest('.button,.era-controls button,.planet-controls button,.era-footer button') : null;
+    if (!t || (t instanceof HTMLButtonElement && t.disabled)) return;
+    let n = t.getBoundingClientRect();
+    let r = document.createElement('span');
+    r.className = 'click-ripple';
+    r.setAttribute('aria-hidden', 'true');
+    r.style.left = `${e.detail === 0 ? n.width / 2 : e.clientX - n.left}px`;
+    r.style.top = `${e.detail === 0 ? n.height / 2 : e.clientY - n.top}px`;
+    t.appendChild(r);
+    r.addEventListener('animationend', () => r.remove(), { once: true });
+  };
+
+  // IntersectionObserver for entrance animations on scroll
+  let enterElements = Array.from(document.querySelectorAll('.approach-grid article,.price-card,.steps-grid article,.reading-note,.history-intro,.history-chapter,.sub-option-card'));
+  let v = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (i()) entry.target.classList.add('enter-view');
+        v.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  enterElements.forEach((el) => v.observe(el));
+
+  let x = () => {
+    if (!i()) {
+      h();
+      document.querySelectorAll('.click-ripple').forEach((el) => el.remove());
+    }
+    f();
+  };
+
+  window.addEventListener('scroll', p, { passive: true });
+  window.addEventListener('resize', p, { passive: true });
+  window.addEventListener('pointermove', m, { passive: true });
+  document.addEventListener('pointerleave', h);
+  document.addEventListener('click', g);
+  r?.addEventListener('change', x);
+  t.addEventListener('change', x);
+  f();
+}
+
+
+// ==========================================================================
 // MYDUANG CLONE: WEEKDAY PLANETS & HISTORY INTERACTIVE CONTROLLER
 // ==========================================================================
 const WEEKDAY_PLANETS_DATA = [
@@ -123,6 +240,7 @@ const HISTORY_ERAS_DATA = [
 ];
 
 function initMyDuangFeatures() {
+  setupOriginalSiteExperience();
   // 1. Weekday Guide Controller
   const weekdayButtons = document.querySelectorAll('#weekday-picks button');
   const readingBox = document.getElementById('weekday-reading');
