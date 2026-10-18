@@ -437,10 +437,37 @@ const sections = {
 };
 
 // ==========================================================================
+// ==========================================================================
 // Routing / View Swapper
 // ==========================================================================
 function showSection(sectionId) {
-  // Hide all sections
+  const mainEl = document.getElementById('main');
+  const footerEl = document.querySelector('.footer');
+
+  // Returning to main lobby
+  if (sectionId === 'sec-lobby' || sectionId === 'main') {
+    Object.values(sections).forEach(sec => {
+      if (sec) {
+        sec.classList.add('hidden');
+        sec.classList.remove('active');
+      }
+    });
+    if (mainEl) mainEl.classList.remove('hidden');
+    if (footerEl) footerEl.classList.remove('hidden');
+    AppState.currentView = 'sec-lobby';
+
+    const divinationsSec = document.getElementById('interactive-divinations');
+    if (divinationsSec) {
+      divinationsSec.scrollIntoView({ behavior: 'smooth' });
+    }
+    return;
+  }
+
+  // Entering an interactive divination/game sub-view
+  if (mainEl) mainEl.classList.add('hidden');
+  if (footerEl) footerEl.classList.add('hidden');
+
+  // Hide all divination sections
   Object.values(sections).forEach(sec => {
     if (sec) {
       sec.classList.add('hidden');
@@ -448,25 +475,15 @@ function showSection(sectionId) {
     }
   });
 
-  // Handle main logo visibility: hide in welcome screen
-  const headerLogo = document.getElementById('app-header-logo');
-  if (headerLogo) {
-    if (sectionId === 'sec-welcome') {
-      headerLogo.classList.add('hidden');
-    } else {
-      headerLogo.classList.remove('hidden');
-    }
-  }
-
-  // Show target
+  // Show target section
   const target = document.getElementById(sectionId);
   if (target) {
     target.classList.remove('hidden');
-    // Delay slightly to trigger opacity transitions
     setTimeout(() => {
       target.classList.add('active');
     }, 50);
     AppState.currentView = sectionId;
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 }
 
@@ -508,7 +525,7 @@ document.querySelectorAll('button, .mode-card, .sub-option-card, .game-select-ca
 // NAVIGATION BINDINGS
 // ==========================================================================
 // Welcome screen portal enter trigger
-document.getElementById('btn-enter-land').addEventListener('click', () => {
+document.getElementById('btn-enter-land')?.addEventListener('click', () => {
   // Play BGM automatically on this click
   MysticAudio.init();
   if (!MysticAudio.isBgPlaying) {
@@ -866,17 +883,19 @@ if (btnGotoOnline) {
 // we will add a button to "สร้างห้อง (สำหรับเปิดขึ้นจอใหญ่)" inside the join page.
 // Let's add it dynamically to index.html join page if it's not there.
 const joinFormBox = document.getElementById('join-form-box');
-const createRoomLink = document.createElement('div');
-createRoomLink.className = 'text-center mt-6';
-createRoomLink.innerHTML = `<span style="color:#cbd5e1; font-size:0.85rem;">ต้องการจัดปาร์ตี้ดวงชะตาบนจอคอมใหญ่ใช่ไหม? </span><br>
-<button class="back-btn" style="color:var(--color-gold); font-weight:bold; margin-top:5px;" id="btn-host-create-room-action">🔮 คลิกสร้างห้องเล่นเกมที่นี่ (เป็นโฮสต์)</button>`;
-joinFormBox.appendChild(createRoomLink);
+if (joinFormBox) {
+  const createRoomLink = document.createElement('div');
+  createRoomLink.className = 'text-center mt-6';
+  createRoomLink.innerHTML = `<span style="color:#cbd5e1; font-size:0.85rem;">ต้องการจัดปาร์ตี้ดวงชะตาบนจอคอมใหญ่ใช่ไหม? </span><br>
+  <button class="back-btn" style="color:var(--color-gold); font-weight:bold; margin-top:5px;" id="btn-host-create-room-action">🔮 คลิกสร้างห้องเล่นเกมที่นี่ (เป็นโฮสต์)</button>`;
+  joinFormBox.appendChild(createRoomLink);
 
-document.getElementById('btn-host-create-room-action').addEventListener('click', () => {
-  AppState.isHost = true;
-  showSection('sec-online-host');
-  initHostSocket();
-});
+  document.getElementById('btn-host-create-room-action')?.addEventListener('click', () => {
+    AppState.isHost = true;
+    showSection('sec-online-host');
+    initHostSocket();
+  });
+}
 
 function initHostSocket() {
   const socketUrl = getSocketUrl(); // Socket.io dynamic URL
@@ -2584,7 +2603,7 @@ document.querySelectorAll('#chat-quick-suggestions .chat-badge').forEach(badge =
 // ==========================================================================
 // ON DOM LOAD INITIALIZATION
 // ==========================================================================
-window.addEventListener('DOMContentLoaded', () => {
+function initializeApp() {
   initMyDuangFeatures();
   // Start star particles background
   StarBg.init('star-canvas');
@@ -2592,10 +2611,11 @@ window.addEventListener('DOMContentLoaded', () => {
   // URL parsing helper for quick joining
   const urlParams = new URLSearchParams(window.location.search);
   const roomParam = urlParams.get('room');
-  if (roomParam && io) {
+  if (roomParam && typeof io !== 'undefined') {
     showSection('sec-player-join');
     setupJoinView();
-    document.getElementById('input-room-code').value = roomParam;
+    const roomCodeInput = document.getElementById('input-room-code');
+    if (roomCodeInput) roomCodeInput.value = roomParam;
   }
 
   // Angel Pam Mascot Interaction
@@ -2945,4 +2965,10 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-});
+} // closes initializeApp()
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}

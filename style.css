@@ -222,42 +222,233 @@
   100% { transform: translateY(-8px) rotate(-5deg) scaleX(-1); }
 }
 
-/* Compatibility with sub-section containers */
-.glass-card {
-  background: radial-gradient(at 0 0, rgba(199, 161, 98, 0.08), transparent 60%), #1b1611;
-  border: 1px solid #b48a4550;
-  border-radius: 8px;
-  padding: 2.5rem;
-  max-width: 800px;
-  margin: 2rem auto;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+/* ==========================================================================
+   CELESTIAL PURPLE & SKY-BLUE / CYAN THEME (ดวงปังพลังแพม)
+   ========================================================================== */
+
+/* Brand Mascot Avatar in header and footer */
+.brand-mascot-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 8px;
+  border: 1.5px solid #8b5cf6;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);
+  display: inline-block;
+  object-fit: cover;
+}
+
+/* Backgrounds & Text */
+body {
+  background-color: #080612 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Primary Vibrant Buttons (Gold replacement -> Purple to Cyan) */
+.button.gold, .price-action, .hero-cta, .mystic-btn {
+  background: linear-gradient(135deg, #7c3aed 0%, #2563eb 50%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(167, 139, 250, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4), 0 0 12px rgba(6, 182, 212, 0.25) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.button.gold:hover, .price-action:hover, .hero-cta:hover, .mystic-btn:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.6), 0 0 18px rgba(6, 182, 212, 0.4) !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Outline Buttons */
+.button.outline, .weekday-consult, .history-all {
+  border: 1px solid rgba(139, 92, 246, 0.45) !important;
+  color: #c4b5fd !important;
+  background: rgba(139, 92, 246, 0.08) !important;
+  transition: all 0.25s !important;
+}
+.button.outline:hover, .weekday-consult:hover, .history-all:hover {
+  background: rgba(139, 92, 246, 0.22) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25) !important;
+}
+
+/* Category Buttons */
+.cat-btn {
+  background: #130f24 !important;
+  border: 1px solid rgba(139, 92, 246, 0.35) !important;
+  color: #cbd5e1 !important;
+}
+.cat-btn:hover {
+  border-color: #38bdf8 !important;
+  color: #f8fafc !important;
+  background: #1e163b !important;
+}
+.cat-btn.active {
+  background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+  border-color: #38bdf8 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.5) !important;
+}
+
+/* Headings & Text Accents */
+h1 span, h2 span, .highlight, .starting-price strong, #divinations-title span {
+  background: linear-gradient(135deg, #c084fc 0%, #60a5fa 50%, #38bdf8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.eyebrow {
+  color: #38bdf8 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Glass Cards & Containers */
+.glass-card, .price-card, .sub-option-card, .party-entry-box, .free-reading, .approach-grid article, .steps-grid article, .pam-poster-card {
+  background: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.12), transparent 70%), #110d24 !important;
+  border: 1px solid rgba(139, 92, 246, 0.28) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+}
+.sub-option-card:hover, .price-card:hover, .approach-grid article:hover, .steps-grid article:hover {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 14px 40px rgba(124, 58, 237, 0.25), 0 0 20px rgba(56, 189, 248, 0.18) !important;
+  transform: translateY(-4px) !important;
+}
+.sub-option-card h3 {
+  color: #e0e7ff !important;
+}
+.sub-option-card p {
+  color: #94a3b8 !important;
 }
 .desc-text {
-  color: #baa88b;
-  margin: 0.8rem 0 2rem;
-  font-size: 1rem;
+  color: #94a3b8 !important;
+}
+
+/* Weekday Guide */
+.weekday-picks button {
+  background: #110d24 !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  color: #cbd5e1 !important;
+}
+.weekday-picks button:hover {
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+}
+.weekday-picks button[aria-pressed=true] {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(6, 182, 212, 0.15) 100%) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4) !important;
+  color: #ffffff !important;
+}
+.weekday-reading {
+  background: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15), transparent 70%), #120e26 !important;
+  border: 1px solid rgba(139, 92, 246, 0.35) !important;
+}
+.weekday-seal {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(6, 182, 212, 0.3)) !important;
+  border: 1px solid rgba(56, 189, 248, 0.5) !important;
+  color: #38bdf8 !important;
+}
+.weekday-theme {
+  color: #c4b5fd !important;
+}
+.weekday-sides > div {
+  background: rgba(18, 14, 38, 0.6) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+/* History Explorer */
+.era-controls button {
+  background: #110d24 !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  color: #cbd5e1 !important;
+}
+.era-controls button[aria-pressed=true] {
+  background: rgba(139, 92, 246, 0.25) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3) !important;
+}
+.era-story {
+  background: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.12), transparent 70%), #120e26 !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+}
+
+/* Inputs & Form Controls */
+.mystic-select, .mystic-input, .chat-input, input[type=text], select {
+  background: #0d0a1c !important;
+  border: 1px solid rgba(139, 92, 246, 0.4) !important;
+  color: #f1f5f9 !important;
+  border-radius: 8px !important;
+}
+.mystic-select:focus, .mystic-input:focus, .chat-input:focus, input[type=text]:focus, select:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3) !important;
 }
 .result-box {
-  background: #14100c;
-  border: 1px solid #a37c3a60;
-  border-radius: 6px;
-  padding: 1.8rem;
-  margin-top: 2rem;
+  background: #0d0a1c !important;
+  border: 1px solid rgba(139, 92, 246, 0.4) !important;
+  border-radius: 8px !important;
 }
-.result-box.hidden {
-  display: none !important;
+
+/* Pointer Glow & Progress Bar */
+.pointer-glow {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(6, 182, 212, 0.08) 40%, transparent 70%) !important;
 }
-.mystic-select, .mystic-input, .chat-input {
-  background: #14100c;
-  border: 1px solid #b48a4555;
-  color: #f4e8cc;
-  padding: 0.65rem 1rem;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  outline: none;
-  font-family: inherit;
+.reading-progress {
+  background: linear-gradient(90deg, #7c3aed, #3b82f6, #06b6d4) !important;
 }
-.mystic-select:focus, .mystic-input:focus, .chat-input:focus {
-  border-color: #d9b268;
-  box-shadow: 0 0 10px rgba(217, 178, 104, 0.2);
+.celestial-divider {
+  color: #8b5cf6 !important;
+}
+.celestial-divider span {
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), transparent) !important;
+}
+
+/* Pam Poster Mascot Styling */
+.pam-poster-card {
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(139, 92, 246, 0.35) !important;
+  box-shadow: 0 15px 45px rgba(124, 58, 237, 0.2) !important;
+}
+.pam-poster-mascot {
+  border-radius: 50%;
+  border: 3px solid #8b5cf6;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.5);
+  animation: floatPam 4s ease-in-out infinite alternate;
+}
+@keyframes floatPam {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .solo-options-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .category-buttons {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .cat-btn {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.82rem;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .pam-poster-card {
+    padding: 1.2rem;
+  }
 }
