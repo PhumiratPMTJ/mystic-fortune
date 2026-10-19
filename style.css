@@ -3229,3 +3229,802 @@ html, body, #main {
   }
 }
 
+/* ==========================================================================
+   100/100 NEXT-GEN HOLOGRAPHIC CELESTIAL ORACLE VISUAL SYSTEM
+   ========================================================================== */
+
+/* 1. Multi-Layered Cosmic Aurora Nebula & Perspective Grid */
+.cosmic-nebula-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0%, rgba(28, 15, 69, 0.7) 0%, rgba(5, 6, 15, 0.96) 75%);
+}
+
+.nebula-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  animation: nebulaFloat 22s ease-in-out infinite alternate;
+}
+
+.nebula-orb.orb-purple {
+  width: 55vw;
+  height: 55vw;
+  max-width: 680px;
+  max-height: 680px;
+  top: -12%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.65) 0%, rgba(124, 58, 237, 0.15) 60%, transparent 100%);
+}
+
+.nebula-orb.orb-cyan {
+  width: 50vw;
+  height: 50vw;
+  max-width: 620px;
+  max-height: 620px;
+  top: 25%;
+  right: -12%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.55) 0%, rgba(6, 182, 212, 0.12) 60%, transparent 100%);
+  animation-delay: -7s;
+}
+
+.nebula-orb.orb-gold {
+  width: 45vw;
+  height: 45vw;
+  max-width: 540px;
+  max-height: 540px;
+  bottom: -15%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.35) 0%, rgba(236, 72, 153, 0.18) 55%, transparent 100%);
+  animation-delay: -14s;
+}
+
+.cosmic-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.055) 1px, transparent 100%);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 0.75) 10%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 0.75) 10%, transparent 80%);
+}
+
+@keyframes nebulaFloat {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(25px, -30px, 0) scale(1.08); }
+  100% { transform: translate3d(-20px, 20px, 0) scale(0.95); }
+}
+
+/* 2. VisionOS Floating Glass Header Upgrade */
+.site-header {
+  position: sticky;
+  top: 12px;
+  z-index: 80;
+  max-width: 78rem;
+  margin: 0.75rem auto 0;
+  padding: 0.85rem 1.75rem !important;
+  border-radius: 999px;
+  background: rgba(11, 14, 32, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(168, 85, 247, 0.35) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 25px rgba(124, 58, 237, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.brand-avatar-ring {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #facc15, #ec4899, #38bdf8, #a855f7, #facc15);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.55);
+}
+
+.wordmark-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(56, 189, 248, 0.35));
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  color: #fde047;
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+  margin-left: 0.35rem;
+}
+
+.site-header nav a {
+  position: relative;
+  padding: 0.42rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 500;
+  color: #e2e8f0;
+  transition: all 0.25s ease;
+}
+
+.site-header nav a:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.32), rgba(56, 189, 248, 0.25));
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  transform: translateY(-1px);
+}
+
+/* 3. 3D Sacred Astrolabe Portal in Hero */
+.celestial-astrolabe-portal {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem auto 0.75rem;
+}
+
+.astrolabe-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.astrolabe-ring.ring-outer {
+  inset: 0;
+  border: 1.5px dashed rgba(250, 204, 21, 0.45);
+  box-shadow: 0 0 35px rgba(168, 85, 247, 0.35), inset 0 0 25px rgba(56, 189, 248, 0.2);
+  animation: spinAstrolabeCW 36s linear infinite;
+}
+
+.astrolabe-ring.ring-outer span {
+  position: absolute;
+  font-size: 0.82rem;
+  color: rgba(253, 224, 71, 0.85);
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.8);
+  font-weight: 600;
+}
+
+/* Position 12 zodiac glyphs around the 220px circle */
+.astrolabe-ring.ring-outer span:nth-child(1)  { transform: rotate(0deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(2)  { transform: rotate(30deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(3)  { transform: rotate(60deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(4)  { transform: rotate(90deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(5)  { transform: rotate(120deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(6)  { transform: rotate(150deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(7)  { transform: rotate(180deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(8)  { transform: rotate(210deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(9)  { transform: rotate(240deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(10) { transform: rotate(270deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(11) { transform: rotate(300deg) translateY(-102px); }
+.astrolabe-ring.ring-outer span:nth-child(12) { transform: rotate(330deg) translateY(-102px); }
+
+.astrolabe-ring.ring-middle {
+  inset: 22px;
+  animation: spinAstrolabeCCW 26s linear infinite;
+}
+
+.astrolabe-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
+}
+
+.astrolabe-core-glow {
+  position: absolute;
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.42) 0%, rgba(168, 85, 247, 0.38) 50%, transparent 75%);
+  filter: blur(8px);
+  animation: corePulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes spinAstrolabeCW {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinAstrolabeCCW {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes corePulse {
+  0% { transform: scale(0.92); opacity: 0.75; }
+  100% { transform: scale(1.14); opacity: 1; }
+}
+
+/* Hero Cyber Badge & Title Shimmer */
+.hero-cyber-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 1.15rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.25), inset 0 0 12px rgba(168, 85, 247, 0.2);
+  color: #67e8f9;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade80;
+  display: inline-block;
+  animation: liveDotBlink 1.6s ease-in-out infinite;
+}
+
+@keyframes liveDotBlink {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.55; }
+}
+
+.logo-text-hero {
+  background: linear-gradient(90deg, #ffffff 0%, #fde047 28%, #67e8f9 55%, #f472b6 80%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holoTitleShine 7s linear infinite;
+  filter: drop-shadow(0 6px 28px rgba(168, 85, 247, 0.45));
+}
+
+@keyframes holoTitleShine {
+  to { background-position: 200% center; }
+}
+
+/* 4. Live Cosmic Pulse HUD & Instant 1-Card Daily Oracle */
+.cosmic-live-hud {
+  max-width: 56rem;
+  margin: 2.2rem auto 0;
+  padding: 1.35rem 1.5rem;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(16, 18, 42, 0.88) 0%, rgba(9, 11, 26, 0.92) 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.42);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(124, 58, 237, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.cosmic-live-hud::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38bdf8, #facc15, #ec4899, transparent);
+  animation: hudScanline 6s linear infinite;
+}
+
+@keyframes hudScanline {
+  0% { transform: translateX(-30%); }
+  100% { transform: translateX(30%); }
+}
+
+.cosmic-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.hud-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.92rem;
+  color: #e2e8f0;
+}
+
+.hud-instant-draw-btn {
+  appearance: none;
+  border: 1.5px solid rgba(250, 204, 21, 0.75);
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.22) 0%, rgba(236, 72, 153, 0.28) 50%, rgba(124, 58, 237, 0.35) 100%);
+  color: #fef08a;
+  font-family: var(--font-body, 'Kanit', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hud-instant-draw-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.4) 0%, rgba(236, 72, 153, 0.45) 100%);
+  box-shadow: 0 0 28px rgba(250, 204, 21, 0.55);
+  color: #ffffff;
+}
+
+.cosmic-hud-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.hud-metric-card {
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.hud-metric-card:hover {
+  border-color: rgba(56, 189, 248, 0.55);
+  transform: translateY(-2px);
+}
+
+.hud-metric-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.hud-metric-card strong {
+  font-size: 0.92rem;
+  color: #f8fafc;
+  line-height: 1.35;
+}
+
+/* Instant 1-Card Drawer */
+.instant-card-drawer {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px dashed rgba(250, 204, 21, 0.35);
+  animation: fadeIn 0.35s ease-out;
+}
+
+.instant-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  background: radial-gradient(circle at 15% 50%, rgba(168, 85, 247, 0.22), rgba(15, 23, 42, 0.85));
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  border-radius: 16px;
+  padding: 1.15rem 1.35rem;
+}
+
+.instant-card-visual {
+  width: 92px;
+  height: 138px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 2px solid #facc15;
+  background: #0f172a;
+  box-shadow: 0 0 22px rgba(250, 204, 21, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.25s ease;
+}
+
+.instant-card-visual svg {
+  width: 100%;
+  height: 100%;
+}
+
+.instant-card-info {
+  flex: 1;
+}
+
+.instant-card-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fde047;
+  background: rgba(250, 204, 21, 0.14);
+  border: 1px solid rgba(250, 204, 21, 0.4);
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.35rem;
+}
+
+.instant-card-info h4 {
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 0 0 0.35rem 0;
+  text-shadow: 0 0 12px rgba(250, 204, 21, 0.45);
+}
+
+.instant-card-info p {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin: 0 0 0.7rem 0;
+}
+
+.instant-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.instant-card-footer strong {
+  color: #4ade80;
+  font-size: 1rem;
+}
+
+.instant-redraw-btn {
+  appearance: none;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  color: #67e8f9;
+  font-family: var(--font-body, 'Kanit', sans-serif);
+  font-size: 0.82rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.instant-redraw-btn:hover {
+  background: rgba(56, 189, 248, 0.32);
+  color: #fff;
+}
+
+/* 5. 12 Holographic Tarot Arcana Portal Cards */
+.sub-option-card.holo-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.12) 0%, transparent 55%),
+    linear-gradient(160deg, rgba(20, 24, 52, 0.9) 0%, rgba(10, 12, 28, 0.95) 100%) !important;
+  border: 1.5px solid rgba(148, 163, 184, 0.22) !important;
+  border-radius: 18px !important;
+  padding: 1.45rem 1.35rem !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.32s ease, box-shadow 0.32s ease !important;
+}
+
+.sub-option-card.holo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--card-accent, #a855f7), transparent);
+  opacity: 0.85;
+}
+
+.sub-option-card.holo-card:hover {
+  transform: translateY(-7px) scale(1.015) !important;
+  border-color: var(--card-accent, #38bdf8) !important;
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.65),
+    0 0 28px color-mix(in srgb, var(--card-accent, #a855f7) 40%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--card-accent, #a855f7) 15%, transparent) !important;
+}
+
+.card-arcana-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  width: 100%;
+}
+
+.arcana-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.arcana-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card-accent, #a855f7) 18%, rgba(15, 23, 42, 0.85));
+  border: 1px solid color-mix(in srgb, var(--card-accent, #a855f7) 55%, transparent);
+  color: #f8fafc;
+}
+
+.card-orb-halo {
+  width: 72px;
+  height: 72px;
+  margin: 0.25rem auto 0.95rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, color-mix(in srgb, var(--card-accent, #a855f7) 28%, transparent) 0%, rgba(15, 23, 42, 0.6) 75%);
+  border: 1px solid color-mix(in srgb, var(--card-accent, #a855f7) 45%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--card-accent, #a855f7) 25%, transparent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sub-option-card.holo-card:hover .card-orb-halo {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--card-accent, #a855f7) 55%, transparent);
+}
+
+.card-orb-halo .sub-icon {
+  margin: 0 !important;
+  font-size: 2.15rem !important;
+}
+
+.card-enter-footer {
+  margin-top: 1.1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--card-accent, #67e8f9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: letter-spacing 0.25s ease, color 0.25s ease;
+}
+
+.sub-option-card.holo-card:hover .card-enter-footer {
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
+/* 6. 3D Planet Orb & 4D Planetary Power Meters */
+.planet-orb-3d {
+  box-shadow:
+    0 0 30px color-mix(in srgb, var(--day-color, #f87171) 45%, transparent),
+    inset -8px -8px 20px rgba(0, 0, 0, 0.65),
+    inset 6px 6px 16px rgba(255, 255, 255, 0.22) !important;
+  animation: planetFloat3D 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes planetFloat3D {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-6px) scale(1.04); }
+}
+
+.planet-power-meters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.25rem;
+  margin: 0 0 1.4rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 14px;
+  background: rgba(10, 14, 32, 0.68);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+}
+
+.power-meter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+
+.power-meter-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.power-meter-label strong {
+  color: var(--day-color, #fde047);
+  font-size: 0.9rem;
+}
+
+.power-meter-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(30, 41, 59, 0.85);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.power-meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--day-color, #f87171), #fde047, #38bdf8);
+  box-shadow: 0 0 12px var(--day-color, #f87171);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 7. VIP 50 THB Oracle Pass & Master Profile Card */
+.holo-vip-card {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(250, 204, 21, 0.16), transparent 60%),
+    linear-gradient(160deg, rgba(22, 18, 52, 0.92) 0%, rgba(10, 12, 28, 0.96) 100%) !important;
+  border: 1.5px solid rgba(250, 204, 21, 0.55) !important;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.65), 0 0 35px rgba(250, 204, 21, 0.18) !important;
+}
+
+.vip-price-orb {
+  margin: 0.75rem auto 1rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 18px;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.18) 0%, rgba(124, 58, 237, 0.18) 100%);
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  box-shadow: inset 0 0 20px rgba(250, 204, 21, 0.15);
+}
+
+.holo-profile-card {
+  background:
+    radial-gradient(circle at 80% 15%, rgba(56, 189, 248, 0.16), transparent 55%),
+    linear-gradient(160deg, rgba(18, 22, 50, 0.92) 0%, rgba(10, 12, 28, 0.96) 100%) !important;
+  border: 1.5px solid rgba(168, 85, 247, 0.45) !important;
+}
+
+.poster-avatar-halo {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.verified-oracle-badge {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #facc15, #f59e0b);
+  color: #0f172a;
+  box-shadow: 0 2px 10px rgba(250, 204, 21, 0.5);
+}
+
+.pam-stats-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+  text-align: center;
+}
+
+.pam-stat-box {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: 10px;
+  padding: 0.6rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pam-stat-box strong {
+  font-size: 1.05rem;
+  color: #fde047;
+}
+
+.pam-stat-box span {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+/* 8. Full Mobile & Tablet Responsiveness for Next-Gen Components */
+@media (max-width: 768px) {
+  .site-header {
+    border-radius: 22px;
+    top: 6px;
+    margin: 0.4rem 0.65rem 0;
+  }
+
+  .celestial-astrolabe-portal {
+    width: 180px;
+    height: 180px;
+  }
+
+  .astrolabe-ring.ring-outer span:nth-child(1)  { transform: rotate(0deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(2)  { transform: rotate(30deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(3)  { transform: rotate(60deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(4)  { transform: rotate(90deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(5)  { transform: rotate(120deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(6)  { transform: rotate(150deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(7)  { transform: rotate(180deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(8)  { transform: rotate(210deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(9)  { transform: rotate(240deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(10) { transform: rotate(270deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(11) { transform: rotate(300deg) translateY(-82px); }
+  .astrolabe-ring.ring-outer span:nth-child(12) { transform: rotate(330deg) translateY(-82px); }
+
+  .hero-cyber-badge {
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    padding: 0.38rem 0.85rem;
+  }
+
+  .cosmic-live-hud {
+    padding: 1.1rem 1rem;
+    margin-top: 1.6rem;
+  }
+
+  .cosmic-hud-header {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .hud-live-indicator {
+    justify-content: center;
+  }
+
+  .hud-instant-draw-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cosmic-hud-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .instant-card-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .instant-card-footer {
+    justify-content: center;
+  }
+
+  .planet-power-meters {
+    grid-template-columns: 1fr;
+    padding: 0.95rem 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .cosmic-hud-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .pam-stats-mini-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .pam-stat-box strong {
+    font-size: 0.92rem;
+  }
+}
+
+

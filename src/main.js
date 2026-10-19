@@ -129,6 +129,7 @@ const WEEKDAY_PLANETS_DATA = [
     element: 'ธาตุไฟ (เพลิงสุริยะ)',
     luckyColor: 'สีแดง, สีทอง, สีเขียว',
     luckyNumber: '1, 4, 5, 9',
+    stats: { career: 96, wealth: 88, love: 84, luck: 92 },
     theme: 'โดดเด่น มีเกียรติยศ มุ่งมั่นแรงกล้า และรักศักดิ์ศรี',
     nature: 'คนเกิดวันอาทิตย์ได้รับพลังจากดวงตราพญาราชสีห์ มีความเป็นผู้นำสูง รักอิสระ คิดเร็วทำเร็ว จริงใจต่อคนรอบข้าง เมื่อตั้งเป้าหมายแล้วจะพุ่งชนด้วยความมุ่งมั่นไม่ย่อท้อ',
     strengths: ['กล้าตัดสินใจ เด็ดเดี่ยว และพึ่งพาตัวเองได้ดีเยี่ยม', 'มีบารมีผู้ใหญ่อุปถัมภ์ คิดการใหญ่และมองการณ์ไกล', 'ใจกว้าง จริงใจ ไม่ชอบเอาเปรียบใคร'],
@@ -144,6 +145,7 @@ const WEEKDAY_PLANETS_DATA = [
     element: 'ธาตุดิน (แผ่นดินอุดมทรัพย์)',
     luckyColor: 'สีเหลืองนวล, สีขาว, สีม่วง',
     luckyNumber: '2, 4, 6, 7',
+    stats: { career: 86, wealth: 91, love: 98, luck: 89 },
     theme: 'อ่อนโยน มีเสน่ห์ดึงดูดใจ ช่างสังเกต และประณีตละเอียดอ่อน',
     nature: 'คนเกิดวันจันทร์เปรียบเสมือนแสงจันทร์คืนเพ็ญที่ให้ความร่มเย็น มีเสน่ห์เมตตามหานิยมสูง ไปที่ไหนใครก็รักใคร่เอ็นดู เข้าใจความรู้สึกของผู้อื่นได้อย่างลึกซึ้ง',
     strengths: ['มีเสน่ห์ในการเจรจา คนรอบข้างพร้อมช่วยเหลือเกื้อกูล', 'ละเอียดรอบคอบ มีรสนิยมดี และใส่ใจคนรักเก่งมาก', 'ปรับตัวเข้ากับสังคมได้ดี ประนีประนอมเก่ง'],
@@ -159,6 +161,7 @@ const WEEKDAY_PLANETS_DATA = [
     element: 'ธาตุลม (พายุหมุนแห่งความกล้า)',
     luckyColor: 'สีชมพู, สีส้ม, สีดำ',
     luckyNumber: '3, 5, 6, 8',
+    stats: { career: 95, wealth: 87, love: 85, luck: 91 },
     theme: 'กล้าหาญ ลุยไม่ถอย ตรงไปตรงมา และเปี่ยมด้วยพลังสร้างสรรค์',
     nature: 'คนเกิดวันอังคารมีหัวใจนักรบที่เข้มแข็ง ไม่กลัวความยากลำบาก ยิ่งเจอโจทย์ยากยิ่งฮึดสู้ มีพลังในการบุกเบิกสิ่งใหม่ๆ และมีความจริงใจระดับร้อยเปอร์เซ็นต์',
     strengths: ['อดทนสู้งานหนัก ล้มแล้วลุกไว ไม่ยอมแพ้ต่อโชคชะตา', 'คล่องแคล่ว ว่องไว แก้ปัญหาเฉพาะหน้าได้เฉียบขาด', 'รักเพื่อนพ้องและปกป้องคนที่ตัวเองรักสุดตัว'],
@@ -174,6 +177,7 @@ const WEEKDAY_PLANETS_DATA = [
     element: 'ธาตุน้ำ (สายน้ำแห่งไหวพริบ)',
     luckyColor: 'สีเขียวเหนี่ยวทรัพย์, สีเหลือง, สีฟ้า',
     luckyNumber: '4, 2, 5, 9',
+    stats: { career: 92, wealth: 96, love: 89, luck: 94 },
     theme: 'ไหวพริบเป็นเลิศ สื่อสารเก่ง ค้าขายรุ่งเรือง และปรับตัวไว',
     nature: 'คนเกิดวันพุธคือเจ้าของวาทศิลป์และสติปัญญาที่เฉียบแหลม เรียนรู้สิ่งใหม่ได้รวดเร็ว มีหัวการค้าและการติดต่อสื่อสารที่เป็นเลิศ เปลี่ยนวิกฤตให้เป็นโอกาสได้เสมอ',
     strengths: ['พูดจาเป็นเงินเป็นทอง เจรจาต่อรองหรือปิดการขายเก่งมาก', 'มีไอเดียสร้างสรรค์ ทันสมัย และเข้ากับคนได้ทุกกลุ่ม', 'แก้ปัญหาด้วยเหตุผลและชั้นเชิงที่นุ่มนวล'],
@@ -189,6 +193,7 @@ const WEEKDAY_PLANETS_DATA = [
     element: 'ธาตุดิน (ภูผาแห่งปัญญาและคุณธรรม)',
     luckyColor: 'สีส้ม, สีทอง, สีแดง, สีขาว',
     luckyNumber: '5, 1, 3, 9',
+    stats: { career: 97, wealth: 90, love: 86, luck: 95 },
     theme: 'มีสติปัญญา สุขุมรอบคอบ ยุติธรรม และมีดวงผู้ใหญ่อุปถัมภ์',
     nature: 'คนเกิดวันพฤหัสบดีได้รับอิทธิพลจากดาวครู มีความใฝ่รู้ มีเหตุผล และยึดมั่นในความถูกต้อง เป็นที่พึ่งพิงและที่ปรึกษาที่ดีให้กับคนรอบข้างเสมอ',
     strengths: ['วางแผนชีวิตและการงานอย่างเป็นระบบ มั่นคงระยะยาว', 'มีสิ่งศักดิ์สิทธิ์และผู้ใหญ่คอยคุ้มครองช่วยเหลือเมื่อมีภัย', 'มีเมตตาธรรม ซื่อสัตย์ และน่าเชื่อถือสูงมาก'],
@@ -204,6 +209,7 @@ const WEEKDAY_PLANETS_DATA = [
     element: 'ธาตุน้ำ (สายฝนแห่งความสุขและทรัพย์สิน)',
     luckyColor: 'สีฟ้า, สีน้ำเงิน, สีชมพู, สีขาว',
     luckyNumber: '6, 2, 3, 5',
+    stats: { career: 88, wealth: 97, love: 98, luck: 93 },
     theme: 'รสนิยมเลิศ ดวงการเงินและความรักโดดเด่น มีเสน่ห์น่าค้นหา',
     nature: 'คนเกิดวันศุกร์คือตัวแทนแห่งความสุข ศิลปะ และโภคทรัพย์ ชอบความสวยงาม มีอารมณ์สุนทรีย์ หาเงินเก่งและรู้วิธีใช้เงินซื้อความสุขให้ตัวเองและคนที่รัก',
     strengths: ['มีดวงโชคลาภและการเงินหมุนเวียนดี หาช่องทางทำเงินเก่ง', 'มีเสน่ห์ดึงดูดเพศตรงข้ามและมิตรสหายสูงมาก', 'มองโลกในแง่บวก สร้างรอยยิ้มและพลังบวกให้คนรอบตัว'],
@@ -219,6 +225,7 @@ const WEEKDAY_PLANETS_DATA = [
     element: 'ธาตุไฟ (ไฟหลอมเพชรแห่งความสำเร็จ)',
     luckyColor: 'สีม่วง, สีดำ, สีทอง, สีฟ้า',
     luckyNumber: '7, 8, 9, 1',
+    stats: { career: 94, wealth: 95, love: 83, luck: 96 },
     theme: 'หนักแน่น อดทนเป็นเลิศ สร้างฐานะด้วยลำแข้ง และมั่งคั่งในระยะยาว',
     nature: 'คนเกิดวันเสาร์เปรียบดั่งเพชรที่ผ่านแรงกดดันจนส่องประกายล้ำค่า มีความอดทนสูงมาก สุขุมลุ่มลึก ไม่ชอบพึ่งพาใคร มักสร้างเนื้อสร้างตัวจนมีทรัพย์สินที่ดินมั่นคง',
     strengths: ['มีความรับผิดชอบสูง งานยากแค่ไหนก็ทำจนสำเร็จลุล่วง', 'เก็บเงินและบริหารทรัพย์สินระยะยาวได้ดี มีเกณฑ์ได้ทรัพย์ใหญ่', 'รักใครรักจริง มั่นคง และไม่โลเล'],
@@ -229,6 +236,76 @@ const WEEKDAY_PLANETS_DATA = [
 
 function initMyDuangFeatures() {
   setupOriginalSiteExperience();
+
+  // 0. Live Cosmic Pulse HUD & Instant 1-Card Daily Oracle in Hero
+  const now = new Date();
+  const todayPlanet = WEEKDAY_PLANETS_DATA[now.getDay()] || WEEKDAY_PLANETS_DATA[0];
+  const liveDateEl = document.getElementById('live-cosmic-date');
+  const livePlanetEl = document.getElementById('live-cosmic-planet');
+  const liveColorEl = document.getElementById('live-cosmic-color');
+  const liveNumEl = document.getElementById('live-cosmic-num');
+
+  if (liveDateEl) {
+    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+    liveDateEl.textContent = `วัน${todayPlanet.day}ที่ ${now.getDate()} ${thaiMonths[now.getMonth()]} ${now.getFullYear() + 543}`;
+  }
+  if (livePlanetEl) {
+    livePlanetEl.textContent = `${todayPlanet.symbol} ดาว${todayPlanet.planet.split(' ')[0]}`;
+  }
+  if (liveColorEl) {
+    liveColorEl.textContent = todayPlanet.luckyColor;
+  }
+  if (liveNumEl) {
+    const seed = now.getDate() * 13 + (now.getMonth() + 1) * 7 + now.getDay() * 3;
+    const twoDigit = String((seed * 17) % 100).padStart(2, '0');
+    liveNumEl.textContent = `${todayPlanet.luckyNumber} (เด่น ${twoDigit})`;
+  }
+
+  function triggerInstantDailyCard() {
+    if (!TAROT_CARDS || !TAROT_CARDS.length) return;
+    if (typeof MysticAudio !== 'undefined' && MysticAudio.playFlip) {
+      MysticAudio.playFlip();
+    }
+    const drawer = document.getElementById('instant-daily-card-drawer');
+    const svgBox = document.getElementById('instant-card-svg');
+    const titleEl = document.getElementById('instant-card-title');
+    const descEl = document.getElementById('instant-card-desc');
+    const luckyNumEl = document.getElementById('instant-card-lucky-num');
+
+    const randomCard = TAROT_CARDS[Math.floor(Math.random() * TAROT_CARDS.length)];
+    if (drawer) {
+      drawer.classList.remove('hidden');
+    }
+    if (svgBox) {
+      svgBox.style.transform = 'rotateY(90deg) scale(0.9)';
+      setTimeout(() => {
+        svgBox.innerHTML = randomCard.svg || '';
+        svgBox.style.transform = 'rotateY(0deg) scale(1)';
+      }, 150);
+    }
+    if (titleEl) {
+      titleEl.textContent = `${randomCard.thaiName} ${randomCard.emoji || '✨'}`;
+    }
+    if (descEl) {
+      const modeKey = (typeof AppState !== 'undefined' && AppState.soloCategory) ? AppState.soloCategory : 'gag';
+      descEl.textContent = randomCard[modeKey] || randomCard.inspiration || randomCard.gag;
+    }
+    if (luckyNumEl) {
+      const n1 = Math.floor(Math.random() * 90) + 10;
+      const n2 = Math.floor(Math.random() * 90) + 10;
+      luckyNumEl.textContent = `${n1} · ${n2}`;
+    }
+  }
+
+  const btnInstantCard = document.getElementById('btn-instant-daily-card');
+  const btnRedrawCard = document.getElementById('btn-redraw-daily-card');
+  if (btnInstantCard) {
+    btnInstantCard.addEventListener('click', triggerInstantDailyCard);
+  }
+  if (btnRedrawCard) {
+    btnRedrawCard.addEventListener('click', triggerInstantDailyCard);
+  }
+
   // 1. Weekday Guide Controller
   const weekdayButtons = document.querySelectorAll('#weekday-picks button');
   const readingBox = document.getElementById('weekday-reading');
@@ -244,6 +321,14 @@ function initMyDuangFeatures() {
   const elementEl = document.getElementById('w-element');
   const luckyColorEl = document.getElementById('w-lucky-color');
   const luckyNumEl = document.getElementById('w-lucky-num');
+  const statCareer = document.getElementById('w-stat-career');
+  const barCareer = document.getElementById('w-bar-career');
+  const statWealth = document.getElementById('w-stat-wealth');
+  const barWealth = document.getElementById('w-bar-wealth');
+  const statLove = document.getElementById('w-stat-love');
+  const barLove = document.getElementById('w-bar-love');
+  const statLuck = document.getElementById('w-stat-luck');
+  const barLuck = document.getElementById('w-bar-luck');
 
   weekdayButtons.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
@@ -265,6 +350,17 @@ function initMyDuangFeatures() {
       if (luckyColorEl && data.luckyColor) luckyColorEl.textContent = data.luckyColor;
       if (luckyNumEl && data.luckyNumber) luckyNumEl.textContent = data.luckyNumber;
 
+      if (data.stats) {
+        if (statCareer) statCareer.textContent = `${data.stats.career}%`;
+        if (barCareer) barCareer.style.width = `${data.stats.career}%`;
+        if (statWealth) statWealth.textContent = `${data.stats.wealth}%`;
+        if (barWealth) barWealth.style.width = `${data.stats.wealth}%`;
+        if (statLove) statLove.textContent = `${data.stats.love}%`;
+        if (barLove) barLove.style.width = `${data.stats.love}%`;
+        if (statLuck) statLuck.textContent = `${data.stats.luck}%`;
+        if (barLuck) barLuck.style.width = `${data.stats.luck}%`;
+      }
+
       if (strengthsUl) {
         strengthsUl.innerHTML = data.strengths.map(s => `<li>${s}</li>`).join('');
       }
@@ -279,6 +375,17 @@ function initMyDuangFeatures() {
         inner.offsetHeight; // trigger reflow
         inner.style.animation = '0.35s ease-out weekday-arrive';
       }
+    });
+  });
+
+  // Holographic 3D Spotlight effect for 12 Arcana Portal Cards
+  document.querySelectorAll('.holo-card').forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mouse-x', `${x}%`);
+      card.style.setProperty('--mouse-y', `${y}%`);
     });
   });
 

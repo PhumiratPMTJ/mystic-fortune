@@ -18,7 +18,13 @@
 <body>
   <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
   
-  <!-- Original Starry Sky Canvas & Progress/Glow -->
+  <!-- Original Starry Sky Canvas & Multi-Layered Nebula Aurora -->
+  <div class="cosmic-nebula-bg" aria-hidden="true">
+    <div class="nebula-orb orb-purple"></div>
+    <div class="nebula-orb orb-cyan"></div>
+    <div class="nebula-orb orb-gold"></div>
+    <div class="cosmic-grid-overlay"></div>
+  </div>
   <canvas id="star-canvas"></canvas>
   <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
   <div class="pointer-glow" aria-hidden="true"></div>
@@ -29,16 +35,19 @@
     <div class="audio-icon">🔊</div>
   </div>
 
-  <!-- Top Navigation Header -->
+  <!-- Top Navigation Header (Floating VisionOS Glass Capsule) -->
   <header class="site-header wrap">
     <a href="#" class="wordmark" aria-label="ดวงปังพลังแพม หน้าหลัก">
-      <img src="/images/pam_mascot.png" class="brand-mascot-icon" alt="Mascot"> ดวงปังพลังแพม
+      <span class="brand-avatar-ring">
+        <img src="/images/pam_mascot.png" class="brand-mascot-icon" alt="Mascot">
+      </span>
+      <span class="wordmark-text">ดวงปังพลังแพม <small class="wordmark-badge">12D ORACLE</small></span>
     </a>
     <nav aria-label="เมนูหลัก">
       <a href="#interactive-divinations">🔮 ดูดวง ๑๒ มิติ</a>
       <a href="#weekday-guide">🌟 ดาวประจำวันเกิด</a>
-      <a href="#services">💎 อัตราค่าบริการ 50฿</a>
-      <a class="nav-contact" href="#contact">💬 ติดต่อปรึกษา <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
+      <a href="#services">💎 ดูดวงส่วนตัว 50฿</a>
+      <a class="nav-contact" href="#contact">💬 ติดต่อแม่หมอ <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
     </nav>
   </header>
 
@@ -65,27 +74,55 @@
       <div class="lizard-sticker" title="น้องกิ้งก่าจอมซน! คลิกทักทายกวนๆ 🦎"></div>
     </div>
 
-    <!-- 1. HERO SECTION: Original Duang Pang Palang Pam Celestial Portal -->
+    <!-- 1. HERO SECTION: Next-Gen Holographic Celestial Astrolabe Portal -->
     <section class="hero narrow" aria-labelledby="hero-title">
       <div class="hero-mascot-showcase">
-        <div class="angel-pam-container hero-pam-center">
-          <div class="wing left-wing"></div>
-          <div class="wing right-wing"></div>
-          <div class="pam-avatar"></div>
-          <div class="halo"></div>
+        <div class="celestial-astrolabe-portal">
+          <!-- Rotating Outer Zodiac Ring -->
+          <div class="astrolabe-ring ring-outer" aria-hidden="true">
+            <span>♈</span><span>♉</span><span>♊</span><span>♋</span><span>♌</span><span>♍</span>
+            <span>♎</span><span>♏</span><span>♐</span><span>♑</span><span>♒</span><span>♓</span>
+          </div>
+          <!-- Counter-Rotating Sacred Geometry SVG Ring -->
+          <svg class="astrolabe-ring ring-middle" viewBox="0 0 260 260" aria-hidden="true">
+            <circle cx="130" cy="130" r="118" fill="none" stroke="url(#astroGrad)" stroke-width="1.2" stroke-dasharray="6 6" />
+            <circle cx="130" cy="130" r="96" fill="none" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1" />
+            <polygon points="130,18 227,186 33,186" fill="none" stroke="rgba(192, 132, 252, 0.35)" stroke-width="1.2" />
+            <polygon points="130,242 227,74 33,74" fill="none" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" />
+            <defs>
+              <linearGradient id="astroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fde047" />
+                <stop offset="50%" stop-color="#c084fc" />
+                <stop offset="100%" stop-color="#38bdf8" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <!-- Glowing Core Aura -->
+          <div class="astrolabe-core-glow" aria-hidden="true"></div>
+          <!-- Original Angel Pam Mascot at the Center -->
+          <div class="angel-pam-container hero-pam-center">
+            <div class="wing left-wing"></div>
+            <div class="wing right-wing"></div>
+            <div class="pam-avatar"></div>
+            <div class="halo"></div>
+          </div>
         </div>
       </div>
 
-      <p class="eyebrow">✨ CELESTIAL ORACLE &amp; INTERACTIVE FORTUNE ✨</p>
-      <h1 id="hero-title" class="logo-text-hero">ดวงปังพลังแพม<br/><span>เปิดประตูชะตาฟ้าลิขิต ๑๒ มิติ</span></h1>
+      <div class="hero-cyber-badge">
+        <span class="pulse-dot"></span>
+        <span>NEXT-GEN INTERACTIVE CELESTIAL ORACLE · 12 DIMENSIONS</span>
+      </div>
+
+      <h1 id="hero-title" class="logo-text-hero">ดวงปังพลังแพม<br/><span>จักรวาลพยากรณ์ชะตาฟ้าลิขิต ๑๒ มิติ</span></h1>
       <p class="hero-description">
-        ดินแดนพยากรณ์ดวงชะตาออนไลน์สุดล้ำ ผสานตำราโหราศาสตร์ไทยเข้ากับระบบเสี่ยงทายแบบ Interactive<br class="desktop-break"/>
-        เลือกเล่นฟีเจอร์ดูดวงฟรีได้ถึง ๑๒ มิติ หรือปรึกษาเจาะลึกตัวต่อตัวกับแม่หมอแพมในราคาสุดคุ้ม
+        ก้าวเข้าสู่มิติใหม่แห่งการดูดวงออนไลน์ที่ล้ำที่สุด ผสานคัมภีร์โหราศาสตร์ไทย ไพ่ทาโรต์ และเลขศาสตร์<br class="desktop-break"/>
+        เข้ากับระบบ Interactive เต็มรูปแบบ เล่นฟรีครบ ๑๒ มิติ หรือปรึกษาส่วนตัวกับแม่หมอแพมเพียง 50 บาท
       </p>
 
       <div class="hero-cta-group-main">
         <a class="button gold hero-cta" href="#interactive-divinations">
-          🔮 เริ่มเสี่ยงทายดูดวงฟรี ๑๒ มิติ
+          🔮 เปิดประตูดูดวงฟรี ๑๒ มิติ
         </a>
         <a class="button outline hero-cta-secondary" href="#services">
           💎 วิเคราะห์ทุกคำถาม · 50 บาท <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
@@ -100,147 +137,254 @@
         <button type="button" class="pam-pill" data-open-target="btn-start-chatbot">💬 แชทบอทแม่หมอแพม 24 ชม.</button>
         <button type="button" class="pam-pill" data-open-target="btn-start-consult">⭐ ดูดวงส่วนตัวทุกคำถาม 50฿</button>
       </div>
+
+      <!-- LIVE COSMIC PULSE HUD & INSTANT 1-CARD ORACLE -->
+      <div class="cosmic-live-hud">
+        <div class="cosmic-hud-header">
+          <div class="hud-live-title">
+            <span class="hud-live-dot"></span>
+            <strong>🌌 สภาวะคลื่นดวงดาวประจำวันนี้</strong>
+            <span id="live-cosmic-date" class="hud-date-tag">กำลังคำนวณองศาดาว...</span>
+          </div>
+          <button type="button" class="hud-instant-draw-btn" id="btn-instant-daily-card">
+            ⚡ สุ่มไพ่พลังงานประจำวันของคุณ 1 ใบ
+          </button>
+        </div>
+        <div class="cosmic-hud-metrics">
+          <div class="hud-metric-box">
+            <span class="hud-metric-label">🪐 ดาวทรงอิทธิพลวันนี้</span>
+            <strong id="live-cosmic-planet">พระอาทิตย์เรืองแสง</strong>
+          </div>
+          <div class="hud-metric-box">
+            <span class="hud-metric-label">🎨 สีมงคลดูดทรัพย์วันนี้</span>
+            <strong id="live-cosmic-color">สีแดง, สีทอง, สีเขียว</strong>
+          </div>
+          <div class="hud-metric-box">
+            <span class="hud-metric-label">🍀 เลขมงคลประจำวัน</span>
+            <strong id="live-cosmic-num" class="hud-num-glow">19 · 59</strong>
+          </div>
+        </div>
+        <!-- Instant Daily Card Reveal Drawer -->
+        <div id="instant-daily-card-drawer" class="instant-card-drawer hidden">
+          <div class="instant-card-inner">
+            <div class="instant-card-art" id="instant-card-svg"></div>
+            <div class="instant-card-info">
+              <span class="instant-card-badge">✨ ไพ่ประจำตัวคุณวันนี้</span>
+              <h4 id="instant-card-title">ไพ่เดอะซัน (The Sun)</h4>
+              <p id="instant-card-desc">คำทำนายประจำวัน...</p>
+              <div class="instant-card-lucky">
+                <span id="instant-card-lucky-num">🍀 เลขนำโชคจากไพ่: 99</span>
+                <button type="button" class="instant-redraw-btn" id="btn-redraw-daily-card">🔄 สุ่มใหม่อีกครั้ง</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- 2. INTERACTIVE 12 DIVINATIONS PORTAL (Core Original Feature Suite) -->
     <section id="interactive-divinations" class="wrap section-space" aria-labelledby="divinations-title">
       <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
       <div class="guide-heading">
-        <p class="eyebrow">🔮 อาณาจักรเสี่ยงทายออนไลน์ครบวงจร</p>
-        <h2 id="divinations-title">เปิดชะตาชีวิต ๑๒ มิติ<br/><span>เลือกศาสตร์พยากรณ์ที่คุณต้องการ</span></h2>
+        <p class="eyebrow">🔮 12 INTERACTIVE DIVINATION PORTALS</p>
+        <h2 id="divinations-title">อาณาจักรพยากรณ์ชะตา ๑๒ มิติ<br/><span>เลือกศาสตร์เสี่ยงทายที่คุณต้องการเปิดคำทำนาย</span></h2>
         <p class="section-description">
-          คลิกเลือกโหมดคำทำนายด้านล่าง แล้วสัมผัสประสบการณ์ดูดวงสุดล้ำได้ทันที ฟรีทุกฟีเจอร์!
+          ปรับโทนคำทำนายได้ 3 สไตล์ตามอารมณ์ของคุณ แล้วคลิกการ์ดโฮโลแกรมด้านล่างเพื่อเข้าสู่ห้องพยากรณ์ทันที!
         </p>
       </div>
 
       <!-- Category Selector -->
       <div class="category-selector-container">
-        <p class="label-text">เลือกโทนคำทำนายที่คุณต้องการ:</p>
+        <p class="label-text">🎭 เลือกโทนเสียงคำทำนายของแม่หมอแพม:</p>
         <div class="category-buttons">
-          <button class="cat-btn active" data-category="gag">🤪 ตลกกวนบาทา</button>
-          <button class="cat-btn" data-category="inspiration">💖 ซึ้งให้กำลังใจ</button>
-          <button class="cat-btn" data-category="serious">🔮 แม่นยำจริงจัง</button>
+          <button class="cat-btn active" data-category="gag">🤪 ตลกกวนบาทา (ฮาปอดโยก)</button>
+          <button class="cat-btn" data-category="inspiration">💖 ซึ้งฮีลใจ (อบอุ่นพลังบวก)</button>
+          <button class="cat-btn" data-category="serious">🔮 โหราศาสตร์เข้มข้น (แม่นยำจริงจัง)</button>
         </div>
       </div>
 
-      <!-- 12 Divination Cards Grid -->
+      <!-- 12 Holographic Divination Cards Grid -->
       <div class="solo-options-grid">
         <!-- 1. Option Esiimsi -->
-        <div class="sub-option-card" id="btn-start-esiimsi">
-          <div class="card-icon-img" style="background-image: url('/images/esiimsi_cup.jpg'); margin: 0 auto 1rem auto; width: 78px; height: 78px; border-radius: 50%; border: 2px solid #a855f7;"></div>
+        <div class="sub-option-card holo-card" id="btn-start-esiimsi" style="--card-accent: #a855f7;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL I</span>
+            <span class="arcana-badge">🎋 เซียมซีโบราณ</span>
+          </div>
+          <div class="card-orb-halo">
+            <div class="card-icon-img" style="background-image: url('/images/esiimsi_cup.jpg'); width: 76px; height: 76px; border-radius: 50%; border: 2px solid #a855f7;"></div>
+          </div>
           <h3>🎋 เซียมซีอธิษฐานจิต</h3>
-          <p>ตั้งจิตอธิษฐานแล้วเขย่ากระบอกเซียมซีลุ้นใบทำนายมงคลโบราณ</p>
+          <p>ตั้งจิตอธิษฐานแล้วเขย่ากระบอกเซียมซีแบบ Interactive ลุ้นใบทำนายมงคล ૨๘ ใบ</p>
+          <div class="card-enter-footer"><span>เข้าสู่ห้องเสี่ยงเซียมซี</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 2. Option Tarot -->
-        <div class="sub-option-card" id="btn-start-tarot">
-          <div class="card-icon-img" style="background-image: url('/images/tarot_card_back.jpg'); margin: 0 auto 1rem auto; width: 60px; height: 84px; border-radius: 6px; border: 2px solid #38bdf8;"></div>
+        <div class="sub-option-card holo-card" id="btn-start-tarot" style="--card-accent: #38bdf8;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL II</span>
+            <span class="arcana-badge">🃏 ไพ่ทาโรต์ 3 มิติ</span>
+          </div>
+          <div class="card-orb-halo">
+            <div class="card-icon-img" style="background-image: url('/images/tarot_card_back.jpg'); width: 58px; height: 82px; border-radius: 6px; border: 2px solid #38bdf8;"></div>
+          </div>
           <h3>🃏 ไพ่ยิปซีชี้ทาง</h3>
-          <p>เลือกไพ่ 3 ใบจากสำรับ 35 ใบ ทำนายอดีต ปัจจุบัน อนาคต อย่างแม่นยำ</p>
+          <p>หยิบไพ่ 3 ใบจากสำรับวงโค้ง 35 ใบ เปิดเผยอดีต ปัจจุบัน และอนาคต พร้อมเอฟเฟกต์พลิกไพ่ 3D</p>
+          <div class="card-enter-footer"><span>เปิดสำรับไพ่ทาโรต์</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 3. Option Numeric -->
-        <div class="sub-option-card" id="btn-start-numeric">
-          <div class="sub-icon">🔢</div>
+        <div class="sub-option-card holo-card" id="btn-start-numeric" style="--card-accent: #fde047;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL III</span>
+            <span class="arcana-badge">🔢 เลขศาสตร์</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon">🔢</div></div>
           <h3>วิเคราะห์ตัวเลขมงคล</h3>
-          <p>ถอดรหัสวิเคราะห์เบอร์โทรศัพท์ มือถือ เลขทะเบียนรถนำโชคตามตำราเลขศาสตร์</p>
+          <p>ถอดรหัสเบอร์โทรศัพท์มือถือ เลขทะเบียนรถ และเลขบัตรประชาชน จัดเกรดพลังงาน A+ ถึง D</p>
+          <div class="card-enter-footer"><span>สแกนรหัสตัวเลข</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 4. Option Zodiac Match -->
-        <div class="sub-option-card" id="btn-start-zodmatch">
-          <div class="sub-icon">💘</div>
+        <div class="sub-option-card holo-card" id="btn-start-zodmatch" style="--card-accent: #f472b6;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL IV</span>
+            <span class="arcana-badge">💘 ผูกดวงคู่รัก</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon">💘</div></div>
           <h3>เช็กดวงเนื้อคู่สมพงษ์</h3>
-          <p>วิเคราะห์ดวงความเข้ากันได้ตามจักรราศีและวันเกิดแม่นยำ 100%</p>
+          <p>คำนวณเปอร์เซ็นต์ความสมพงษ์ของคู่รักและเพื่อนซี้จาก ١٢ ราศีและธาตุวันเกิด</p>
+          <div class="card-enter-footer"><span>คำนวณดวงสมพงษ์</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 5. Option Zodiac Reading -->
-        <div class="sub-option-card" id="btn-start-zodread">
-          <div class="sub-icon">☀️</div>
+        <div class="sub-option-card holo-card" id="btn-start-zodread" style="--card-accent: #fb923c;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL V</span>
+            <span class="arcana-badge">☀️ จักรราศี</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon">☀️</div></div>
           <h3>คำนวณราศีและธาตุเกิด</h3>
-          <p>ตรวจสอบสัญลักษณ์ดวงชะตา ราศีเกิด ธาตุเจ้าเรือน สีและเลขนำโชคประจำตัว</p>
+          <p>ตรวจสอบราศีเกิด ธาตุเจ้าเรือน อุปนิสัยเบื้องลึก สีและเลขมงคลประจำตัว</p>
+          <div class="card-enter-footer"><span>ตรวจธาตุเจ้าเรือน</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 6. Option Dream Dictionary -->
-        <div class="sub-option-card" id="btn-start-dream">
-          <div class="sub-icon">🛌</div>
+        <div class="sub-option-card holo-card" id="btn-start-dream" style="--card-accent: #60a5fa;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL VI</span>
+            <span class="arcana-badge">🛌 ทำนายฝัน</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon">🛌</div></div>
           <h3>ทำนายฝันแปลเลขเด็ด</h3>
-          <p>สืบค้นความฝัน วิเคราะห์ความหมายลี้ลับ พร้อมถอดเลขเด็ดมงคลโชคลาภ 2 ตัวและ 3 ตัว</p>
+          <p>ค้นหาความหมายแห่งนิมิตความฝันตามตำราโบราณ พร้อมถอดรหัสเลขเด็ด 2 ตัว และ 3 ตัว</p>
+          <div class="card-enter-footer"><span>ถอดรหัสความฝัน</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 7. Option Daily Outfit Color -->
-        <div class="sub-option-card" id="btn-start-outfit">
-          <div class="sub-icon">👕</div>
+        <div class="sub-option-card holo-card" id="btn-start-outfit" style="--card-accent: #34d399;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL VII</span>
+            <span class="arcana-badge">👕 มูเตลูรายวัน</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon">👕</div></div>
           <h3>ตารางเสื้อสีมงคลประจำวัน</h3>
-          <p>คำนวณสีเสื้อผ้าเสริมดวงรายวันเสริม โชคลาภ การเงิน การงาน เสน่ห์เมตตา และเลี่ยงกาลกิณี</p>
+          <p>เช็กสีเสื้อผ้าเสริมดวงการงาน โชคลาภ เสน่ห์เมตตา และสีต้องห้ามกาลกิณีครบทั้ง 7 วัน</p>
+          <div class="card-enter-footer"><span>เปิดตารางสีมงคล</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 8. Option Life Graph -->
-        <div class="sub-option-card" id="btn-start-lifegraph">
-          <div class="sub-icon">📈</div>
+        <div class="sub-option-card holo-card" id="btn-start-lifegraph" style="--card-accent: #22d3ee;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL VIII</span>
+            <span class="arcana-badge">📈 กราฟ ૧૨ เรือน</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon">📈</div></div>
           <h3>กราฟชีวิตลิขิตโชคชะตา</h3>
-          <p>วิเคราะห์กราฟพลังชีวิต 12 ด้าน (วาสนา, ทรัพย์, การงาน, คู่ครอง, ลาภยศ) คำนวณเลขศาสตร์</p>
+          <p>พล็อตกราฟพลังชีวิต 12 เรือนชะตา (วาสนา, ทรัพย์, การงาน, คู่ครอง, ลาภยศ) แบบเรืองแสง</p>
+          <div class="card-enter-footer"><span>คำนวณกราฟชีวิต</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 9. Option Consult -->
-        <div class="sub-option-card" id="btn-start-consult" style="border-color: rgba(250, 204, 21, 0.5) !important;">
-          <div class="sub-icon" style="color: #fde047;">⭐</div>
+        <div class="sub-option-card holo-card" id="btn-start-consult" style="--card-accent: #fde047;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL IX</span>
+            <span class="arcana-badge">⭐ VIP 50฿</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon" style="color: #fde047;">⭐</div></div>
           <h3>ดูดวงส่วนตัวแบบละเอียด</h3>
-          <p>ปรึกษาชะตาชีวิต 1 ต่อ 1 เชิงลึกแบบแม่นยำ 100% กับแม่หมอแพมผ่านช่องทาง Discord</p>
+          <p>ปรึกษาชะตาชีวิตตัวต่อตัว เจาะลึกทุกคำถามที่คาใจกับแม่หมอแพมในราคาเพียง 50 บาท</p>
+          <div class="card-enter-footer"><span>ดูรายละเอียดจองคิว</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 10. Option Chatbot -->
-        <div class="sub-option-card" id="btn-start-chatbot" style="border-color: rgba(56, 189, 248, 0.5) !important;">
-          <div class="sub-icon" style="color: #38bdf8;">💬</div>
+        <div class="sub-option-card holo-card" id="btn-start-chatbot" style="--card-accent: #38bdf8;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL X</span>
+            <span class="arcana-badge">💬 LIVE 24/7</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon" style="color: #38bdf8;">💬</div></div>
           <h3>คุยแก้เหงากับแม่หมอแพม</h3>
-          <p>เหงาใจ ดวงตก หรือไม่มีคนปลอบ? แวะมาคุยเล่นรับพลังบวกกับระบบแชทบอทแม่หมอได้ 24 ชั่วโมง!</p>
+          <p>เหงาใจ ดวงตก หรืออยากได้ทริคเรียกทรัพย์ด่วน? ทักแชทคุยกับแม่หมอแพมได้ตลอด 24 ชม.</p>
+          <div class="card-enter-footer"><span>เริ่มแชทกับแม่หมอ</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 11. Option Rekindle -->
-        <div class="sub-option-card" id="btn-start-rekindle" style="border-color: rgba(244, 114, 182, 0.5) !important;">
-          <div class="sub-icon" style="color: #f472b6;">🔥</div>
+        <div class="sub-option-card holo-card" id="btn-start-rekindle" style="--card-accent: #fb7185;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL XI</span>
+            <span class="arcana-badge">🔥 ดวงความรัก</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon" style="color: #f472b6;">🔥</div></div>
           <h3>ถ่านไฟเก่าจะกลับมาคุไหม?</h3>
-          <p>เช็กดวงชะตาคนรักเก่า จะมีโอกาสลมพัดหวนหรือมอดดับไปตลอดกาล</p>
+          <p>สแกนคลื่นพลังงานคนรักเก่า ว่ายังมีเกณฑ์ลมพัดหวนคืนดี หรือควรปล่อยให้มอดดับถาวร</p>
+          <div class="card-enter-footer"><span>เช็กดวงถ่านไฟเก่า</span><span class="enter-arrow">→</span></div>
         </div>
 
         <!-- 12. Option Move On -->
-        <div class="sub-option-card" id="btn-start-moveon" style="border-color: rgba(192, 132, 252, 0.5) !important;">
-          <div class="sub-icon" style="color: #c084fc;">⏳</div>
+        <div class="sub-option-card holo-card" id="btn-start-moveon" style="--card-accent: #c084fc;">
+          <div class="card-arcana-top">
+            <span class="arcana-num">PORTAL XII</span>
+            <span class="arcana-badge">⏳ ดึงสติสายมู</span>
+          </div>
+          <div class="card-orb-halo"><div class="sub-icon" style="color: #c084fc;">⏳</div></div>
           <h3>ชาตินี้จะมูฟออนได้กี่โมง?</h3>
-          <p>ประเมินเกราะป้องกันใจและพลังงานมูฟออน พร้อมคำแนะนำดึงสติสุดจ๊าบ</p>
+          <p>วัดระดับเกราะป้องกันใจ Move-On Shield พร้อมรับคำทำนายดึงสติสุดจ๊าบจากแม่หมอแพม</p>
+          <div class="card-enter-footer"><span>วัดเกราะมูฟออน</span><span class="enter-arrow">→</span></div>
         </div>
       </div>
     </section>
 
-    <!-- 3. WEEKDAY PLANET GUIDE: คัมภีร์ดาวประจำวันเกิด ฉบับแม่หมอแพม -->
+    <!-- 3. WEEKDAY PLANET GUIDE: คัมภีร์ดาวประจำวันเกิด 3D Planetarium ฉบับแม่หมอแพม -->
     <section id="weekday-guide" class="weekday-guide wrap section-space" aria-labelledby="weekday-guide-title">
       <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
       <div class="guide-heading">
-        <p class="eyebrow">🌟 คัมภีร์โหราศาสตร์ดวงดาว ฉบับแม่หมอแพม</p>
-        <h2 id="weekday-guide-title">เจ็ดวัน เจ็ดดวงดาว<br/><span>เจาะลึกพลังงานชีวิต &amp; เคล็ดลับเสริมดวง</span></h2>
+        <p class="eyebrow">🌟 PLANETARY ASTROLOGY MATRIX · ตำราแม่หมอแพม</p>
+        <h2 id="weekday-guide-title">เจ็ดวัน เจ็ดดวงดาว<br/><span>เจาะลึกคลื่นพลังงานชีวิต &amp; เคล็ดลับเปิดดวงเศรษฐี</span></h2>
         <p class="section-description">
-          แตะเลือกวันเกิดของคุณเพื่ออ่านพลังงานดาวเจ้าเรือน จุดแข็ง ข้อควรระวัง พร้อมสีและเลขมงคลประจำวันเกิด
+          เลือกวันเกิดของคุณเพื่อสแกนค่าพลังดวงดาวทั้ง 4 มิติ จุดแข็ง ข้อควรระวัง พร้อมสีและเลขมงคลเฉพาะตัว
         </p>
       </div>
 
       <fieldset class="weekday-picks" id="weekday-picks" aria-label="เลือกวันเพื่ออ่านความหมายดาว">
-        <button type="button" aria-pressed="true" aria-controls="weekday-reading" data-day-index="0" style="--day-color:#f87171"><span aria-hidden="true">๑</span><span>อาทิตย์</span></button>
-        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="1" style="--day-color:#fde047"><span aria-hidden="true">๒</span><span>จันทร์</span></button>
-        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="2" style="--day-color:#f472b6"><span aria-hidden="true">๓</span><span>อังคาร</span></button>
-        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="3" style="--day-color:#4ade80"><span aria-hidden="true">๔</span><span>พุธ</span></button>
-        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="4" style="--day-color:#fb923c"><span aria-hidden="true">๕</span><span>พฤหัสบดี</span></button>
-        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="5" style="--day-color:#38bdf8"><span aria-hidden="true">๖</span><span>ศุกร์</span></button>
-        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="6" style="--day-color:#c084fc"><span aria-hidden="true">๗</span><span>เสาร์</span></button>
+        <button type="button" aria-pressed="true" aria-controls="weekday-reading" data-day-index="0" style="--day-color:#f87171"><span aria-hidden="true">☉ ๑</span><span>อาทิตย์</span></button>
+        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="1" style="--day-color:#fde047"><span aria-hidden="true">☽ ๒</span><span>จันทร์</span></button>
+        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="2" style="--day-color:#f472b6"><span aria-hidden="true">♂ ๓</span><span>อังคาร</span></button>
+        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="3" style="--day-color:#4ade80"><span aria-hidden="true">☿ ๔</span><span>พุธ</span></button>
+        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="4" style="--day-color:#fb923c"><span aria-hidden="true">♃ ๕</span><span>พฤหัสบดี</span></button>
+        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="5" style="--day-color:#38bdf8"><span aria-hidden="true">♀ ๖</span><span>ศุกร์</span></button>
+        <button type="button" aria-pressed="false" aria-controls="weekday-reading" data-day-index="6" style="--day-color:#c084fc"><span aria-hidden="true">♄ ๗</span><span>เสาร์</span></button>
       </fieldset>
 
-      <div id="weekday-reading" class="weekday-reading" style="--day-color:#f87171" aria-live="polite" aria-atomic="true">
+      <div id="weekday-reading" class="weekday-reading holo-planet-panel" style="--day-color:#f87171" aria-live="polite" aria-atomic="true">
         <div class="weekday-reading-inner" id="weekday-reading-content">
           <div class="weekday-lead">
-            <div class="weekday-seal" aria-hidden="true">
+            <div class="weekday-seal planet-orb-3d" aria-hidden="true">
               <span id="w-symbol">☉</span>
               <small id="w-num">๑</small>
             </div>
             <div>
-              <p class="eyebrow" id="w-eyebrow">ดาวประจำวันอาทิตย์ · ธาตุไฟ</p>
+              <p class="eyebrow" id="w-eyebrow">ดาวประจำวันอาทิตย์ · ธาตุไฟ (เพลิงสุริยะ)</p>
               <h3 id="w-planet">พระอาทิตย์ (พลังแห่งผู้นำและแสงสว่าง)</h3>
               <p class="weekday-theme" id="w-theme">โดดเด่น มีเกียรติยศ มุ่งมั่นแรงกล้า และรักศักดิ์ศรี</p>
             </div>
@@ -259,6 +403,26 @@
             <div class="lucky-badge-item">
               <span class="lucky-label">🔢 เลขมงคลเรียกทรัพย์</span>
               <strong id="w-lucky-num">1, 4, 5, 9</strong>
+            </div>
+          </div>
+
+          <!-- Interactive 4D Planetary Power Meters -->
+          <div class="planet-power-meters">
+            <div class="power-meter-row">
+              <div class="power-meter-label"><span>👑 พลังการงาน &amp; บารมีผู้นำ</span><strong id="w-stat-career">95%</strong></div>
+              <div class="power-meter-track"><div class="power-meter-fill" id="w-bar-career" style="width: 95%;"></div></div>
+            </div>
+            <div class="power-meter-row">
+              <div class="power-meter-label"><span>💰 พลังโชคลาภ &amp; การเงิน</span><strong id="w-stat-wealth">88%</strong></div>
+              <div class="power-meter-track"><div class="power-meter-fill" id="w-bar-wealth" style="width: 88%;"></div></div>
+            </div>
+            <div class="power-meter-row">
+              <div class="power-meter-label"><span>💖 พลังเสน่ห์ &amp; เมตตามหานิยม</span><strong id="w-stat-love">84%</strong></div>
+              <div class="power-meter-track"><div class="power-meter-fill" id="w-bar-love" style="width: 84%;"></div></div>
+            </div>
+            <div class="power-meter-row">
+              <div class="power-meter-label"><span>🔮 พลังซิกเซนส์ &amp; สิ่งศักดิ์สิทธิ์คุ้มครอง</span><strong id="w-stat-luck">92%</strong></div>
+              <div class="power-meter-track"><div class="power-meter-fill" id="w-bar-luck" style="width: 92%;"></div></div>
             </div>
           </div>
 
@@ -298,41 +462,43 @@
     <!-- 4. SERVICES & PRICING: วิเคราะห์ทุกคำถาม 50 บาท + PAM PROFILE -->
     <section id="services" class="services wrap section-space" aria-labelledby="services-title">
       <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
-      <p class="eyebrow">💎 บริการและอัตราค่าบูชาครู</p>
+      <p class="eyebrow">💎 EXCLUSIVE PERSONAL CONSULTATION</p>
       <h2 id="services-title">วิเคราะห์ทุกคำถาม<span> 50 บาท</span></h2>
       <p class="section-description">
-        ถามได้ทุกเรื่องที่คาใจ การงาน การเงิน ความรัก โชคลาภ หรือพื้นดวงชะตา<br/>
-        แม่หมอแพมวิเคราะห์เจาะลึกแบบส่วนตัว ตรงไปตรงมา และเป็นกันเองที่สุด
+        ปลดล็อกทุกข้อสงสัยในชีวิต การงาน การเงิน ความรัก โชคลาภ หรือพื้นดวงชะตา<br/>
+        แม่หมอแพมวิเคราะห์เจาะลึกแบบส่วนตัว ตรงไปตรงมา ฮีลใจ และชี้ทางออกที่ใช้ได้จริง
       </p>
 
       <div class="pam-services-showcase">
-        <!-- Single 50 THB All-Questions Price Card -->
-        <article class="price-card pam-featured-price-card">
-          <div class="price-badge-top">🔥 แพ็กเกจยอดฮิต คุ้มค่าที่สุด</div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle card-icon" aria-hidden="true" style="margin: 0.5rem auto 0.8rem;"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
-          <h3 style="font-size: 1.7rem; margin-bottom: 0.4rem; color: #fff;">วิเคราะห์ทุกคำถาม</h3>
-          <p class="card-description">ปลดล็อกทุกข้อสงสัยในชีวิต พยากรณ์เจาะลึกเฉพาะบุคคล</p>
-          
-          <div class="starting-price" style="margin: 1.4rem 0; justify-content: center;">
-            <span>เพียง</span>
-            <strong style="font-size: 3.4rem; color: #67e8f9; text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);">50</strong>
-            <span>บาท / คำถาม</span>
+        <!-- Single 50 THB All-Questions Holographic VIP Card -->
+        <article class="price-card pam-featured-price-card holo-vip-card">
+          <div class="price-badge-top">🔥 VIP ORACLE PASS · คุ้มค่าที่สุด</div>
+          <div class="vip-price-orb">
+            <span class="vip-orb-label">เพียง</span>
+            <strong class="vip-orb-number">50</strong>
+            <span class="vip-orb-unit">บาท / คำถาม</span>
           </div>
+          <h3 style="font-size: 1.75rem; margin-bottom: 0.35rem; color: #fff;">วิเคราะห์ทุกคำถามแบบเจาะลึก</h3>
+          <p class="card-description">ถามได้ทุกเรื่องที่คาใจ ไม่จำกัดหมวดหมู่ พยากรณ์ตัวต่อตัวกับแม่หมอแพม</p>
 
-          <dl style="margin-bottom: 1.4rem;">
+          <dl style="margin: 1.35rem 0;">
             <div>
               <dt>✨ วิเคราะห์ทุกประเด็นคำถาม</dt>
-              <dd style="color: #fde047; font-weight: 700;">50 บาท</dd>
+              <dd style="color: #fde047; font-weight: 700;">50 บาทถ้วน</dd>
             </div>
             <div>
-              <dt>🔮 ความรัก / การงาน / การเงิน / โชคลาภ</dt>
-              <dd style="color: #67e8f9;">ถามได้ครบ</dd>
+              <dt>🃏 ไพ่ยิปซี + โหราศาสตร์ + เลขมงคล</dt>
+              <dd style="color: #67e8f9; font-weight: 600;">ครบทุกศาสตร์</dd>
+            </div>
+            <div>
+              <dt>💖 ความรัก / การงาน / การเงิน / โชคลาภ</dt>
+              <dd style="color: #4ade80; font-weight: 600;">ถามได้ทุกเรื่อง</dd>
             </div>
           </dl>
 
           <p class="card-detail" style="justify-content: center;">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-            วิเคราะห์ตัวต่อตัวโดยแม่หมอแพม · ตอบชัดเจนเข้าใจง่าย
+            พยากรณ์สดตัวต่อตัวโดยแม่หมอแพม · ชัดเจน แม่นยำ เป็นกันเอง
           </p>
 
           <a class="button gold price-action" href="https://discord.com/users/618048213366210562" target="_blank" rel="noopener noreferrer" style="margin-top: 1.4rem; justify-content: center; width: 100%;">
@@ -341,11 +507,21 @@
         </article>
 
         <!-- Pam Poster Profile Card -->
-        <div class="pam-poster-card glass-card">
-          <img src="/images/pam_mascot.png" class="pam-poster-mascot" alt="แม่หมอแพม" width="135" height="135" />
-          <h3 style="font-size:1.45rem; font-family:var(--font-title); color:#e9d5ff; margin-top:0.9rem;">แม่หมอแพม · ดวงปังพลังแพม</h3>
-          <p class="poster-tagline" style="color:#94a3b8; font-size:0.92rem; margin:0.35rem 0 1.1rem;">“เข้าใจจังหวะดวงดาว เพื่อก้าวเดินอย่างมั่นใจและปังกว่าเดิม”</p>
-          <div class="poster-badge-row" style="display:flex; flex-direction:column; gap:8px; font-size:0.88rem; color:#e2e8f0; text-align:left; background:rgba(15, 10, 35, 0.55); padding:14px 16px; border-radius:10px; border:1px solid rgba(139,92,246,0.3); width: 100%;">
+        <div class="pam-poster-card glass-card holo-profile-card">
+          <div class="poster-avatar-halo">
+            <img src="/images/pam_mascot.png" class="pam-poster-mascot" alt="แม่หมอแพม" width="135" height="135" />
+            <span class="verified-oracle-badge">✔ VERIFIED ORACLE</span>
+          </div>
+          <h3 style="font-size:1.5rem; font-family:var(--font-title); color:#e9d5ff; margin-top:0.9rem;">แม่หมอแพม · ดวงปังพลังแพม</h3>
+          <p class="poster-tagline" style="color:#94a3b8; font-size:0.92rem; margin:0.35rem 0 1rem;">“เข้าใจจังหวะดวงดาว เพื่อก้าวเดินอย่างมั่นใจและปังกว่าเดิม”</p>
+
+          <div class="pam-stats-mini-grid">
+            <div class="pam-stat-pill"><strong>๑๒</strong><span>มิติเสี่ยงทายฟรี</span></div>
+            <div class="pam-stat-pill"><strong>50฿</strong><span>ทุกคำถาม</span></div>
+            <div class="pam-stat-pill"><strong>24/7</strong><span>แชทบอทฮีลใจ</span></div>
+          </div>
+
+          <div class="poster-badge-row" style="display:flex; flex-direction:column; gap:8px; font-size:0.88rem; color:#e2e8f0; text-align:left; background:rgba(15, 10, 35, 0.65); padding:14px 16px; border-radius:12px; border:1px solid rgba(139,92,246,0.35); width: 100%; margin-top: 0.9rem;">
             <span>🔮 เชี่ยวชาญไพ่ยิปซี โหราศาสตร์ไทย และเลขศาสตร์มงคล</span>
             <span>💖 ให้คำปรึกษาเป็นกันเอง ฮีลใจ และชี้ทางออกที่ใช้ได้จริง</span>
             <span>⚡ วิเคราะห์ทุกคำถามเพียง 50 บาท ไม่มีค่าใช้จ่ายแอบแฝง</span>
@@ -360,10 +536,10 @@
     <!-- 5. CONTACT SECTION -->
     <section id="contact" class="contact narrow section-space" aria-labelledby="contact-title">
       <div class="celestial-divider" aria-hidden="true"><span></span>✦<span></span></div>
-      <p class="eyebrow">💬 ช่องทางติดต่อโดยตรง</p>
+      <p class="eyebrow">💬 DIRECT CELESTIAL CHANNEL</p>
       <h2 id="contact-title">ปรึกษาดวงชะตากับ<span>แม่หมอแพม</span></h2>
       <p class="section-description">
-        ทักแชทเพื่อแจ้งคำถามที่ต้องการวิเคราะห์ หรือสอบถามคิวว่างได้ตลอดเวลา
+        ทักแชทเพื่อแจ้งคำถามที่ต้องการวิเคราะห์ (50 บาท/คำถาม) หรือสอบถามคิวว่างได้โดยตรง
       </p>
       <div class="contact-actions" style="justify-content:center;">
         <a class="button gold" href="https://discord.com/users/618048213366210562" target="_blank" rel="noopener noreferrer">
@@ -371,7 +547,7 @@
         </a>
       </div>
       <p class="contact-handles">Discord: <strong>แม่หมอแพม (Mae Mho Pam)</strong></p>
-      <p class="microcopy">คลิกปุ่มด้านบนเพื่อเปิดโปรไฟล์และส่งข้อความหาแม่หมอแพมได้โดยตรง</p>
+      <p class="microcopy">คลิกปุ่มด้านบนเพื่อเปิดโปรไฟล์และส่งข้อความหาแม่หมอแพมได้ทันที</p>
     </section>
   </main>
 
