@@ -2554,12 +2554,13 @@ function resetChatMessages() {
   if (input) input.value = '';
 }
 
-// Function to handle chatbot reply logic (Smart local engine)
+// Function to handle offline fallback reply using live Tarot Card synthesis
 function getChatbotReply(userText) {
-  const text = String(userText || '').trim().toLowerCase();
+  const raw = String(userText || '').trim();
+  const text = raw.toLowerCase();
 
-  // Simple math expression check (e.g. "1+1", "5*5", etc.)
-  const match = text.replace(/\s+/g, '').match(/^(\d+)([\+\-\*\/])(\d+)$/);
+  // Math expression check (e.g. "1+1", "5*5", etc.)
+  const match = text.replace(/\s+/g, '').match(/^(-?\d+(?:\.\d+)?)([\+\-\*\/x÷])(-?\d+(?:\.\d+)?)$/);
   if (match) {
     const num1 = parseFloat(match[1]);
     const op = match[2];
@@ -2567,118 +2568,28 @@ function getChatbotReply(userText) {
     let result = 0;
     if (op === '+') result = num1 + num2;
     else if (op === '-') result = num1 - num2;
-    else if (op === '*') result = num1 * num2;
-    else if (op === '/') result = num2 !== 0 ? +(num1 / num2).toFixed(2) : "หาค่าไม่ได้จ้า";
-    return `ข้อนี้ง่ายม๊ากกก! ${num1} ${op} ${num2} ได้คำตอบเท่ากับ ${result} จ้า! ถามเลขเด็ดงวดนี้แม่หมอก็คำนวณให้ได้นะจ๊ะ 🧠✨`;
+    else if (op === '*' || op === 'x') result = num1 * num2;
+    else if (op === '/' || op === '÷') result = num2 !== 0 ? +(num1 / num2).toFixed(4) : 'หาค่าไม่ได้จ้า';
+    return `🧮 แม่หมอคำนวณให้ไวปานสายฟ้า! ${num1} ${op} ${num2} = ${result} จ้า! อยากถามโจทย์ไหนหรือให้แม่หมอเปิดไพ่เช็กดวงเรื่องอะไร พิมพ์มาได้เลยนะจ๊ะ ✨`;
   }
 
-  // 1. Lucky outfit colors (สีเสื้อมงคล)
-  if (text.includes('สีเสื้อ') || text.includes('สีมงคล') || text.includes('ใส่สีอะไร')) {
-    const dayNames = ['วันอาทิตย์ 🔴', 'วันจันทร์ 🟡', 'วันอังคาร 💗', 'วันพุธ 🟢', 'วันพฤหัสบดี 🟠', 'วันศุกร์ 🔵', 'วันเสาร์ 🟣'];
-    const dayColors = [
-      'เสริมงาน: สีแดง/ชมพู | เรียกทรัพย์: สีเขียว/ทอง | เมตตา: สีดำ/เทา | เลี่ยง: สีน้ำเงิน',
-      'เสริมงาน: สีเขียว/ครีม | เรียกทรัพย์: สีม่วง/ส้ม | เมตตา: สีฟ้า/น้ำเงิน | เลี่ยง: สีแดง',
-      'เสริมงาน: สีม่วง/ชมพู | เรียกทรัพย์: สีดำ/เทา | เมตตา: สีแดง | เลี่ยง: สีขาว/เหลือง',
-      'เสริมงาน: สีเขียว/ส้ม | เรียกทรัพย์: สีเหลือง/ทอง | เมตตา: สีฟ้า/น้ำเงิน | เลี่ยง: สีชมพู',
-      'เสริมงาน: สีส้ม/เหลือง | เรียกทรัพย์: สีแดง/ทอง | เมตตา: สีเขียว | เลี่ยง: สีดำ/ม่วง',
-      'เสริมงาน: สีฟ้า/น้ำเงิน | เรียกทรัพย์: สีชมพู/แดง | เมตตา: สีเหลือง/ส้ม | เลี่ยง: สีเทาเข้ม',
-      'เสริมงาน: สีดำ/เทา | เรียกทรัพย์: สีฟ้า/น้ำเงิน | เมตตา: สีชมพู/ม่วง | เลี่ยง: สีเขียว'
-    ];
-    const d = new Date().getDay();
-    return `👕 สีเสื้อมงคลประจำ${dayNames[d]}นี้จ้า! ✨ ${dayColors[d]} ใส่ตามนี้รับรองเดินสับๆ รับทรัพย์ตลอดวันเลยนะจ๊ะ! 💖`;
-  }
+  // Pull a real card from TAROT_CARDS so offline fallback is always unique & contextual
+  const cardPool = (typeof TAROT_CARDS !== 'undefined' && TAROT_CARDS.length) ? TAROT_CARDS : [];
+  const randomCard = cardPool.length
+    ? cardPool[Math.floor(Math.random() * cardPool.length)]
+    : { thaiName: 'ไพ่เดอะซัน (The Sun)', emoji: '☀️', inspiration: 'แสงสว่างแห่งความสำเร็จกำลังส่องมาที่หนูแล้วจ้า' };
 
-  // 2. Lucky numbers / Lottery (เลขนำโชค / เลขเด็ด / หวย)
-  if (text.includes('เลขนำโชค') || text.includes('เลขเด็ด') || text.includes('หวย') || text.includes('ขอเลข')) {
-    const n2 = String(Math.floor(Math.random() * 90) + 10);
-    const n3 = String(Math.floor(Math.random() * 900) + 100);
-    return `🍀 เพี้ยง! จิตสัมผัสแม่หมอแพมและพี่หมูแด็บส่องเห็นเลขมงคลประจำตัวหนูวันนี้คือ เลข 2 ตัว: 【 ${n2} 】 และเลข 3 ตัว: 【 ${n3} 】 จ้า! ขอให้โชคใหญ่หล่นทับรับทรัพย์เต็มกระเป๋านะจ๊ะ! 💸✨`;
-  }
-
-  // 3. Comfort / Hug / Bad luck (กอดปลอบใจ / ดวงไม่ดี / เศร้า / เหนื่อย / ท้อ / เครียด)
-  if (text.includes('กอด') || text.includes('ปลอบใจ') || text.includes('ดวงไม่ดี') || text.includes('เศร้า') || text.includes('เหนื่อย') || text.includes('ท้อ') || text.includes('เครียด') || text.includes('ร้องไห้')) {
-    const comforts = [
-      'โอ๋ๆ มานี่มา แม่หมอแพมขอกอดแน่นๆ ทีนึงนะจ๊ะ 🤗💖 วันนี้เหนื่อยมามากแล้วใช่ไหมคนเก่ง เรื่องร้ายๆ ที่เจอมันแค่ผ่านมาแล้วก็ผ่านไป หลังจากวินาทีนี้กราฟดวงของหนูกำลังจะพุ่งขึ้นแล้วนะ ยิ้มเยอะๆ นะจ๊ะ!',
-      'กอดปุๆ นะคนเก่งของแม่หมอ! 🥺✨ ดาวเคราะห์ร้ายกำลังโคจรออกไปแล้วจ้า ไม่ต้องคิดมากนะ วันนี้พักใจฟังเพลงสบายๆ กินของอร่อยๆ แล้วพรุ่งนี้เตรียมรับข่าวดีได้เลย แม่หมอและพี่หมูแด็บอยู่ข้างๆ เสมอจ้า 🐷💕',
-      'เพี้ยง! แม่หมอเป่ามนต์ปัดเป่าความเศร้าออกไปให้หมดเลยนะจ๊ะ 🪄✨ หนูเก่งมากๆ แล้วที่ผ่านวันนี้มาได้ อย่าลืมใจดีกับตัวเองเยอะๆ นะ ความสุขก้อนใหญ่กำลังเดินทางมาหาหนูแล้วจ้า!'
-    ];
-    return comforts[Math.floor(Math.random() * comforts.length)];
-  }
-
-  // 4. Food suggestion (กินของอร่อย / หิว / อาหาร)
-  if (text.includes('กิน') || text.includes('อร่อย') || text.includes('หิว') || text.includes('อาหาร') || text.includes('เมนู')) {
-    const foods = [
-      'หมูกระทะร้อนๆ ย่างหมูสามชั้นเกรียมๆ จิ้มน้ำจิ้มรสเด็ด 🥓🔥 กินแล้วพลังธาตุไฟพุ่ง กระตุ้นดวงการเงินสุดๆ จ้า!',
-      'ชาบูซุปน้ำดำหอมๆ กับเนื้อสไลซ์นุ่มๆ 🍲✨ กินของอุ่นๆ ช่วยเสริมพลังธาตุน้ำ ให้จิตใจชุ่มชื้นและดึงดูดคนอุปถัมภ์นะจ๊ะ!',
-      'ชานมไข่มุกหวานกำลังดีสักแก้วคู่กับไก่ทอดกรอบๆ 🧋🍗 เติมความหวานให้ชีวิต ดวงความรักและเมตตามหานิยมจะได้พุ่งกระฉูดจ้า!',
-      'ส้มตำปูปลาร้าแซ่บๆ คอหมูย่างข้าวเหนียวร้อนๆ 🥗🌶️ ความแซ่บจะช่วยปลุกเอเนอร์จี้และปัดเป่าความซึมเศร้าออกไปทันทีเลยจ้า!'
-    ];
-    return foods[Math.floor(Math.random() * foods.length)];
-  }
-
-  // 5. Wealth tricks / Money (ทริคเรียกทรัพย์ / โชคลาภ / การเงิน / เงิน)
-  if (text.includes('เรียกทรัพย์') || text.includes('โชคลาภ') || text.includes('นักษัตร') || text.includes('การเงิน') || text.includes('รวย') || text.includes('เงิน')) {
-    const wealthTips = [
-      '💸 ทริคเรียกทรัพย์ฉบับแม่หมอแพม: แนะนำให้จัดเรียงธนบัตรในกระเป๋าสตางค์ให้หันหัวขึ้นทุกใบ ลบใบเสร็จเก่าๆ ทิ้ง และพกแบงก์ขวัญถุงที่ลงท้ายด้วยเลข 8 หรือ 9 จะช่วยดูดเงินก้อนเข้ากระเป๋ารัวๆ เลยจ้า! ✨',
-      '🪙 เคล็ดลับเปิดดวงเศรษฐีวันนี้: ก่อนออกจากบ้านให้ยิ้มหน้ากระจกแล้วพูดว่า "วันนี้เงินไหลมาเทมา" พร้อมทำความสะอาดหน้าจอโทรศัพท์ให้ใสปิ๊ง เพราะมือถือคือประตูรับทรัพย์ยุคดิจิทัลจ้า! 📱💰',
-      '🌟 คาถาเสริมโชคลาภด่วน: วันนี้ลองแบ่งเงินเล็กๆ น้อยๆ ทำบุญออนไลน์หรือหยอดตู้บริจาค แล้วอธิษฐานขอพรพระสีวลี รับรองว่าจะมีลาภลอยหรือข่าวดีเรื่องเงินเข้ามาแบบไม่ทันตั้งตัวนะจ๊ะ!'
-    ];
-    return wealthTips[Math.floor(Math.random() * wealthTips.length)];
-  }
-
-  // 6. Jokes / Playful banter (คุยเล่น / มุกกวนๆ / ตลก / เหงา)
-  if (text.includes('คุยเล่น') || text.includes('มุก') || text.includes('กวน') || text.includes('ตลก') || text.includes('เหงา')) {
-    const jokes = [
-      '🃏 แม่หมอเช็กดวงให้แล้วนะ... ดวงหนูช่วงนี้มีเกณฑ์เสียทรัพย์หนักมาก! โดยเฉพาะเวลาเปิดแอปสั่งอาหารตอนเที่ยงคืนกับแอปช้อปปิ้งตอนโปรสิ้นเดือน ฮ่าๆๆ 🛒🍕',
-      '🐷 พี่หมูแด็บฝากถามว่า: "เป็นหมอดูต้องดูดวง แต่ถ้าอยากเป็นคนในใจเธอต้องดูตรงไหนจ๊ะ?" ฮิ้ววว! เขินเลยล่ะสิ! 💕✨',
-      '🔮 คำทำนายด่วนจากลูกแก้ว: เนื้อคู่ของหนูเป็นคนมีฐานะดีมาก... แต่ตอนนี้เขากำลังหลงทางอยู่แถวๆ ร้านชาบู ถ้าหนูออกไปกินของอร่อยบ่อยๆ เดี๋ยวก็ได้เจอกันเองจ้า! 😆🍲'
-    ];
-    return jokes[Math.floor(Math.random() * jokes.length)];
-  }
-
-  // 7. Love / Ex / Relationship
-  if (text.includes('รัก') || text.includes('แฟน') || text.includes('คนคุย') || text.includes('อกหัก') || text.includes('โสด') || text.includes('เนื้อคู่')) {
-    const loveReplies = [
-      '💘 ดวงความรักของหนูช่วงนี้เสน่ห์แรงอยู่นะจ๊ะ! คนโสดมีเกณฑ์เจอคนถูกใจจากการเดินทางหรือโลกออนไลน์ ส่วนถ้าใครทำหนูเสียใจ แม่หมอแนะนำให้เชิดหน้าสวยๆ เพราะคนใหม่ที่จะเข้ามาดีและเปย์เก่งกว่าเดิมแน่นอนจ้า! ✨',
-      '💖 เรื่องหัวใจไม่ต้องรีบร้อนนะจ๊ะ ดาวศุกร์กำลังโคจรมาเสริมเสน่ห์ให้หนูแล้ว ช่วงนี้ยิ่งดูแลตัวเองให้สดใสอารมณ์ดี พลังดึงดูดคนที่ใช่ก็จะยิ่งทำงานแรงขึ้นร้อยเท่าเลยจ้า!'
-    ];
-    return loveReplies[Math.floor(Math.random() * loveReplies.length)];
-  }
-
-  // 8. Work / Study
-  if (text.includes('งาน') || text.includes('เรียน') || text.includes('สอบ') || text.includes('โปรเจกต์')) {
-    return '💼✨ ดวงการงานและการเรียนของหนูช่วงนี้ แม้จะมีเรื่องให้เหนื่อยหรือต้องแก้ปัญหาเฉพาะหน้าบ้าง แต่ด้วยไหวพริบของหนูจะผ่านไปได้แบบปังมากจ้า! ผู้ใหญ่และคนรอบข้างพร้อมซัพพอร์ต ลุยได้เลยนะจ๊ะ!';
-  }
-
-  // 9. Greeting & General Questions
-  if (text.includes('สวัสดี') || text.includes('หวัดดี') || text.includes('hello') || text.includes('hi')) {
-    return "สวัสดีจ้าคนเก่ง! 🔮✨ วันนี้อยากให้แม่หมอแพมช่วยเช็กสีเสื้อมงคล ขอเลขนำโชค ปลอบใจ หรือชวนคุยเรื่องความรัก/การเงิน พิมพ์บอกแม่หมอได้เลยนะจ๊ะ! 💖";
-  }
-
-  if (text.includes('ทำอะไรอยู่') || text.includes('ทำไรอยู่')) {
-    return "กำลังนั่งขัดลูกแก้วรอคุยเล่นแก้ง่วงกับหนูอยู่นี่แหละจ้า มีเรื่องอะไรเล่าให้ฟังไหมจ๊ะ? 🔮✨";
-  }
-
-  if (text.includes('ชื่ออะไร') || text.includes('ชื่อไร')) {
-    return "แม่หมอชื่อ 'แม่หมอแพม' จ้า ส่วนน้องกลมๆ ที่บินลอยไปลอยมาข้างๆ คือ 'พี่หมูแด็บ' จ้า 🐷💕";
-  }
-
-  // Generic warm & engaging fallbacks
-  const fallbacks = [
-    `แม่หมอแพมฟังอยู่นะจ๊ะ! 🔮✨ เรื่องที่หนูพิมพ์มา "${userText}" น่าสนใจมากเลย ดวงชะตาช่วงนี้ขอแค่หนูมั่นใจและคิดบวก สิ่งดีๆ กำลังจะเข้ามาแน่นอนจ้า มีเรื่องไหนอยากเล่าเพิ่มอีกไหมจ๊ะ? 💖`,
-    "รับทราบเลยจ้าคนดี! 😊✨ แม่หมอและพี่หมูแด็บขอส่งพลังบวกให้หนูแบบจัดเต็มร้อยเปอร์เซ็นต์เลยนะ อยากถามเรื่องความรัก การเงิน สีมงคล หรือให้แม่หมอปล่อยมุกฮาๆ กดปุ่มด้านล่างหรือพิมพ์มาได้เลยนะจ๊ะ! 🐷💕",
-    "เพี้ยง! ✨ แม่หมอสัมผัสได้ถึงพลังงานดีๆ จากตัวหนูนะเนี่ย! ไม่ว่าจะเจอเรื่องอะไรอยู่ ขอให้วันนี้เป็นวันที่ยิ้มได้กว้างๆ และมีแต่โชคลาภวิ่งเข้าหานะจ๊ะ คุยกับแม่หมอต่อได้ยาวๆ เลยจ้า! 🌟"
-  ];
-  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+  return `🔮 แม่หมอแพมตั้งจิตอ่านเรื่อง "${raw}" แล้วลองหยิบไพ่ขึ้นมา 1 ใบ ได้ 【${randomCard.thaiName} ${randomCard.emoji || '✨'}】 จ้า! ไพ่ใบนี้ส่งสัญญาณว่า: "${randomCard.inspiration || randomCard.gag}" ลองเล่าเพิ่มอีกนิดสิจ๊ะว่าตอนนี้หนูกังวลจุดไหนที่สุด เดี๋ยวแม่หมอเจาะลึกให้เลยนะจ๊ะ! 💖`;
 }
 
-// Function to send a message
-function sendChatMessage(text) {
+// Function to send a message (Live AI Powered)
+async function sendChatMessage(text) {
   if (!text || text.trim() === '') return;
-  
+
+  const cleanText = text.trim();
   const messagesBox = document.getElementById('chat-messages-box');
   if (!messagesBox) return;
-  
+
   // 1. Append User Bubble
   const userBubble = document.createElement('div');
   userBubble.className = 'chat-bubble user';
@@ -2687,21 +2598,23 @@ function sendChatMessage(text) {
       <img src="/images/esiimsi_cup.jpg" alt="User">
     </div>
     <div class="bubble-content">
-      <div class="bubble-text">${text}</div>
+      <div class="bubble-text"></div>
     </div>
   `;
+  const userTextNode = userBubble.querySelector('.bubble-text');
+  if (userTextNode) userTextNode.textContent = cleanText;
   messagesBox.appendChild(userBubble);
-  
+
   // Play sound
   MysticAudio.playClick();
-  
+
   // Clear input
   const inputEl = document.getElementById('input-chat-message');
   if (inputEl) inputEl.value = '';
-  
+
   // Scroll to bottom
   messagesBox.scrollTop = messagesBox.scrollHeight;
-  
+
   // 2. Add Typing Indicator Bubble
   const typingBubble = document.createElement('div');
   typingBubble.className = 'chat-bubble pam typing-indicator-bubble-wrapper';
@@ -2721,78 +2634,66 @@ function sendChatMessage(text) {
   messagesBox.scrollTop = messagesBox.scrollHeight;
 
   // Add to local chat memory
-  chatHistory.push({ role: 'user', text });
-  
-  // 3. Request AI response from server with fallback to local engine
-  fetch('/api/chat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      message: text,
-      history: chatHistory
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    // Remove typing indicator
-    const indicator = messagesBox.querySelector('.typing-indicator-bubble-wrapper');
-    if (indicator) indicator.remove();
-    
-    const replyText = data.reply;
-    
-    // Append Pam Bubble
-    const pamBubble = document.createElement('div');
-    pamBubble.className = 'chat-bubble pam';
-    pamBubble.innerHTML = `
-      <div class="bubble-avatar">
-        <img src="/images/pam_mascot.png" alt="Pam">
-      </div>
-      <div class="bubble-content">
-        <div class="bubble-text">${replyText}</div>
-      </div>
-    `;
-    messagesBox.appendChild(pamBubble);
-    
-    // Add to history
-    chatHistory.push({ role: 'model', text: replyText });
-    
-    // Play Success sound
-    MysticAudio.playSuccess();
-    
-    // Scroll to bottom
-    messagesBox.scrollTop = messagesBox.scrollHeight;
-  })
-  .catch(err => {
-    console.warn("Fallback to local chatbot responses:", err);
-    
-    // Fallback delay simulation
-    setTimeout(() => {
-      // Remove typing indicator
-      const indicator = messagesBox.querySelector('.typing-indicator-bubble-wrapper');
-      if (indicator) indicator.remove();
-      
-      const replyText = getChatbotReply(text);
-      
-      const pamBubble = document.createElement('div');
-      pamBubble.className = 'chat-bubble pam';
-      pamBubble.innerHTML = `
-        <div class="bubble-avatar">
-          <img src="/images/pam_mascot.png" alt="Pam">
-        </div>
-        <div class="bubble-content">
-          <div class="bubble-text">${replyText}</div>
-        </div>
-      `;
-      messagesBox.appendChild(pamBubble);
-      
-      chatHistory.push({ role: 'model', text: replyText });
-      
-      MysticAudio.playSuccess();
-      messagesBox.scrollTop = messagesBox.scrollHeight;
-    }, 1200);
+  chatHistory.push({ role: 'user', text: cleanText });
+
+  const payload = JSON.stringify({
+    message: cleanText,
+    history: chatHistory
   });
+
+  let replyText = null;
+  const endpoints = ['/api/chat', 'https://duang-pam.vercel.app/api/chat'];
+
+  for (const endpoint of endpoints) {
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.reply) {
+          replyText = data.reply;
+          break;
+        }
+      }
+    } catch (err) {
+      console.warn(`Chat endpoint ${endpoint} unavailable:`, err.message || err);
+    }
+  }
+
+  if (!replyText) {
+    replyText = getChatbotReply(cleanText);
+  }
+
+  // Remove typing indicator
+  const indicator = messagesBox.querySelector('.typing-indicator-bubble-wrapper');
+  if (indicator) indicator.remove();
+
+  // Append Pam Bubble safely supporting line breaks
+  const pamBubble = document.createElement('div');
+  pamBubble.className = 'chat-bubble pam';
+  pamBubble.innerHTML = `
+    <div class="bubble-avatar">
+      <img src="/images/pam_mascot.png" alt="Pam">
+    </div>
+    <div class="bubble-content">
+      <div class="bubble-text" style="white-space: pre-line;"></div>
+    </div>
+  `;
+  const pamTextNode = pamBubble.querySelector('.bubble-text');
+  if (pamTextNode) pamTextNode.textContent = replyText;
+  messagesBox.appendChild(pamBubble);
+
+  // Add to history
+  chatHistory.push({ role: 'model', text: replyText });
+
+  // Play Success sound
+  MysticAudio.playSuccess();
+
+  // Scroll to bottom
+  messagesBox.scrollTop = messagesBox.scrollHeight;
 }
 
 // Bind Chat Actions
