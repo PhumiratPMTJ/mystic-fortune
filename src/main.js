@@ -424,7 +424,7 @@ const sections = {
   numeric: document.getElementById('sec-numeric'),
   zodiacMatch: document.getElementById('sec-zodiac-match'),
   zodiacReading: document.getElementById('sec-zodiac-reading'),
-  contact: document.getElementById('sec-contact'),
+  consult: document.getElementById('sec-consult'),
   dream: document.getElementById('sec-dream'),
   outfit: document.getElementById('sec-outfit'),
   lifegraph: document.getElementById('sec-lifegraph'),
@@ -1966,8 +1966,8 @@ document.getElementById('btn-start-zodread').addEventListener('click', () => {
   document.getElementById('zodread-result-box').classList.add('hidden');
 });
 
-document.getElementById('btn-start-contact').addEventListener('click', () => {
-  showSection('sec-contact');
+document.getElementById('btn-start-consult')?.addEventListener('click', () => {
+  showSection('sec-consult');
 });
 
 // 1. Numeric Analysis trigger
