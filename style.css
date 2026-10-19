@@ -1563,3 +1563,1348 @@ h1 span, h2 span, .highlight, .starting-price strong, #divinations-title span {
   }
 }
 
+
+
+/* ==========================================================================
+   RESTORED GLOBAL VARIABLES & ORIGINAL DUANG PANG PALANG PAM FOUNDATION
+   ========================================================================== */
+:root {
+  --bg-color: #070514;
+  --glass-bg: rgba(15, 10, 35, 0.72);
+  --glass-border: rgba(139, 92, 246, 0.3);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --color-gold: #fde047;
+  --color-gold-dark: #ca8a04;
+  --color-purple: #a855f7;
+  --color-magenta: #f472b6;
+  --color-cyan: #38bdf8;
+  --color-blue: #6366f1;
+  --font-title: 'Mitr', 'Kanit', 'Noto Sans Thai', sans-serif;
+  --font-body: 'Kanit', 'Noto Sans Thai', sans-serif;
+  --shadow-neon-purple: 0 0 18px rgba(168, 85, 247, 0.5);
+  --shadow-neon-gold: 0 0 18px rgba(253, 224, 71, 0.45);
+}
+
+#star-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.22), rgba(6, 182, 212, 0.08) 45%, rgba(7, 5, 20, 0.95) 85%), url('/images/mystic_cosmic_bg.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.text-center { text-align: center; }
+.mt-6 { margin-top: 1.5rem; }
+.w-full { width: 100%; }
+.text-lg { font-size: 1.25rem; }
+.desc-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+
+.card-icon-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(139, 92, 246, 0.35);
+  transition: transform 0.3s ease;
+}
+.sub-option-card:hover .card-icon-img {
+  transform: scale(1.08) rotate(3deg);
+}
+
+/* Sub-section container centering & spacing */
+.view-section {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* Hero Mascot Centerpiece & Pills */
+.hero-mascot-showcase {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.hero-pam-center {
+  position: relative !important;
+  bottom: auto !important;
+  right: auto !important;
+  margin: 0 auto !important;
+  transform: scale(1.15);
+  display: flex;
+  pointer-events: none;
+}
+.logo-text-hero {
+  font-family: var(--font-title) !important;
+}
+.hero-cta-group-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+.pam-highlight-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.pam-pill {
+  background: rgba(139, 92, 246, 0.14);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #e2e8f0;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(8px);
+}
+
+/* 7-Day Planet Guide Lucky Strip */
+.weekday-lucky-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin: 1.25rem 0 1.5rem;
+}
+.lucky-badge-item {
+  background: rgba(15, 10, 35, 0.65);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.lucky-label {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+.lucky-badge-item strong {
+  font-size: 0.95rem;
+  color: #67e8f9;
+}
+
+/* 50 THB Services & Pam Profile Two-Column Showcase */
+.pam-services-showcase {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.75rem;
+  max-width: 56rem;
+  margin: 2.5rem auto 0;
+  align-items: stretch;
+}
+.pam-featured-price-card {
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1.5px solid rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 15px 45px rgba(6, 182, 212, 0.15), 0 0 25px rgba(124, 58, 237, 0.2) !important;
+}
+.price-badge-top {
+  display: inline-block;
+  align-self: center;
+  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.28rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+
+
+/* Duck Mascot */
+.lobby-duck-container {
+  position: absolute;
+  top: 15%;
+  left: -120px;
+  z-index: 1;
+  pointer-events: auto;
+  animation: duckSlide 45s linear infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.duck-sticker {
+  width: 70px;
+  height: 70px;
+  background: url('/images/duck.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+  animation: duckWaddle 1.4s ease-in-out infinite alternate;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+}
+
+.duck-sticker:hover {
+  transform: scale(1.15) rotate(10deg);
+  filter: drop-shadow(0 10px 20px rgba(255, 215, 0, 0.75));
+}
+
+.lobby-duck-container.spin-active .duck-sticker {
+  animation: duckSpin 0.75s ease-in-out !important;
+}
+
+/* Duck Speech Bubble */
+.lobby-duck-container .duck-speech-bubble {
+  position: absolute;
+  bottom: 105px;
+  background: rgba(13, 17, 38, 0.9);
+  border: 1px solid var(--color-gold);
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 200px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
+  pointer-events: none;
+  z-index: 20;
+  animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-duck-container .duck-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: rgba(13, 17, 38, 0.9) transparent;
+  display: block;
+  width: 0;
+}
+
+@keyframes duckSlide {
+  0% { left: -120px; }
+  100% { left: 100%; }
+}
+
+@keyframes duckWaddle {
+  0% { transform: translateY(0) rotate(-6deg); }
+  100% { transform: translateY(-10px) rotate(6deg); }
+}
+
+@keyframes duckSpin {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.3) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+/* Lizard Mascot */
+.lobby-lizard-container {
+  position: absolute;
+  top: 30%;
+  right: -120px;
+  z-index: 1;
+  pointer-events: auto;
+  animation: lizardSlide 52s linear infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lizard-sticker {
+  width: 70px;
+  height: 70px;
+  background: url('/images/lizard.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+  animation: lizardWaddle 1.6s ease-in-out infinite alternate;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+}
+
+.lizard-sticker:hover {
+  transform: scale(1.15) rotate(-10deg);
+  filter: drop-shadow(0 10px 20px rgba(0, 255, 128, 0.75));
+}
+
+.lobby-lizard-container.spin-active .lizard-sticker {
+  animation: lizardSpin 0.75s ease-in-out !important;
+}
+
+/* Lizard Speech Bubble */
+.lobby-lizard-container .lizard-speech-bubble {
+  position: absolute;
+  bottom: 105px;
+  background: rgba(13, 17, 38, 0.9);
+  border: 1px solid #00ff88;
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 200px;
+  box-shadow: 0 4px 15px rgba(0, 255, 128, 0.25);
+  pointer-events: none;
+  z-index: 20;
+  animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-lizard-container .lizard-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: rgba(13, 17, 38, 0.9) transparent;
+  display: block;
+  width: 0;
+}
+
+@keyframes lizardSlide {
+  0% { right: -120px; }
+  100% { right: 100%; }
+}
+
+@keyframes lizardWaddle {
+  0% { transform: translateY(0) rotate(5deg) scaleX(-1); }
+  100% { transform: translateY(-8px) rotate(-5deg) scaleX(-1); }
+}
+
+@keyframes lizardSpin {
+  0% { transform: scaleX(-1) scale(1) rotate(0deg); }
+  50% { transform: scaleX(-1) scale(1.3) rotate(-180deg); }
+  100% { transform: scaleX(-1) scale(1) rotate(-360deg); }
+}
+
+
+/* Mobile Refinements & Small Screens */
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.8rem;
+  }
+  .glass-card {
+    padding: 1.2rem;
+  }
+  .tarot-selection-layout {
+    gap: 8px;
+  }
+  .slot-card-holder, .flip-card, .tarot-card-deck {
+    width: 72px;
+    height: 108px;
+  }
+  .score-radial-progress {
+    width: 80px;
+    height: 80px;
+  }
+  .score-val {
+    font-size: 1.4rem;
+  }
+  .compat-status-title {
+    font-size: 1.2rem;
+  }
+  .audio-control {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+  }
+  .welcome-card h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* iPad / Tablet specific adjustments */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .app-container {
+    padding: 1rem;
+  }
+  .glass-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Offline Game Board layout */
+.offline-game-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .offline-game-layout {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+/* ==========================================================================
+   Angel Pam Mascot Floating Style
+   ========================================================================== */
+.angel-pam-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 76px;
+  height: 76px;
+  z-index: 999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: hoverMascot 4s infinite ease-in-out;
+}
+
+.pam-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-gold);
+  background: url('/images/pam_mascot.png') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.angel-pam-container:hover .pam-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  border-color: var(--color-cyan);
+}
+
+/* Angelic Halo */
+.halo {
+  position: absolute;
+  top: -12px;
+  width: 45px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 0 8px var(--color-gold), inset 0 0 8px var(--color-gold);
+  z-index: 1;
+  opacity: 0.85;
+  transform: rotateX(60deg);
+  animation: floatHalo 4s infinite ease-in-out;
+}
+
+/* Flapping Wings */
+.wing {
+  position: absolute;
+  width: 45px;
+  height: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 215, 0, 0.4) 100%);
+  border-radius: 200px 10px 150px 10px;
+  z-index: 0;
+  box-shadow: 0 0 10px rgba(255,255,255,0.7);
+  filter: blur(0.5px);
+}
+
+.left-wing {
+  left: -32px;
+  transform-origin: right center;
+  transform: rotate(-15deg) scaleX(-1);
+  animation: flapLeft 1.2s infinite ease-in-out alternate;
+}
+
+.right-wing {
+  right: -32px;
+  transform-origin: left center;
+  transform: rotate(-15deg);
+  animation: flapRight 1.2s infinite ease-in-out alternate;
+}
+
+/* Speech Bubble */
+.speech-bubble {
+  position: absolute;
+  bottom: 90px;
+  right: 0;
+  width: 220px;
+  background: rgba(13, 17, 38, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--color-gold);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  z-index: 10;
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 28px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--color-gold);
+}
+
+.speech-bubble p {
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Mascot Animations */
+@keyframes hoverMascot {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes floatHalo {
+  0% { transform: translateY(0) rotateX(65deg); }
+  50% { transform: translateY(-3px) rotateX(65deg); }
+  100% { transform: translateY(0) rotateX(65deg); }
+}
+
+@keyframes flapLeft {
+  0% { transform: rotate(-25deg) scaleX(-1); }
+  100% { transform: rotate(10deg) scaleX(-1); }
+}
+
+@keyframes flapRight {
+  0% { transform: rotate(-25deg); }
+  100% { transform: rotate(10deg); }
+}
+
+/* Mobile responsive mascot styling */
+@media (max-width: 480px) {
+  .angel-pam-container {
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+  }
+  .pam-avatar {
+    width: 52px;
+    height: 52px;
+    border-width: 2px;
+  }
+  .wing {
+    width: 32px;
+    height: 22px;
+  }
+  .left-wing { left: -22px; }
+  .right-wing { right: -22px; }
+  .halo {
+    width: 35px;
+    top: -10px;
+  }
+  .speech-bubble {
+    bottom: 75px;
+    width: 180px;
+  }
+}
+
+/* ==========================================================================
+   Floating Tarot Cards Particle Ornaments
+   ========================================================================== */
+.card-particles-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.floating-card-particle {
+  position: absolute;
+  bottom: -150px; /* start below screen */
+  width: 70px;
+  height: 105px;
+  background: url('/images/tarot_card_back.jpg') no-repeat center center;
+  background-size: cover;
+  border: 1.5px solid var(--color-gold);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  animation: floatCardUp 9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes floatCardUp {
+  0% {
+    bottom: -150px;
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  85% {
+    opacity: 0.55;
+  }
+  100% {
+    bottom: 110%;
+    transform: translateX(var(--drift-x)) rotate(var(--rotate-deg));
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-card-particle {
+    width: 50px;
+    height: 75px;
+    border-width: 1px;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  }
+}
+
+/* ==========================================================================
+   XO and Racing Game Layouts
+   ========================================================================== */
+.xo-status-box {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-gold);
+  margin-bottom: 1.2rem;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.25);
+}
+
+.xo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.xo-cell {
+  aspect-ratio: 1;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.xo-cell:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-cyan);
+}
+
+.xo-cell.x {
+  color: var(--color-magenta);
+  text-shadow: 0 0 10px var(--color-magenta);
+}
+
+.xo-cell.o {
+  color: var(--color-cyan);
+  text-shadow: 0 0 10px var(--color-cyan);
+}
+
+.racing-track-container {
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px 10px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.racing-lane {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+  position: relative;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.racing-lane:last-child {
+  border-bottom: none;
+}
+
+.lane-num {
+  position: absolute;
+  left: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-gold);
+}
+
+.car-sprite {
+  font-size: 1.8rem;
+  position: absolute;
+  left: 30px; /* Start offset */
+  transition: left 0.08s linear;
+}
+
+.finish-line {
+  position: absolute;
+  right: 10px;
+  font-size: 1.4rem;
+}
+
+.race-winner-box {
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 1.5rem;
+}
+
+.winner-car-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-gold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  margin: 5px 0 12px 0;
+}
+
+/* ==========================================================================
+   Dabbing Pig Mascot on Left Side of Lobby
+   ========================================================================== */
+.lobby-pig-container {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 140px;
+  height: 140px;
+  z-index: 10;
+  cursor: pointer;
+  animation: pigBobbing 3.5s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.pig-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 10px rgba(178, 159, 217, 0.3));
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-pig-container:hover .pig-avatar {
+  transform: scale(1.1) rotate(-8deg);
+}
+
+/* 360 flip animation when clicked */
+.lobby-pig-container.spin-active .pig-avatar {
+  animation: pigSpin 0.75s ease-out;
+}
+
+@keyframes pigBobbing {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes pigSpin {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.25) rotate(-180deg); }
+  100% { transform: scale(1) rotate(-360deg); }
+}
+
+/* Pig Speech Bubble */
+.lobby-pig-container .speech-bubble {
+  position: absolute;
+  bottom: 145px;
+  left: 20px;
+  background: rgba(13, 17, 38, 0.9);
+  border: 1px solid var(--color-cyan);
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 200px;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.25);
+  pointer-events: none;
+  z-index: 20;
+  animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-pig-container .speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: rgba(13, 17, 38, 0.9) transparent;
+  display: block;
+  width: 0;
+}
+
+/* Mobile responsive pig mascot */
+@media (max-width: 900px) {
+  .lobby-pig-container {
+    width: 100px;
+    height: 100px;
+    bottom: 20px;
+    left: 20px;
+  }
+  .lobby-pig-container .speech-bubble {
+    bottom: 105px;
+    width: 160px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lobby-pig-container {
+    width: 70px;
+    height: 70px;
+    bottom: 20px;
+    left: 15px;
+  }
+  .lobby-pig-container .speech-bubble {
+    bottom: 75px;
+    width: 140px;
+  }
+}
+
+/* Life Graph Responsive Form Grid */
+.lifegraph-form-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.lifegraph-form-grid #btn-submit-lifegraph {
+  grid-column: span 5;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .lifegraph-form-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Make 5th item (Zodiac Year) span full width in 2-column mobile layout */
+  .lifegraph-form-grid .form-group:nth-child(5) {
+    grid-column: span 2 !important;
+  }
+  
+  /* Make button span full width in 2-column mobile layout */
+  .lifegraph-form-grid #btn-submit-lifegraph {
+    grid-column: span 2 !important;
+  }
+}
+
+/* ==========================================================================
+   Mae Mho Pam's Comfort Chatbot Styling
+   ========================================================================== */
+.chat-container {
+  border-radius: 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 10, 24, 0.45);
+  display: flex;
+  flex-direction: column;
+  height: 440px;
+  margin-top: 1rem;
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.08);
+  background: rgba(13, 17, 38, 0.9);
+  text-align: left;
+}
+
+.chat-header-avatar {
+  position: relative;
+  width: 42px;
+  height: 42px;
+}
+
+.chat-header-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-cyan);
+}
+
+.online-indicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background: #00ff88;
+  border-radius: 50%;
+  border: 1.5px solid rgba(13, 17, 38, 1);
+  box-shadow: 0 0 8px #00ff88;
+  animation: pulseOnline 2s infinite ease-in-out;
+}
+
+@keyframes pulseOnline {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.chat-header-info h4 {
+  margin: 0 0 2px 0;
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.chat-status {
+  font-size: 0.75rem;
+  color: var(--color-cyan);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: rgba(5, 7, 18, 0.15);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.chat-bubble {
+  display: flex;
+  gap: 8px;
+  max-width: 85%;
+  text-align: left;
+  animation: messageSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes messageSlideIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.chat-bubble.pam {
+  align-self: flex-start;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.bubble-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.bubble-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold);
+  object-fit: cover;
+}
+
+.bubble-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.bubble-text {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.chat-bubble.pam .bubble-text {
+  background: rgba(142, 45, 226, 0.15);
+  border: 1px solid rgba(142, 45, 226, 0.35);
+  border-top-left-radius: 4px;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.chat-bubble.user .bubble-text {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-top-right-radius: 4px;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.chat-suggestions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(13, 17, 38, 0.4);
+  scrollbar-width: none;
+}
+
+.chat-suggestions::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-badge {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.chat-badge:hover {
+  background: rgba(0, 255, 255, 0.15);
+  border-color: var(--color-cyan);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px 15px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.08);
+  background: rgba(13, 17, 38, 0.9);
+}
+
+/* Typing bubble dots styles */
+.typing-indicator-bubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 15px;
+  background: rgba(142, 45, 226, 0.15);
+  border: 1px solid rgba(142, 45, 226, 0.35);
+  border-radius: 16px;
+  border-top-left-radius: 4px;
+  width: fit-content;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-cyan);
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-7px); }
+}
+
+@media (max-width: 480px) {
+  .chat-container {
+    height: 380px;
+  }
+  .bubble-text {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}
+
+
+.tarot-card-deck.selected {
+  --hover-y: -35px;
+  --hover-scale: 1.05;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  pointer-events: none;
+  z-index: 90 !important;
+}
+@media (max-width: 480px) {
+  .deck-container {
+    height: 200px !important;
+    max-width: 320px !important;
+    margin: 1.5rem auto 0 auto !important;
+  }
+  .tarot-card-deck {
+    width: 50px !important;
+    height: 77px !important;
+  }
+  .tarot-card-deck.selected {
+    --hover-y: -20px !important; /* Smaller lift on mobile */
+  }
+  .tarot-card-deck.hidden {
+    --hover-y: 80px !important;
+  }
+  .tarot-showcase-item {
+    grid-template-columns: 65px 1fr !important;
+    gap: 12px !important;
+    padding: 0.75rem !important;
+  }
+  .tarot-showcase-item svg {
+    width: 65px !important;
+    height: 98px !important;
+  }
+  .category-buttons {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .cat-btn {
+    width: 100% !important;
+    flex: none !important;
+  }
+}
+
+/* Duck Mascot */
+.lobby-duck-container {
+  position: absolute;
+  top: 15%;
+  left: -120px;
+  z-index: 1;
+  pointer-events: auto;
+  animation: duckSlide 45s linear infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.duck-sticker {
+  width: 70px;
+  height: 70px;
+  background: url('/images/duck.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+  animation: duckWaddle 1.4s ease-in-out infinite alternate;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+}
+
+.duck-sticker:hover {
+  transform: scale(1.15) rotate(10deg);
+  filter: drop-shadow(0 10px 20px rgba(255, 215, 0, 0.75));
+}
+
+.lobby-duck-container.spin-active .duck-sticker {
+  animation: duckSpin 0.75s ease-in-out !important;
+}
+
+/* Duck Speech Bubble */
+.lobby-duck-container .duck-speech-bubble {
+  position: absolute;
+  bottom: 105px;
+  background: rgba(13, 17, 38, 0.9);
+  border: 1px solid var(--color-gold);
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 200px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
+  pointer-events: none;
+  z-index: 20;
+  animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-duck-container .duck-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: rgba(13, 17, 38, 0.9) transparent;
+  display: block;
+  width: 0;
+}
+
+@keyframes duckSlide {
+  0% { left: -120px; }
+  100% { left: 100%; }
+}
+
+@keyframes duckWaddle {
+  0% { transform: translateY(0) rotate(-6deg); }
+  100% { transform: translateY(-10px) rotate(6deg); }
+}
+
+@keyframes duckSpin {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.3) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+/* Lizard Mascot */
+.lobby-lizard-container {
+  position: absolute;
+  top: 30%;
+  right: -120px;
+  z-index: 1;
+  pointer-events: auto;
+  animation: lizardSlide 52s linear infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lizard-sticker {
+  width: 70px;
+  height: 70px;
+  background: url('/images/lizard.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+  animation: lizardWaddle 1.6s ease-in-out infinite alternate;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+}
+
+.lizard-sticker:hover {
+  transform: scale(1.15) rotate(-10deg);
+  filter: drop-shadow(0 10px 20px rgba(0, 255, 128, 0.75));
+}
+
+.lobby-lizard-container.spin-active .lizard-sticker {
+  animation: lizardSpin 0.75s ease-in-out !important;
+}
+
+/* Lizard Speech Bubble */
+.lobby-lizard-container .lizard-speech-bubble {
+  position: absolute;
+  bottom: 105px;
+  background: rgba(13, 17, 38, 0.9);
+  border: 1px solid #00ff88;
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 200px;
+  box-shadow: 0 4px 15px rgba(0, 255, 128, 0.25);
+  pointer-events: none;
+  z-index: 20;
+  animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lobby-lizard-container .lizard-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: rgba(13, 17, 38, 0.9) transparent;
+  display: block;
+  width: 0;
+}
+
+@keyframes lizardSlide {
+  0% { right: -120px; }
+  100% { right: 100%; }
+}
+
+@keyframes lizardWaddle {
+  0% { transform: translateY(0) rotate(5deg) scaleX(-1); }
+  100% { transform: translateY(-8px) rotate(-5deg) scaleX(-1); }
+}
+
+@keyframes lizardSpin {
+  0% { transform: scaleX(-1) scale(1) rotate(0deg); }
+  50% { transform: scaleX(-1) scale(1.3) rotate(-180deg); }
+  100% { transform: scaleX(-1) scale(1) rotate(-360deg); }
+}
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE & TABLET RESPONSIVE ENHANCEMENTS
+   ========================================================================== */
+@media (max-width: 900px) {
+  .pam-services-showcase {
+    grid-template-columns: 1fr;
+    max-width: 32rem;
+  }
+  .weekday-lucky-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem !important;
+    padding-bottom: 0.85rem !important;
+  }
+  .site-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+  }
+  .audio-control {
+    top: 12px !important;
+    right: 12px !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .hero {
+    padding-top: 2rem !important;
+  }
+  .hero-cta-group-main {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-cta-group-main .button {
+    width: 100%;
+    justify-content: center;
+  }
+  .weekday-picks {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  .solo-options-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.9rem !important;
+  }
+  .view-section {
+    padding: 1.25rem 0.85rem 3.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .solo-options-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .weekday-picks {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .category-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .cat-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .pam-highlight-pills {
+    gap: 0.45rem;
+  }
+  .pam-pill {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.75rem;
+  }
+}
