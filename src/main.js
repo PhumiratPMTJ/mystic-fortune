@@ -566,15 +566,54 @@ document.querySelectorAll('.btn-back-solo').forEach(btn => {
   btn.addEventListener('click', () => showSection('sec-lobby'));
 });
 
+// Hero Highlight Pills: directly launch target divination feature
+document.querySelectorAll('.pam-pill[data-open-target]').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const targetId = pill.getAttribute('data-open-target');
+    const targetBtn = targetId ? document.getElementById(targetId) : null;
+    if (targetBtn) {
+      targetBtn.click();
+    }
+  });
+});
+
+// Top Header Navigation: ensure clicking header links while inside a sub-section returns to main page first
+document.querySelectorAll('.site-header a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href') || '';
+    if (AppState.currentView !== 'sec-lobby' && href.startsWith('#')) {
+      e.preventDefault();
+      const mainEl = document.getElementById('main');
+      const footerEl = document.querySelector('.footer');
+      Object.values(sections).forEach(sec => {
+        if (sec) {
+          sec.classList.add('hidden');
+          sec.classList.remove('active');
+        }
+      });
+      if (mainEl) mainEl.classList.remove('hidden');
+      if (footerEl) footerEl.classList.remove('hidden');
+      AppState.currentView = 'sec-lobby';
+
+      if (href === '#' || href === '#main') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const dest = document.querySelector(href);
+        if (dest) dest.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+});
+
 // ==========================================================================
 // SOLO HOROSCOPE CATEGORIES
 // ==========================================================================
 const categoryButtons = document.querySelectorAll('.cat-btn');
 categoryButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
+  btn.addEventListener('click', () => {
     categoryButtons.forEach(b => b.classList.remove('active'));
-    e.target.classList.add('active');
-    AppState.soloCategory = e.target.dataset.category;
+    btn.classList.add('active');
+    AppState.soloCategory = btn.dataset.category;
   });
 });
 
@@ -2406,9 +2445,9 @@ function resetChatMessages() {
   if (input) input.value = '';
 }
 
-// Function to handle chatbot reply logic (Fallback local engine)
+// Function to handle chatbot reply logic (Smart local engine)
 function getChatbotReply(userText) {
-  const text = userText.trim().toLowerCase();
+  const text = String(userText || '').trim().toLowerCase();
 
   // Simple math expression check (e.g. "1+1", "5*5", etc.)
   const match = text.replace(/\s+/g, '').match(/^(\d+)([\+\-\*\/])(\d+)$/);
@@ -2420,36 +2459,106 @@ function getChatbotReply(userText) {
     if (op === '+') result = num1 + num2;
     else if (op === '-') result = num1 - num2;
     else if (op === '*') result = num1 * num2;
-    else if (op === '/') result = num2 !== 0 ? num1 / num2 : "หาค่าไม่ได้จ้า";
-    return `ข้อนี้ง่ายม๊ากกก! ${num1} ${op} ${num2} ได้คำตอบเท่ากับ ${result} จ้า! 🧠✨`;
+    else if (op === '/') result = num2 !== 0 ? +(num1 / num2).toFixed(2) : "หาค่าไม่ได้จ้า";
+    return `ข้อนี้ง่ายม๊ากกก! ${num1} ${op} ${num2} ได้คำตอบเท่ากับ ${result} จ้า! ถามเลขเด็ดงวดนี้แม่หมอก็คำนวณให้ได้นะจ๊ะ 🧠✨`;
   }
 
-  // Greeting
+  // 1. Lucky outfit colors (สีเสื้อมงคล)
+  if (text.includes('สีเสื้อ') || text.includes('สีมงคล') || text.includes('ใส่สีอะไร')) {
+    const dayNames = ['วันอาทิตย์ 🔴', 'วันจันทร์ 🟡', 'วันอังคาร 💗', 'วันพุธ 🟢', 'วันพฤหัสบดี 🟠', 'วันศุกร์ 🔵', 'วันเสาร์ 🟣'];
+    const dayColors = [
+      'เสริมงาน: สีแดง/ชมพู | เรียกทรัพย์: สีเขียว/ทอง | เมตตา: สีดำ/เทา | เลี่ยง: สีน้ำเงิน',
+      'เสริมงาน: สีเขียว/ครีม | เรียกทรัพย์: สีม่วง/ส้ม | เมตตา: สีฟ้า/น้ำเงิน | เลี่ยง: สีแดง',
+      'เสริมงาน: สีม่วง/ชมพู | เรียกทรัพย์: สีดำ/เทา | เมตตา: สีแดง | เลี่ยง: สีขาว/เหลือง',
+      'เสริมงาน: สีเขียว/ส้ม | เรียกทรัพย์: สีเหลือง/ทอง | เมตตา: สีฟ้า/น้ำเงิน | เลี่ยง: สีชมพู',
+      'เสริมงาน: สีส้ม/เหลือง | เรียกทรัพย์: สีแดง/ทอง | เมตตา: สีเขียว | เลี่ยง: สีดำ/ม่วง',
+      'เสริมงาน: สีฟ้า/น้ำเงิน | เรียกทรัพย์: สีชมพู/แดง | เมตตา: สีเหลือง/ส้ม | เลี่ยง: สีเทาเข้ม',
+      'เสริมงาน: สีดำ/เทา | เรียกทรัพย์: สีฟ้า/น้ำเงิน | เมตตา: สีชมพู/ม่วง | เลี่ยง: สีเขียว'
+    ];
+    const d = new Date().getDay();
+    return `👕 สีเสื้อมงคลประจำ${dayNames[d]}นี้จ้า! ✨ ${dayColors[d]} ใส่ตามนี้รับรองเดินสับๆ รับทรัพย์ตลอดวันเลยนะจ๊ะ! 💖`;
+  }
+
+  // 2. Lucky numbers / Lottery (เลขนำโชค / เลขเด็ด / หวย)
+  if (text.includes('เลขนำโชค') || text.includes('เลขเด็ด') || text.includes('หวย') || text.includes('ขอเลข')) {
+    const n2 = String(Math.floor(Math.random() * 90) + 10);
+    const n3 = String(Math.floor(Math.random() * 900) + 100);
+    return `🍀 เพี้ยง! จิตสัมผัสแม่หมอแพมและพี่หมูแด็บส่องเห็นเลขมงคลประจำตัวหนูวันนี้คือ เลข 2 ตัว: 【 ${n2} 】 และเลข 3 ตัว: 【 ${n3} 】 จ้า! ขอให้โชคใหญ่หล่นทับรับทรัพย์เต็มกระเป๋านะจ๊ะ! 💸✨`;
+  }
+
+  // 3. Comfort / Hug / Bad luck (กอดปลอบใจ / ดวงไม่ดี / เศร้า / เหนื่อย / ท้อ / เครียด)
+  if (text.includes('กอด') || text.includes('ปลอบใจ') || text.includes('ดวงไม่ดี') || text.includes('เศร้า') || text.includes('เหนื่อย') || text.includes('ท้อ') || text.includes('เครียด') || text.includes('ร้องไห้')) {
+    const comforts = [
+      'โอ๋ๆ มานี่มา แม่หมอแพมขอกอดแน่นๆ ทีนึงนะจ๊ะ 🤗💖 วันนี้เหนื่อยมามากแล้วใช่ไหมคนเก่ง เรื่องร้ายๆ ที่เจอมันแค่ผ่านมาแล้วก็ผ่านไป หลังจากวินาทีนี้กราฟดวงของหนูกำลังจะพุ่งขึ้นแล้วนะ ยิ้มเยอะๆ นะจ๊ะ!',
+      'กอดปุๆ นะคนเก่งของแม่หมอ! 🥺✨ ดาวเคราะห์ร้ายกำลังโคจรออกไปแล้วจ้า ไม่ต้องคิดมากนะ วันนี้พักใจฟังเพลงสบายๆ กินของอร่อยๆ แล้วพรุ่งนี้เตรียมรับข่าวดีได้เลย แม่หมอและพี่หมูแด็บอยู่ข้างๆ เสมอจ้า 🐷💕',
+      'เพี้ยง! แม่หมอเป่ามนต์ปัดเป่าความเศร้าออกไปให้หมดเลยนะจ๊ะ 🪄✨ หนูเก่งมากๆ แล้วที่ผ่านวันนี้มาได้ อย่าลืมใจดีกับตัวเองเยอะๆ นะ ความสุขก้อนใหญ่กำลังเดินทางมาหาหนูแล้วจ้า!'
+    ];
+    return comforts[Math.floor(Math.random() * comforts.length)];
+  }
+
+  // 4. Food suggestion (กินของอร่อย / หิว / อาหาร)
+  if (text.includes('กิน') || text.includes('อร่อย') || text.includes('หิว') || text.includes('อาหาร') || text.includes('เมนู')) {
+    const foods = [
+      'หมูกระทะร้อนๆ ย่างหมูสามชั้นเกรียมๆ จิ้มน้ำจิ้มรสเด็ด 🥓🔥 กินแล้วพลังธาตุไฟพุ่ง กระตุ้นดวงการเงินสุดๆ จ้า!',
+      'ชาบูซุปน้ำดำหอมๆ กับเนื้อสไลซ์นุ่มๆ 🍲✨ กินของอุ่นๆ ช่วยเสริมพลังธาตุน้ำ ให้จิตใจชุ่มชื้นและดึงดูดคนอุปถัมภ์นะจ๊ะ!',
+      'ชานมไข่มุกหวานกำลังดีสักแก้วคู่กับไก่ทอดกรอบๆ 🧋🍗 เติมความหวานให้ชีวิต ดวงความรักและเมตตามหานิยมจะได้พุ่งกระฉูดจ้า!',
+      'ส้มตำปูปลาร้าแซ่บๆ คอหมูย่างข้าวเหนียวร้อนๆ 🥗🌶️ ความแซ่บจะช่วยปลุกเอเนอร์จี้และปัดเป่าความซึมเศร้าออกไปทันทีเลยจ้า!'
+    ];
+    return foods[Math.floor(Math.random() * foods.length)];
+  }
+
+  // 5. Wealth tricks / Money (ทริคเรียกทรัพย์ / โชคลาภ / การเงิน / เงิน)
+  if (text.includes('เรียกทรัพย์') || text.includes('โชคลาภ') || text.includes('นักษัตร') || text.includes('การเงิน') || text.includes('รวย') || text.includes('เงิน')) {
+    const wealthTips = [
+      '💸 ทริคเรียกทรัพย์ฉบับแม่หมอแพม: แนะนำให้จัดเรียงธนบัตรในกระเป๋าสตางค์ให้หันหัวขึ้นทุกใบ ลบใบเสร็จเก่าๆ ทิ้ง และพกแบงก์ขวัญถุงที่ลงท้ายด้วยเลข 8 หรือ 9 จะช่วยดูดเงินก้อนเข้ากระเป๋ารัวๆ เลยจ้า! ✨',
+      '🪙 เคล็ดลับเปิดดวงเศรษฐีวันนี้: ก่อนออกจากบ้านให้ยิ้มหน้ากระจกแล้วพูดว่า "วันนี้เงินไหลมาเทมา" พร้อมทำความสะอาดหน้าจอโทรศัพท์ให้ใสปิ๊ง เพราะมือถือคือประตูรับทรัพย์ยุคดิจิทัลจ้า! 📱💰',
+      '🌟 คาถาเสริมโชคลาภด่วน: วันนี้ลองแบ่งเงินเล็กๆ น้อยๆ ทำบุญออนไลน์หรือหยอดตู้บริจาค แล้วอธิษฐานขอพรพระสีวลี รับรองว่าจะมีลาภลอยหรือข่าวดีเรื่องเงินเข้ามาแบบไม่ทันตั้งตัวนะจ๊ะ!'
+    ];
+    return wealthTips[Math.floor(Math.random() * wealthTips.length)];
+  }
+
+  // 6. Jokes / Playful banter (คุยเล่น / มุกกวนๆ / ตลก / เหงา)
+  if (text.includes('คุยเล่น') || text.includes('มุก') || text.includes('กวน') || text.includes('ตลก') || text.includes('เหงา')) {
+    const jokes = [
+      '🃏 แม่หมอเช็กดวงให้แล้วนะ... ดวงหนูช่วงนี้มีเกณฑ์เสียทรัพย์หนักมาก! โดยเฉพาะเวลาเปิดแอปสั่งอาหารตอนเที่ยงคืนกับแอปช้อปปิ้งตอนโปรสิ้นเดือน ฮ่าๆๆ 🛒🍕',
+      '🐷 พี่หมูแด็บฝากถามว่า: "เป็นหมอดูต้องดูดวง แต่ถ้าอยากเป็นคนในใจเธอต้องดูตรงไหนจ๊ะ?" ฮิ้ววว! เขินเลยล่ะสิ! 💕✨',
+      '🔮 คำทำนายด่วนจากลูกแก้ว: เนื้อคู่ของหนูเป็นคนมีฐานะดีมาก... แต่ตอนนี้เขากำลังหลงทางอยู่แถวๆ ร้านชาบู ถ้าหนูออกไปกินของอร่อยบ่อยๆ เดี๋ยวก็ได้เจอกันเองจ้า! 😆🍲'
+    ];
+    return jokes[Math.floor(Math.random() * jokes.length)];
+  }
+
+  // 7. Love / Ex / Relationship
+  if (text.includes('รัก') || text.includes('แฟน') || text.includes('คนคุย') || text.includes('อกหัก') || text.includes('โสด') || text.includes('เนื้อคู่')) {
+    const loveReplies = [
+      '💘 ดวงความรักของหนูช่วงนี้เสน่ห์แรงอยู่นะจ๊ะ! คนโสดมีเกณฑ์เจอคนถูกใจจากการเดินทางหรือโลกออนไลน์ ส่วนถ้าใครทำหนูเสียใจ แม่หมอแนะนำให้เชิดหน้าสวยๆ เพราะคนใหม่ที่จะเข้ามาดีและเปย์เก่งกว่าเดิมแน่นอนจ้า! ✨',
+      '💖 เรื่องหัวใจไม่ต้องรีบร้อนนะจ๊ะ ดาวศุกร์กำลังโคจรมาเสริมเสน่ห์ให้หนูแล้ว ช่วงนี้ยิ่งดูแลตัวเองให้สดใสอารมณ์ดี พลังดึงดูดคนที่ใช่ก็จะยิ่งทำงานแรงขึ้นร้อยเท่าเลยจ้า!'
+    ];
+    return loveReplies[Math.floor(Math.random() * loveReplies.length)];
+  }
+
+  // 8. Work / Study
+  if (text.includes('งาน') || text.includes('เรียน') || text.includes('สอบ') || text.includes('โปรเจกต์')) {
+    return '💼✨ ดวงการงานและการเรียนของหนูช่วงนี้ แม้จะมีเรื่องให้เหนื่อยหรือต้องแก้ปัญหาเฉพาะหน้าบ้าง แต่ด้วยไหวพริบของหนูจะผ่านไปได้แบบปังมากจ้า! ผู้ใหญ่และคนรอบข้างพร้อมซัพพอร์ต ลุยได้เลยนะจ๊ะ!';
+  }
+
+  // 9. Greeting & General Questions
   if (text.includes('สวัสดี') || text.includes('หวัดดี') || text.includes('hello') || text.includes('hi')) {
-    return "สวัสดีจ้าเด็กๆ! ยินดีที่ได้คุยกันนะ มีอะไรอยากคุยหรือถามแม่หมอไหมจ๊ะ? 😊💬";
+    return "สวัสดีจ้าคนเก่ง! 🔮✨ วันนี้อยากให้แม่หมอแพมช่วยเช็กสีเสื้อมงคล ขอเลขนำโชค ปลอบใจ หรือชวนคุยเรื่องความรัก/การเงิน พิมพ์บอกแม่หมอได้เลยนะจ๊ะ! 💖";
   }
 
-  // Food suggestion
-  if (text.includes('กินอะไรดี') || text.includes('หิว') || text.includes('อาหาร') || text.includes('เมนู')) {
-    const foods = ["หมูกระทะร้อนๆ", "ชาบูซุปดำ", "กะเพราหมูกรอบไข่ดาว", "ส้มตำไก่ย่างแซ่บๆ", "ชานมไข่มุกหวานร้อย"];
-    const choice = foods[Math.floor(Math.random() * foods.length)];
-    return `แม่หมอแนะนำให้กิน "${choice}" เลยจ้า! มื้อนี้ฟินแน่นอน 🍲✨`;
-  }
-
-  // General Questions
   if (text.includes('ทำอะไรอยู่') || text.includes('ทำไรอยู่')) {
-    return "กำลังนั่งรอคุยเล่นแก้ง่วงกับหนูอยู่นี่แหละจ้า มีเรื่องอะไรเล่าให้ฟังไหมจ๊ะ? 🔮";
+    return "กำลังนั่งขัดลูกแก้วรอคุยเล่นแก้ง่วงกับหนูอยู่นี่แหละจ้า มีเรื่องอะไรเล่าให้ฟังไหมจ๊ะ? 🔮✨";
   }
 
   if (text.includes('ชื่ออะไร') || text.includes('ชื่อไร')) {
     return "แม่หมอชื่อ 'แม่หมอแพม' จ้า ส่วนน้องกลมๆ ที่บินลอยไปลอยมาข้างๆ คือ 'พี่หมูแด็บ' จ้า 🐷💕";
   }
 
-  // Generic conversational Q&A fallbacks (No fortune-telling forcing!)
+  // Generic warm & engaging fallbacks
   const fallbacks = [
-    "รับทราบคำพูดจ้า! เรื่องนี้น่ารักและน่าสนใจมากๆ เลย เล่าต่อได้เลยนะจ๊ะ 😊",
-    "ดีจังเลยที่ทักมาเล่าให้ฟัง! แม่หมอนั่งฟังอยู่ตรงนี้นะจ๊ะ มีอะไรชวนคุยต่อได้เลยจ้า 💖",
-    "เป็นไอเดียที่เจ๋งมากเลยจ้า! คุยกับแม่หมอและพี่หมูแด็บได้สนุกๆ เสมอเลยนะจ๊ะ 🐷💬"
+    `แม่หมอแพมฟังอยู่นะจ๊ะ! 🔮✨ เรื่องที่หนูพิมพ์มา "${userText}" น่าสนใจมากเลย ดวงชะตาช่วงนี้ขอแค่หนูมั่นใจและคิดบวก สิ่งดีๆ กำลังจะเข้ามาแน่นอนจ้า มีเรื่องไหนอยากเล่าเพิ่มอีกไหมจ๊ะ? 💖`,
+    "รับทราบเลยจ้าคนดี! 😊✨ แม่หมอและพี่หมูแด็บขอส่งพลังบวกให้หนูแบบจัดเต็มร้อยเปอร์เซ็นต์เลยนะ อยากถามเรื่องความรัก การเงิน สีมงคล หรือให้แม่หมอปล่อยมุกฮาๆ กดปุ่มด้านล่างหรือพิมพ์มาได้เลยนะจ๊ะ! 🐷💕",
+    "เพี้ยง! ✨ แม่หมอสัมผัสได้ถึงพลังงานดีๆ จากตัวหนูนะเนี่ย! ไม่ว่าจะเจอเรื่องอะไรอยู่ ขอให้วันนี้เป็นวันที่ยิ้มได้กว้างๆ และมีแต่โชคลาภวิ่งเข้าหานะจ๊ะ คุยกับแม่หมอต่อได้ยาวๆ เลยจ้า! 🌟"
   ];
   return fallbacks[Math.floor(Math.random() * fallbacks.length)];
 }

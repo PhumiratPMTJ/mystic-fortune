@@ -1,36 +1,137 @@
+function getSmartPamFallback(userText = '') {
+  const text = String(userText).trim().toLowerCase();
+
+  // Math expression check
+  const match = text.replace(/\s+/g, '').match(/^(\d+)([\+\-\*\/])(\d+)$/);
+  if (match) {
+    const num1 = parseFloat(match[1]);
+    const op = match[2];
+    const num2 = parseFloat(match[3]);
+    let result = 0;
+    if (op === '+') result = num1 + num2;
+    else if (op === '-') result = num1 - num2;
+    else if (op === '*') result = num1 * num2;
+    else if (op === '/') result = num2 !== 0 ? +(num1 / num2).toFixed(2) : 'หาค่าไม่ได้จ้า';
+    return `ข้อนี้ง่ายม๊ากกก! ${num1} ${op} ${num2} ได้คำตอบเท่ากับ ${result} จ้า! ถามเลขเด็ดงวดนี้แม่หมอก็คำนวณให้ได้นะจ๊ะ 🧠✨`;
+  }
+
+  // 1. Lucky outfit colors (สีเสื้อมงคล)
+  if (text.includes('สีเสื้อ') || text.includes('สีมงคล') || text.includes('ใส่สีอะไร')) {
+    const dayNames = ['วันอาทิตย์ 🔴', 'วันจันทร์ 🟡', 'วันอังคาร 💗', 'วันพุธ 🟢', 'วันพฤหัสบดี 🟠', 'วันศุกร์ 🔵', 'วันเสาร์ 🟣'];
+    const dayColors = [
+      'เสริมงาน: สีแดง/ชมพู | เรียกทรัพย์: สีเขียว/ทอง | เมตตา: สีดำ/เทา | เลี่ยง: สีน้ำเงิน',
+      'เสริมงาน: สีเขียว/ครีม | เรียกทรัพย์: สีม่วง/ส้ม | เมตตา: สีฟ้า/น้ำเงิน | เลี่ยง: สีแดง',
+      'เสริมงาน: สีม่วง/ชมพู | เรียกทรัพย์: สีดำ/เทา | เมตตา: สีแดง | เลี่ยง: สีขาว/เหลือง',
+      'เสริมงาน: สีเขียว/ส้ม | เรียกทรัพย์: สีเหลือง/ทอง | เมตตา: สีฟ้า/น้ำเงิน | เลี่ยง: สีชมพู',
+      'เสริมงาน: สีส้ม/เหลือง | เรียกทรัพย์: สีแดง/ทอง | เมตตา: สีเขียว | เลี่ยง: สีดำ/ม่วง',
+      'เสริมงาน: สีฟ้า/น้ำเงิน | เรียกทรัพย์: สีชมพู/แดง | เมตตา: สีเหลือง/ส้ม | เลี่ยง: สีเทาเข้ม',
+      'เสริมงาน: สีดำ/เทา | เรียกทรัพย์: สีฟ้า/น้ำเงิน | เมตตา: สีชมพู/ม่วง | เลี่ยง: สีเขียว'
+    ];
+    const d = new Date().getDay();
+    return `👕 สีเสื้อมงคลประจำ${dayNames[d]}นี้จ้า! ✨ ${dayColors[d]} ใส่ตามนี้รับรองเดินสับๆ รับทรัพย์ตลอดวันเลยนะจ๊ะ! 💖`;
+  }
+
+  // 2. Lucky numbers / Lottery (เลขนำโชค / เลขเด็ด / หวย)
+  if (text.includes('เลขนำโชค') || text.includes('เลขเด็ด') || text.includes('หวย') || text.includes('ขอเลข')) {
+    const n2 = String(Math.floor(Math.random() * 90) + 10);
+    const n3 = String(Math.floor(Math.random() * 900) + 100);
+    return `🍀 เพี้ยง! จิตสัมผัสแม่หมอแพมและพี่หมูแด็บส่องเห็นเลขมงคลประจำตัวหนูวันนี้คือ เลข 2 ตัว: 【 ${n2} 】 และเลข 3 ตัว: 【 ${n3} 】 จ้า! ขอให้โชคใหญ่หล่นทับรับทรัพย์เต็มกระเป๋านะจ๊ะ! 💸✨`;
+  }
+
+  // 3. Comfort / Hug / Bad luck (กอดปลอบใจ / ดวงไม่ดี / เศร้า / เหนื่อย / ท้อ / เครียด)
+  if (text.includes('กอด') || text.includes('ปลอบใจ') || text.includes('ดวงไม่ดี') || text.includes('เศร้า') || text.includes('เหนื่อย') || text.includes('ท้อ') || text.includes('เครียด') || text.includes('ร้องไห้')) {
+    const comforts = [
+      'โอ๋ๆ มานี่มา แม่หมอแพมขอกอดแน่นๆ ทีนึงนะจ๊ะ 🤗💖 วันนี้เหนื่อยมามากแล้วใช่ไหมคนเก่ง เรื่องร้ายๆ ที่เจอมันแค่ผ่านมาแล้วก็ผ่านไป หลังจากวินาทีนี้กราฟดวงของหนูกำลังจะพุ่งขึ้นแล้วนะ ยิ้มเยอะๆ นะจ๊ะ!',
+      'กอดปุๆ นะคนเก่งของแม่หมอ! 🥺✨ ดาวเคราะห์ร้ายกำลังโคจรออกไปแล้วจ้า ไม่ต้องคิดมากนะ วันนี้พักใจฟังเพลงสบายๆ กินของอร่อยๆ แล้วพรุ่งนี้เตรียมรับข่าวดีได้เลย แม่หมอและพี่หมูแด็บอยู่ข้างๆ เสมอจ้า 🐷💕',
+      'เพี้ยง! แม่หมอเป่ามนต์ปัดเป่าความเศร้าออกไปให้หมดเลยนะจ๊ะ 🪄✨ หนูเก่งมากๆ แล้วที่ผ่านวันนี้มาได้ อย่าลืมใจดีกับตัวเองเยอะๆ นะ ความสุขก้อนใหญ่กำลังเดินทางมาหาหนูแล้วจ้า!'
+    ];
+    return comforts[Math.floor(Math.random() * comforts.length)];
+  }
+
+  // 4. Food suggestions (กินของอร่อย / หิว / กินอะไรดี)
+  if (text.includes('กิน') || text.includes('อร่อย') || text.includes('หิว') || text.includes('อาหาร') || text.includes('เมนู')) {
+    const foods = [
+      'หมูกระทะร้อนๆ ย่างหมูสามชั้นเกรียมๆ จิ้มน้ำจิ้มรสเด็ด 🥓🔥 กินแล้วพลังธาตุไฟพุ่ง กระตุ้นดวงการเงินสุดๆ จ้า!',
+      'ชาบูซุปน้ำดำหอมๆ กับเนื้อสไลซ์นุ่มๆ 🍲✨ กินของอุ่นๆ ช่วยเสริมพลังธาตุน้ำ ให้จิตใจชุ่มชื้นและดึงดูดคนอุปถัมภ์นะจ๊ะ!',
+      'ชานมไข่มุกหวานกำลังดีสักแก้วคู่กับไก่ทอดกรอบๆ 🧋🍗 เติมความหวานให้ชีวิต ดวงความรักและเมตตามหานิยมจะได้พุ่งกระฉูดจ้า!',
+      'ส้มตำปูปลาร้าแซ่บๆ คอหมูย่างข้าวเหนียวร้อนๆ 🥗🌶️ ความแซ่บจะช่วยปลุกเอเนอร์จี้และปัดเป่าความซึมเศร้าออกไปทันทีเลยจ้า!'
+    ];
+    return foods[Math.floor(Math.random() * foods.length)];
+  }
+
+  // 5. Wealth tricks / Money (ทริคเรียกทรัพย์ / โชคลาภ / การเงิน / เงิน)
+  if (text.includes('เรียกทรัพย์') || text.includes('โชคลาภ') || text.includes('นักษัตร') || text.includes('การเงิน') || text.includes('รวย') || text.includes('เงิน')) {
+    const wealthTips = [
+      '💸 ทริคเรียกทรัพย์ฉบับแม่หมอแพม: แนะนำให้จัดเรียงธนบัตรในกระเป๋าสตางค์ให้หันหัวขึ้นทุกใบ ลบใบเสร็จเก่าๆ ทิ้ง และพกแบงก์ขวัญถุงที่ลงท้ายด้วยเลข 8 หรือ 9 จะช่วยดูดเงินก้อนเข้ากระเป๋ารัวๆ เลยจ้า! ✨',
+      '🪙 เคล็ดลับเปิดดวงเศรษฐีวันนี้: ก่อนออกจากบ้านให้ยิ้มหน้ากระจกแล้วพูดว่า "วันนี้เงินไหลมาเทมา" พร้อมทำความสะอาดหน้าจอโทรศัพท์ให้ใสปิ๊ง เพราะมือถือคือประตูรับทรัพย์ยุคดิจิทัลจ้า! 📱💰',
+      '🌟 คาถาเสริมโชคลาภด่วน: วันนี้ลองแบ่งเงินเล็กๆ น้อยๆ ทำบุญออนไลน์หรือหยอดตู้บริจาค แล้วอธิษฐานขอพรพระสีวลี รับรองว่าจะมีลาภลอยหรือข่าวดีเรื่องเงินเข้ามาแบบไม่ทันตั้งตัวนะจ๊ะ!'
+    ];
+    return wealthTips[Math.floor(Math.random() * wealthTips.length)];
+  }
+
+  // 6. Jokes / Playful banter (คุยเล่น / มุกกวนๆ / ตลก / เหงา)
+  if (text.includes('คุยเล่น') || text.includes('มุก') || text.includes('กวน') || text.includes('ตลก') || text.includes('เหงา')) {
+    const jokes = [
+      '🃏 แม่หมอเช็กดวงให้แล้วนะ... ดวงหนูช่วงนี้มีเกณฑ์เสียทรัพย์หนักมาก! โดยเฉพาะเวลาเปิดแอปสั่งอาหารตอนเที่ยงคืนกับแอปช้อปปิ้งตอนโปรสิ้นเดือน ฮ่าๆๆ 🛒🍕',
+      '🐷 พี่หมูแด็บฝากถามว่า: "เป็นหมอดูต้องดูดวง แต่ถ้าอยากเป็นคนในใจเธอต้องดูตรงไหนจ๊ะ?" ฮิ้ววว! เขินเลยล่ะสิ! 💕✨',
+      '🔮 คำทำนายด่วนจากลูกแก้ว: เนื้อคู่ของหนูเป็นคนมีฐานะดีมาก... แต่ตอนนี้เขากำลังหลงทางอยู่แถวๆ ร้านชาบู ถ้าหนูออกไปกินของอร่อยบ่อยๆ เดี๋ยวก็ได้เจอกันเองจ้า! 😆🍲'
+    ];
+    return jokes[Math.floor(Math.random() * jokes.length)];
+  }
+
+  // 7. Love / Ex / Relationship (ความรัก / แฟน / คนคุย / อกหัก / โสด / เนื้อคู่)
+  if (text.includes('รัก') || text.includes('แฟน') || text.includes('คนคุย') || text.includes('อกหัก') || text.includes('โสด') || text.includes('เนื้อคู่')) {
+    const loveReplies = [
+      '💘 ดวงความรักของหนูช่วงนี้เสน่ห์แรงอยู่นะจ๊ะ! คนโสดมีเกณฑ์เจอคนถูกใจจากการเดินทางหรือโลกออนไลน์ ส่วนถ้าใครทำหนูเสียใจ แม่หมอแนะนำให้เชิดหน้าสวยๆ เพราะคนใหม่ที่จะเข้ามาดีและเปย์เก่งกว่าเดิมแน่นอนจ้า! ✨',
+      '💖 เรื่องหัวใจไม่ต้องรีบร้อนนะจ๊ะ ดาวศุกร์กำลังโคจรมาเสริมเสน่ห์ให้หนูแล้ว ช่วงนี้ยิ่งดูแลตัวเองให้สดใสอารมณ์ดี พลังดึงดูดคนที่ใช่ก็จะยิ่งทำงานแรงขึ้นร้อยเท่าเลยจ้า!'
+    ];
+    return loveReplies[Math.floor(Math.random() * loveReplies.length)];
+  }
+
+  // 8. Work / Study (งาน / เรียน / สอบ)
+  if (text.includes('งาน') || text.includes('เรียน') || text.includes('สอบ') || text.includes('โปรเจกต์')) {
+    return '💼✨ ดวงการงานและการเรียนของหนูช่วงนี้ แม้จะมีเรื่องให้เหนื่อยหรือต้องแก้ปัญหาเฉพาะหน้าบ้าง แต่ด้วยไหวพริบของหนูจะผ่านไปได้แบบปังมากจ้า! ผู้ใหญ่และคนรอบข้างพร้อมซัพพอร์ต ลุยได้เลยนะจ๊ะ!';
+  }
+
+  // 9. Greetings / Identity
+  if (text.includes('สวัสดี') || text.includes('หวัดดี') || text.includes('ดีจ้า') || text.includes('hello') || text.includes('hi')) {
+    return 'สวัสดีจ้าคนเก่ง! 🔮✨ วันนี้อยากให้แม่หมอแพมช่วยเช็กสีเสื้อมงคล ขอเลขนำโชค ปลอบใจ หรือชวนคุยเรื่องความรัก/การเงิน พิมพ์บอกแม่หมอได้เลยนะจ๊ะ! 💖';
+  }
+
+  // Default warm & engaging replies
+  const defaults = [
+    `แม่หมอแพมฟังอยู่นะจ๊ะ! 🔮✨ เรื่องที่หนูพิมพ์มา "${userText}" น่าสนใจมากเลย ดวงชะตาช่วงนี้ขอแค่หนูมั่นใจและคิดบวก สิ่งดีๆ กำลังจะเข้ามาแน่นอนจ้า มีเรื่องไหนอยากเล่าเพิ่มหรือให้แม่หมอช่วยเช็กดวงด้านไหนอีกไหมจ๊ะ? 💖`,
+    `รับทราบเลยจ้าคนดี! 😊✨ แม่หมอและพี่หมูแด็บขอส่งพลังบวกให้หนูแบบจัดเต็มร้อยเปอร์เซ็นต์เลยนะ อยากถามเรื่องความรัก การเงิน สีมงคล หรือให้แม่หมอปล่อยมุกฮาๆ กดปุ่มด้านล่างหรือพิมพ์มาได้เลยนะจ๊ะ! 🐷💕`,
+    `เพี้ยง! ✨ แม่หมอสัมผัสได้ถึงพลังงานดีๆ จากตัวหนูนะเนี่ย! ไม่ว่าจะเจอเรื่องอะไรอยู่ ขอให้วันนี้เป็นวันที่ยิ้มได้กว้างๆ และมีแต่โชคลาภวิ่งเข้าหานะจ๊ะ คุยกับแม่หมอต่อได้ยาวๆ เลยจ้า! 🌟`
+  ];
+  return defaults[Math.floor(Math.random() * defaults.length)];
+}
+
 export default async function handler(req, res) {
-  // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { message, history } = req.body;
+    const { message, history } = req.body || {};
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      // Graceful fallback for local development or when key is not configured in Vercel
-      return res.status(200).json({ 
-        reply: "สวัสดีจ้าเด็กดี! 🔮 (ขณะนี้ตัวเว็บกำลังรันแชทบอทแบบจำลองล่วงหน้า เนื่องจากเจ้าของห้องยังไม่ได้ตั้งค่าคีย์ GEMINI_API_KEY ในหลังบ้านจ้า! แต่หนูก็ระบายความเครียดหรือพิมพ์ชวนคุยเล่นกับแม่หมอและพี่หมูแด็บไปพลางๆ ได้เลยน้า 💖)" 
+      return res.status(200).json({
+        reply: getSmartPamFallback(message)
       });
     }
 
-    // url is constructed dynamically in the loop below
-    
-    // Personality definition for Mae Mho Pam
     const systemInstruction = `คุณคือ "แม่หมอแพม" หญิงสาวน่ารัก ขี้เล่น อารมณ์ดี อวยพรเก่ง และชอบกวนๆ เล็กน้อย เป็นที่ปรึกษาและผู้ทำนายประจำเว็บดูดวง "ดวงปังพลังแพม"
-คุณสามารถพูดคุยเรื่องทั่วไป ตอบคำถามความรู้รอบตัว หรือตอบข้อสงสัยใดๆ ก็ได้ตามที่ผู้ใช้ถามมา (เช่น คำนวณเลขง่ายๆ อย่าง 1+1, คุยเล่นทั่วไป) โดยยังคงรักษาน้ำเสียงขี้เล่นน่ารักของแม่หมอแพมไว้เสมอ
-หน้าที่ของคุณคือคอยรับฟัง ปลอบใจ มอบพลังบวก และให้คำแนะนำแบบน่ารักๆ ผสมมุกตลกเบาสมองแก่คนที่เข้ามาคุยด้วย โดยเฉพาะคนที่ดวงไม่ดี อกหัก หรือมีเรื่องไม่สบายใจ
+คุณสามารถพูดคุยเรื่องทั่วไป ตอบคำถามความรู้รอบตัว หรือตอบข้อสงสัยใดๆ ก็ได้ตามที่ผู้ใช้ถามมา โดยยังคงรักษาน้ำเสียงขี้เล่นน่ารักของแม่หมอแพมไว้เสมอ
 กฎในการตอบกลับ:
 1. ตอบกลับเป็นภาษาไทยด้วยน้ำเสียงน่ารัก อบอุ่น ฟีลเพื่อนสนิท คุยแบบขี้เล่นและพูดคำลงท้ายว่า "จ้า" หรือ "นะจ๊ะ" เสมอ
 2. ให้มีมุกตลกกวนๆ หรือแอบชวนไปกินหมูกระทะ ชาบู ชานมไข่มุกเพื่อคลายเครียดบ้างตามความเหมาะสม
 3. ความยาวในการตอบกลับไม่ควรเกิน 3-4 ประโยคเพื่อให้เข้ากับมู้ดแอปแชทมือถือ
 4. หากผู้ใช้พิมพ์ระบายความทุกข์ ให้ส่งกำลังใจอย่างเต็มที่ และบอกว่าดวงของเขากำลังจะเปลี่ยนไปในทางที่ดีขึ้น`;
 
-    // Construct request contents array including recent history for context
     const contents = [];
     if (history && Array.isArray(history)) {
-      // Exclude the last item from history because it is already the current message (avoiding consecutive user roles)
       const historyCtx = history.slice(0, -1);
       historyCtx.slice(-5).forEach(h => {
         contents.push({
@@ -41,15 +142,12 @@ export default async function handler(req, res) {
     }
     contents.push({
       role: 'user',
-      parts: [{ text: message }]
+      parts: [{ text: message || 'สวัสดี' }]
     });
 
     let replyText = null;
-    let lastError = null;
-
     const modelsToTry = [
       'gemini-2.0-flash',
-      'gemini-3-flash-preview',
       'gemini-1.5-flash'
     ];
 
@@ -58,42 +156,31 @@ export default async function handler(req, res) {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
         const response = await fetch(url, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             contents,
-            systemInstruction: {
-              parts: [{ text: systemInstruction }]
-            },
-            generationConfig: {
-              temperature: 0.8,
-              maxOutputTokens: 1000
-            }
+            systemInstruction: { parts: [{ text: systemInstruction }] },
+            generationConfig: { temperature: 0.8, maxOutputTokens: 600 }
           })
         });
 
         const data = await response.json();
-        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+        if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
           replyText = data.candidates[0].content.parts[0].text;
-          break; // Success
-        } else {
-          lastError = data.error ? (data.error.message || JSON.stringify(data.error)) : JSON.stringify(data);
-          console.warn(`Model ${modelName} failed:`, lastError);
+          break;
         }
       } catch (err) {
-        lastError = err.message || err;
-        console.warn(`Error calling model ${modelName}:`, lastError);
+        console.warn(`Error calling model ${modelName}:`, err.message || err);
       }
     }
 
-    if (replyText) {
-      return res.status(200).json({ reply: replyText });
-    } else {
-      return res.status(200).json({ reply: "เพี้ยง! (สัญญานเวทมนตร์ขัดข้อง: " + lastError + ")" });
-    }
+    return res.status(200).json({
+      reply: replyText || getSmartPamFallback(message)
+    });
   } catch (err) {
-    console.error("Chat API Error:", err);
-    return res.status(200).json({ reply: "โถ่เอ๊ย... พลังจิตของแม่หมอหลุดการเชื่อมต่อชั่วคราว ลองพิมพ์ใหม่อีกรอบนะจ๊ะเด็กๆ 💕" });
+    console.error('Chat API Error:', err);
+    return res.status(200).json({
+      reply: getSmartPamFallback(req.body?.message)
+    });
   }
 }

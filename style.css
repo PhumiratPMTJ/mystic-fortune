@@ -2828,6 +2828,152 @@ h1 span, h2 span, .highlight, .starting-price strong, #divinations-title span {
 }
 
 /* ==========================================================================
+   HERO MASCOT, CTA ALIGNMENT, INTERACTIVE PILLS, LUCKY STRIP & SERVICES SHOWCASE
+   ========================================================================== */
+.hero-mascot-showcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1.25rem;
+}
+
+.angel-pam-container.hero-pam-center {
+  position: relative !important;
+  bottom: auto !important;
+  right: auto !important;
+  margin: 0 auto !important;
+  z-index: 5;
+}
+
+.hero-cta-group-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem auto 0;
+}
+
+.hero-cta-group-main .button {
+  margin: 0 !important;
+  min-height: 52px;
+  padding: 0.8rem 1.65rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.3;
+  border-radius: 999px !important;
+}
+
+.pam-highlight-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 1.6rem auto 0;
+  max-width: 760px;
+}
+
+.pam-pill {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1.05rem;
+  border-radius: 999px;
+  font-family: var(--font-body, 'Kanit', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  background: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.25), rgba(15, 23, 42, 0.85));
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 0 10px rgba(56, 189, 248, 0.08);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+
+.pam-pill:hover {
+  transform: translateY(-3px) scale(1.03);
+  color: #ffffff;
+  border-color: #38bdf8;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.45) 0%, rgba(6, 182, 212, 0.35) 100%);
+  box-shadow: 0 8px 22px rgba(124, 58, 237, 0.45), 0 0 14px rgba(56, 189, 248, 0.35);
+}
+
+.pam-pill:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Weekday Lucky Strip Badges */
+.weekday-lucky-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.lucky-badge-item {
+  background: rgba(15, 10, 35, 0.65);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.lucky-badge-item .lucky-label {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.lucky-badge-item strong {
+  font-size: 0.96rem;
+  color: #67e8f9;
+}
+
+/* Services 50 THB Showcase Grid */
+.pam-services-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+  max-width: 58rem;
+  margin: 2.2rem auto 0;
+  align-items: stretch;
+}
+
+.pam-featured-price-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.2rem 1.8rem !important;
+  border-radius: 14px !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 15px 45px rgba(124, 58, 237, 0.25), 0 0 25px rgba(6, 182, 212, 0.12) !important;
+  text-align: center;
+}
+
+.price-badge-top {
+  display: inline-block;
+  align-self: center;
+  background: linear-gradient(90deg, rgba(124, 58, 237, 0.35), rgba(6, 182, 212, 0.35));
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  color: #fde047;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+
+/* ==========================================================================
    COMPREHENSIVE MOBILE & TABLET RESPONSIVE ENHANCEMENTS
    ========================================================================== */
 @media (max-width: 900px) {
@@ -2904,7 +3050,7 @@ h1 span, h2 span, .highlight, .starting-price strong, #divinations-title span {
     gap: 0.45rem;
   }
   .pam-pill {
-    font-size: 0.78rem;
-    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    padding: 0.42rem 0.85rem;
   }
 }
