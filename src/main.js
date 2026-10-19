@@ -1,8 +1,142 @@
+// ==========================================================================
+// ANTI-COPY, ANTI-CLONE & DOMAIN LOCK SECURITY SHIELD
+// ==========================================================================
+function setupAntiCopyAndDomainLock() {
+  // 1. Frame-Busting (Prevent embedding in unauthorized iframes)
+  try {
+    if (window.top !== window.self) {
+      window.top.location = window.self.location;
+    }
+  } catch (err) {
+    // Ignore cross-origin frame access errors
+  }
+
+  // 2. Domain Lock (Prevent scraped/cloned copies from running on unauthorized hosts)
+  const host = (window.location.hostname || '').toLowerCase();
+  const protocol = window.location.protocol;
+  const isAuthorizedHost =
+    host === 'duang-pam.vercel.app' ||
+    host.endsWith('.vercel.app') ||
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host.startsWith('192.168.') ||
+    host.startsWith('10.');
+
+  if (protocol === 'file:' || (host && !isAuthorizedHost)) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#070815;color:#fff;font-family:'Kanit',sans-serif;text-align:center;padding:2rem;">
+        <div style="font-size:4rem;margin-bottom:1rem;">🛡️🔮</div>
+        <h1 style="color:#fde047;font-size:1.8rem;margin-bottom:0.75rem;">คาถาป้องกันการโคลนเว็บทำงาน!</h1>
+        <p style="color:#cbd5e1;max-width:460px;line-height:1.6;margin-bottom:1.5rem;">เว็บไซต์ "ดวงปังพลังแพม" ได้รับการคุ้มครองลิขสิทธิ์ ห้ามคัดลอก ดาวน์โหลด หรือนำไปเปิดบนโดเมนอื่นโดยไม่ได้รับอนุญาตจ้า ✨</p>
+        <a href="https://duang-pam.vercel.app" style="padding:0.8rem 1.8rem;border-radius:999px;background:linear-gradient(135deg,#a855f7,#38bdf8);color:#fff;text-decoration:none;font-weight:600;">ไปยังเว็บจริง ดวงปังพลังแพม →</a>
+      </div>
+    `;
+    setTimeout(() => {
+      window.location.replace('https://duang-pam.vercel.app');
+    }, 2200);
+    return;
+  }
+
+  // 3. Magical Shield Toast Notification
+  let shieldToastTimer = null;
+  function showShieldToast(msg = '🛡️ คาถาแม่หมอแพมทำงาน! ห้ามคัดลอกหรือแอบส่องโค้ดเว็บดวงปังพลังแพมนะจ๊ะ ✨') {
+    let toast = document.getElementById('pam-anti-copy-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'pam-anti-copy-toast';
+      toast.className = 'pam-shield-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('active');
+    clearTimeout(shieldToastTimer);
+    shieldToastTimer = setTimeout(() => {
+      toast.classList.remove('active');
+    }, 2600);
+  }
+
+  const isEditableInput = (el) => {
+    if (!el || !(el instanceof Element)) return false;
+    const tag = el.tagName;
+    return tag === 'INPUT' || tag === 'TEXTAREA' || el.isContentEditable;
+  };
+
+  // 4. Disable Right-Click Context Menu
+  document.addEventListener('contextmenu', (e) => {
+    if (isEditableInput(e.target)) return;
+    e.preventDefault();
+    showShieldToast('🛡️ ห้ามคลิกขวาคัดลอกเว็บแม่หมอแพมนะจ๊ะ! ✨');
+  });
+
+  // 5. Disable Dragging Images & Cards
+  document.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+  });
+
+  // 6. Disable Copy / Cut outside of Input fields
+  document.addEventListener('copy', (e) => {
+    if (isEditableInput(e.target)) return;
+    e.preventDefault();
+    showShieldToast('🛡️ เนื้อหาและคำทำนายได้รับการคุ้มครอง ห้ามคัดลอกจ้า! 🔮');
+  });
+
+  document.addEventListener('cut', (e) => {
+    if (isEditableInput(e.target)) return;
+    e.preventDefault();
+  });
+
+  // 7. Block DevTools, View-Source, Save-Page, and Print Shortcuts
+  window.addEventListener('keydown', (e) => {
+    const key = (e.key || '').toLowerCase();
+    const ctrlOrCmd = e.ctrlKey || e.metaKey;
+
+    // F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      e.stopPropagation();
+      showShieldToast();
+      return false;
+    }
+
+    // Ctrl+Shift+I / J / C / K (DevTools / Inspector / Console)
+    if (ctrlOrCmd && e.shiftKey && ['i', 'j', 'c', 'k'].includes(key)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showShieldToast();
+      return false;
+    }
+
+    // Mac Cmd+Option+I / J / C / U
+    if (e.metaKey && e.altKey && ['i', 'j', 'c', 'u'].includes(key)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showShieldToast();
+      return false;
+    }
+
+    // Ctrl+U (View Source), Ctrl+S (Save Webpage), Ctrl+P (Print/Export)
+    if (ctrlOrCmd && ['u', 's', 'p'].includes(key)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showShieldToast('🛡️ ปิดกั้นการบันทึกหน้าเว็บและดูซอร์สโค้ดจ้า! ✨');
+      return false;
+    }
+
+    // Ctrl+C / Ctrl+A outside of inputs
+    if (ctrlOrCmd && ['c', 'a'].includes(key) && !isEditableInput(e.target)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showShieldToast('🛡️ เนื้อหาในเว็บดวงปังพลังแพมได้รับการคุ้มครองจ้า! 💖');
+      return false;
+    }
+  }, true);
+}
 
 // ==========================================================================
 // MYDUANG ORIGINAL INTERACTIVE SITE-EXPERIENCE (Scroll, Tilts, Pointer-glow, Ripples, Chapters)
 // ==========================================================================
 function setupOriginalSiteExperience() {
+  setupAntiCopyAndDomainLock();
   let e = document.documentElement;
   let t = window.matchMedia('(prefers-reduced-motion: reduce)');
   let n = window.matchMedia('(hover: hover) and (pointer: fine)');

@@ -60,8 +60,28 @@ function getSmartPamFallback(userText = '', history = []) {
 }
 
 export default async function handler(req, res) {
-  // Enable CORS so local Vite dev and preview domains can also use the live Gemini API
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = String(req.headers.origin || '');
+  const referer = String(req.headers.referer || '');
+  const isAllowedOrigin = (urlStr) => {
+    if (!urlStr) return true;
+    try {
+      const u = new URL(urlStr);
+      return (
+        u.hostname === 'duang-pam.vercel.app' ||
+        u.hostname.endsWith('.vercel.app') ||
+        u.hostname === 'localhost' ||
+        u.hostname === '127.0.0.1'
+      );
+    } catch {
+      return false;
+    }
+  };
+
+  if (origin && isAllowedOrigin(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://duang-pam.vercel.app');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -71,6 +91,12 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  if ((origin && !isAllowedOrigin(origin)) || (referer && !isAllowedOrigin(referer))) {
+    return res.status(403).json({
+      reply: '🛡️ คาถาป้องกันลิขสิทธิ์ทำงาน! อนุญาตให้ใช้งานเฉพาะบนเว็บทางการ ดวงปังพลังแพม (duang-pam.vercel.app) เท่านั้นจ้า ✨'
+    });
   }
 
   try {
