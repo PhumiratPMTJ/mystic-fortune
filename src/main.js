@@ -130,6 +130,126 @@ function setupAntiCopyAndDomainLock() {
       return false;
     }
   }, true);
+
+  // 8. Active DevTools Detector & DOM Vault Shield (Blocks Chrome ⋮ -> More Tools -> Developer Tools)
+  const isMobileDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '');
+  if (!isMobileDevice) {
+    const domVault = document.createDocumentFragment();
+    let isLockedByDevTools = false;
+    let baseOuterW = window.outerWidth;
+    let baseOuterH = window.outerHeight;
+    let baseDPR = window.devicePixelRatio;
+    let maxObservedInnerW = window.innerWidth;
+    let maxObservedInnerH = window.innerHeight;
+    let dockedByResize = false;
+
+    function lockDOMInVault() {
+      if (isLockedByDevTools) return;
+      isLockedByDevTools = true;
+
+      try {
+        console.clear();
+        console.log(
+          '%c🛡️ หยุดนะจ๊ะ! คาถาป้องกันการโคลนเว็บ "ดวงปังพลังแพม" ทำงานอยู่!',
+          'color:#facc15;font-size:22px;font-weight:bold;background:#1e1b4b;padding:10px 18px;border-radius:10px;border:2px solid #38bdf8;'
+        );
+      } catch (e) {}
+
+      // Move all real page elements out of document.body into private memory vault
+      // so the DevTools "Elements" tab cannot see or copy any HTML!
+      while (document.body.firstChild) {
+        domVault.appendChild(document.body.firstChild);
+      }
+
+      const lockScreen = document.createElement('div');
+      lockScreen.id = 'pam-devtools-lock-screen';
+      lockScreen.style.cssText = 'position:fixed;inset:0;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%, #1e1b4b 0%, #05060f 80%);color:#fff;font-family:"Kanit",sans-serif;text-align:center;padding:2rem;user-select:none;';
+      lockScreen.innerHTML = `
+        <div style="width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3.2rem;background:rgba(250,204,21,0.12);border:2px solid #facc15;box-shadow:0 0 35px rgba(250,204,21,0.45);margin-bottom:1.25rem;">🛡️</div>
+        <h1 style="color:#fde047;font-size:clamp(1.5rem,3.5vw,2.2rem);margin:0 0 0.75rem 0;text-shadow:0 0 18px rgba(250,204,21,0.4);">คาถาผนึกซอร์สโค้ดทำงาน! 🔮✨</h1>
+        <p style="color:#e2e8f0;max-width:540px;font-size:1.02rem;line-height:1.65;margin:0 0 1.5rem 0;">
+          ระบบตรวจพบการเปิด <b>เครื่องมือสำหรับนักพัฒนาซอฟต์แวร์ (Developer Tools)</b><br>
+          เพื่อคุ้มครองลิขสิทธิ์และป้องกันการคัดลอกหรือโคลนเว็บไซต์ <b>ดวงปังพลังแพม</b> ระบบได้ซ่อนโครงสร้างโค้ดทั้งหมดไว้ชั่วคราวจ้า 💖
+        </p>
+        <div style="padding:0.85rem 1.4rem;border-radius:14px;background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.45);color:#67e8f9;font-size:0.92rem;margin-bottom:1.25rem;">
+          👉 กรุณาคลิกกากบาท <b>(✕)</b> ปิดหน้าต่าง DevTools ก่อน แล้วหน้าเว็บจะกลับมาทำงานอัตโนมัติจ้า
+        </div>
+        <button id="btn-pam-unlock-check" style="appearance:none;cursor:pointer;padding:0.75rem 1.6rem;border-radius:999px;border:1.5px solid #facc15;background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;font-family:inherit;font-size:0.95rem;font-weight:600;box-shadow:0 0 20px rgba(124,58,237,0.5);">
+          🔄 ฉันปิด DevTools แล้ว (กลับเข้าสู่เว็บ)
+        </button>
+      `;
+      document.body.appendChild(lockScreen);
+
+      const unlockBtn = document.getElementById('btn-pam-unlock-check');
+      if (unlockBtn) {
+        unlockBtn.addEventListener('click', () => {
+          dockedByResize = false;
+          maxObservedInnerW = window.innerWidth;
+          maxObservedInnerH = window.innerHeight;
+          checkAndRestoreIfClosed();
+        });
+      }
+    }
+
+    function unlockDOMFromVault() {
+      if (!isLockedByDevTools) return;
+      const lockScreen = document.getElementById('pam-devtools-lock-screen');
+      if (lockScreen) lockScreen.remove();
+      document.body.appendChild(domVault);
+      isLockedByDevTools = false;
+    }
+
+    // Track docked DevTools opening via ⋮ -> More Tools -> Developer Tools
+    window.addEventListener('resize', () => {
+      const sameWindowSize = Math.abs(window.outerWidth - baseOuterW) < 25 && Math.abs(window.outerHeight - baseOuterH) < 25;
+      const sameZoom = Math.abs(window.devicePixelRatio - baseDPR) < 0.02;
+
+      if (!sameWindowSize || !sameZoom) {
+        // User resized the browser window or changed zoom level
+        baseOuterW = window.outerWidth;
+        baseOuterH = window.outerHeight;
+        baseDPR = window.devicePixelRatio;
+        maxObservedInnerW = window.innerWidth;
+        maxObservedInnerH = window.innerHeight;
+        dockedByResize = false;
+        return;
+      }
+
+      const shrunkW = maxObservedInnerW - window.innerWidth;
+      const shrunkH = maxObservedInnerH - window.innerHeight;
+
+      if (shrunkW > 160 || shrunkH > 160) {
+        dockedByResize = true;
+        lockDOMInVault();
+      } else if (dockedByResize && shrunkW < 60 && shrunkH < 60) {
+        dockedByResize = false;
+        unlockDOMFromVault();
+      } else {
+        if (window.innerWidth > maxObservedInnerW) maxObservedInnerW = window.innerWidth;
+        if (window.innerHeight > maxObservedInnerH) maxObservedInnerH = window.innerHeight;
+      }
+    });
+
+    function checkDebuggerTiming() {
+      const start = performance.now();
+      try {
+        (function () {}).constructor('debugger')();
+      } catch (e) {}
+      const elapsed = performance.now() - start;
+      return elapsed > 75;
+    }
+
+    function checkAndRestoreIfClosed() {
+      const pausedInDebugger = checkDebuggerTiming();
+      if (pausedInDebugger || dockedByResize) {
+        lockDOMInVault();
+      } else if (isLockedByDevTools) {
+        unlockDOMFromVault();
+      }
+    }
+
+    setInterval(checkAndRestoreIfClosed, 1000);
+  }
 }
 
 // ==========================================================================
