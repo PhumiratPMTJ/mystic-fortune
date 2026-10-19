@@ -692,7 +692,10 @@ function resetTarotGame() {
   deckContainer.innerHTML = '';
 
   const N = shuffledCards.length;
-  const isMobile = window.innerWidth <= 480;
+  const vw = window.innerWidth;
+  const isCompact = vw <= 768;
+  const R = isCompact ? Math.max(95, Math.min(165, Math.floor((vw - 86) / 2))) : 240;
+  const baseY = isCompact ? R + 36 : 300;
   shuffledCards.forEach((card, idx) => {
     const cardEl = document.createElement('div');
     cardEl.className = 'tarot-card-deck';
@@ -702,9 +705,8 @@ function resetTarotGame() {
     const progress = idx / (N - 1);
     const angle = -75 + progress * 150; // -75deg to +75deg
     const angleRad = angle * Math.PI / 180;
-    const R = isMobile ? 120 : 240; // smaller radius on mobile
     const x = R * Math.sin(angleRad);
-    const y = (isMobile ? 160 : 300) - R * Math.cos(angleRad); // Shifted down by 40px/20px to prevent overlapping text
+    const y = baseY - R * Math.cos(angleRad);
 
     cardEl.style.left = `calc(50% + ${x}px)`;
     cardEl.style.top = `${y}px`;
@@ -2914,8 +2916,8 @@ function initializeApp() {
     const card = document.createElement('div');
     card.className = 'floating-card-particle';
 
-    // Random horizontal position across screen
-    const startX = Math.random() * window.innerWidth;
+    // Random horizontal position across screen (clamped to avoid horizontal overflow)
+    const startX = Math.random() * Math.max(20, window.innerWidth - 75);
     card.style.left = `${startX}px`;
 
     // Random drift and rotation
